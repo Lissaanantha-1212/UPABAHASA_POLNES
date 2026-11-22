@@ -1,0 +1,32 @@
+﻿# Environment dan rahasia
+.env
+.env.*
+!.env.example
+
+# Dependencies dan hasil build
+node_modules/
+dist/
+coverage/
+
+# File upload lokal (menggunakan Supabase Storage)
+uploads/
+
+# Backup lokal
+backup*/
+**/backup*/
+*.bak
+*.backup
+
+# Log dan file sistem
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# File diagnostik lokal
+cekPassword.js
+sync-db-password.js
+inspect-password-config.js
+survey-export-test.xlsx
+
+*.before-fixed-settings.js

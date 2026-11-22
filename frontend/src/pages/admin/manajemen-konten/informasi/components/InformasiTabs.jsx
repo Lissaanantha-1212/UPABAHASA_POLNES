@@ -1,0 +1,42 @@
+﻿import React from 'react';
+import {
+  Newspaper,
+  Megaphone,
+  HelpCircle,
+} from 'lucide-react';
+
+export const tabs = [
+  { id: 'berita', label: 'Berita', icon: Newspaper },
+  { id: 'pengumuman', label: 'Pengumuman', icon: Megaphone },
+  { id: 'faq', label: 'FAQ', icon: HelpCircle },
+];
+
+export default function InformasiTabs({ activeTab, onTabChange }) {
+  return (
+    <div className="rounded-xl border border-gray-200 bg-white p-2">
+      <div className="grid grid-cols-3 gap-2">
+        {tabs.map((tab) => {
+          const Icon = tab.icon;
+          const isActive = activeTab === tab.id;
+
+          return (
+            <button
+              key={tab.id}
+              type="button"
+              onClick={() => onTabChange(tab.id)}
+              className={`flex items-center justify-center gap-2 rounded-lg px-3 py-3 text-sm font-semibold transition-all ${
+                isActive
+                  ? 'bg-[#10C35D] text-white shadow-sm'
+                  : 'text-gray-600 hover:bg-gray-50 hover:text-[#0a3d2e]'
+              }`}
+            >
+              <Icon size={18} />
+              <span>{tab.label}</span>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
