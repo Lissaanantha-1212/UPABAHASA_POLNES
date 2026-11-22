@@ -12,8 +12,8 @@ import {
   EyeOff,
 } from 'lucide-react';
 
-const API_URL = 'http://upabahasa-polnes-4p4a.vercel.app/api/cms/admin/galleries';
-const API_ORIGIN = 'http://upabahasa-polnes-4p4a.vercel.app';
+const API_URL = 'https://upabahasa-polnes-4p4a.vercel.app/api/cms/admin/galleries';
+const API_ORIGIN = 'https://upabahasa-polnes-4p4a.vercel.app';
 
 const initialForm = {
   title: '',

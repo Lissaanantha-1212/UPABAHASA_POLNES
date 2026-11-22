@@ -2,8 +2,8 @@
 import { ArrowRight, CalendarDays, UserRound } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 
-const API_URL = "http://upabahasa-polnes-4p4a.vercel.app/api/cms/about";
-const API_ORIGIN = "http://upabahasa-polnes-4p4a.vercel.app";
+const API_URL = "https://upabahasa-polnes-4p4a.vercel.app/api/cms/about";
+const API_ORIGIN = "https://upabahasa-polnes-4p4a.vercel.app";
 
 function getImageUrl(path) {
   if (!path) return "";

@@ -13,7 +13,7 @@ function getCmsImage(path) {
     return path;
   }
 
-  return `http://upabahasa-polnes-4p4a.vercel.app${path}`;
+  return `https://upabahasa-polnes-4p4a.vercel.app${path}`;
 }
 
 export default function PostForm({

@@ -1,7 +1,7 @@
 ﻿import React, { useEffect, useState } from "react";
 
-const API_URL = "http://upabahasa-polnes-4p4a.vercel.app/api/cms/about";
-const API_BASE_URL = "http://upabahasa-polnes-4p4a.vercel.app";
+const API_URL = "https://upabahasa-polnes-4p4a.vercel.app/api/cms/about";
+const API_BASE_URL = "https://upabahasa-polnes-4p4a.vercel.app";
 const HISTORY_CACHE_KEY = "upa_cms_about_history_cache";
 
 const container = "mx-auto w-full max-w-7xl px-5 md:px-8 lg:px-10";

@@ -11,8 +11,8 @@ import {
   RefreshCw,
 } from 'lucide-react';
 
-const API_URL = 'http://upabahasa-polnes-4p4a.vercel.app/api/cms/admin';
-const API_BASE_URL = 'http://upabahasa-polnes-4p4a.vercel.app';
+const API_URL = 'https://upabahasa-polnes-4p4a.vercel.app/api/cms/admin';
+const API_BASE_URL = 'https://upabahasa-polnes-4p4a.vercel.app';
 
 const emptyMember = {
   section_name: '',

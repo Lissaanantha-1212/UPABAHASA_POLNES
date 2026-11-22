@@ -1,7 +1,7 @@
 ﻿import React, { useEffect, useState } from 'react';
 import { ImagePlus, Save, X } from 'lucide-react';
 
-const API_URL = 'http://upabahasa-polnes-4p4a.vercel.app';
+const API_URL = 'https://upabahasa-polnes-4p4a.vercel.app';
 
 const getCmsImage = (imagePath) => {
     if (!imagePath) return '';

@@ -7,7 +7,7 @@ import { adminFetch } from '../../../adminSession';
 import ComplaintTable from './ComplaintTable';
 import ComplaintDetail from './ComplaintDetail';
 
-const API_URL = 'http://upabahasa-polnes-4p4a.vercel.app/api/complaints';
+const API_URL = 'https://upabahasa-polnes-4p4a.vercel.app/api/complaints';
 
 export default function AdminPengaduan() {
   const [complaints, setComplaints] = useState([]);

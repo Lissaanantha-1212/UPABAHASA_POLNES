@@ -1,4 +1,4 @@
-﻿const API_URL = 'http://upabahasa-polnes-4p4a.vercel.app/api/admin';
+﻿const API_URL = 'https://upabahasa-polnes-4p4a.vercel.app/api/admin';
 
 const REFRESH_BUFFER_MS = 60 * 1000;
 const REFRESH_RETRY_MS = 30 * 1000;

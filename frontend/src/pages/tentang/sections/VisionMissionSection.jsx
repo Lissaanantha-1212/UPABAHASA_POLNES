@@ -14,7 +14,7 @@ import {
   missions,
 } from "../data/aboutContent";
 
-const API_URL = "http://upabahasa-polnes-4p4a.vercel.app/api/cms/about";
+const API_URL = "https://upabahasa-polnes-4p4a.vercel.app/api/cms/about";
 
 const container = "mx-auto w-full max-w-7xl px-5 md:px-8 lg:px-10";
 const sectionSpacing = "py-16 md:py-24 lg:py-28";

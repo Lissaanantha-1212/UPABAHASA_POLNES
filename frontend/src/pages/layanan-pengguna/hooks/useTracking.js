@@ -28,7 +28,7 @@ export default function useTracking(setToast) {
 
     try {
       const response = await fetch(
-        'http://upabahasa-polnes-4p4a.vercel.app/api/complaints/track',
+        'https://upabahasa-polnes-4p4a.vercel.app/api/complaints/track',
         {
           method: 'POST',
           headers: {
@@ -219,7 +219,7 @@ export default function useTracking(setToast) {
       }
 
       const response = await fetch(
-        'http://upabahasa-polnes-4p4a.vercel.app/api/complaints/additional-info',
+        'https://upabahasa-polnes-4p4a.vercel.app/api/complaints/additional-info',
         {
           method: 'POST',
           body: formData,
@@ -262,7 +262,7 @@ export default function useTracking(setToast) {
       // Kegagalan refresh tidak membatalkan pengiriman.
       try {
         const trackResponse = await fetch(
-          'http://upabahasa-polnes-4p4a.vercel.app/api/complaints/track',
+          'https://upabahasa-polnes-4p4a.vercel.app/api/complaints/track',
           {
             method: 'POST',
             headers: {

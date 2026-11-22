@@ -13,7 +13,7 @@ export const getComplaintFileUrl = (filePath) => {
     .replace(/\\/g, '/')
     .replace(/^\/+/, '');
 
-  return `http://upabahasa-polnes-4p4a.vercel.app/${cleanPath}`;
+  return `https://upabahasa-polnes-4p4a.vercel.app/${cleanPath}`;
 };
 
 export default function ComplaintAttachmentPreview({

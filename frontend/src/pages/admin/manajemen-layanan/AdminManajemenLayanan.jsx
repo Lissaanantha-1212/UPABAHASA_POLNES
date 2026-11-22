@@ -31,9 +31,9 @@ import ScheduleHistory from './components/ScheduleHistory';
 import { adminFetch } from '../../../adminSession';
 import useScheduleLifecycle from '../../../hooks/useScheduleLifecycle';
 
-const API_URL = 'http://upabahasa-polnes-4p4a.vercel.app/api/non-test-programs';
-const REGISTRATION_API_URL = 'http://upabahasa-polnes-4p4a.vercel.app/api/registrations/admin';
-const SCHEDULE_API_URL = 'http://upabahasa-polnes-4p4a.vercel.app/api/schedules/admin';
+const API_URL = 'https://upabahasa-polnes-4p4a.vercel.app/api/non-test-programs';
+const REGISTRATION_API_URL = 'https://upabahasa-polnes-4p4a.vercel.app/api/registrations/admin';
+const SCHEDULE_API_URL = 'https://upabahasa-polnes-4p4a.vercel.app/api/schedules/admin';
 
 const PROGRAMS = [
   { slug: 'kursus-inggris', label: 'Kursus Bahasa Inggris', icon: BookOpen },
@@ -773,7 +773,7 @@ export default function AdminManajemenLayanan() {
       setScheduleFormError('');
 
       const response = await adminFetch(
-        'http://upabahasa-polnes-4p4a.vercel.app/api/schedules/batches',
+        'https://upabahasa-polnes-4p4a.vercel.app/api/schedules/batches',
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -922,7 +922,7 @@ export default function AdminManajemenLayanan() {
       setScheduleFormError('');
 
       const response = await adminFetch(
-        `http://upabahasa-polnes-4p4a.vercel.app/api/schedules/${schedule.id}`,
+        `https://upabahasa-polnes-4p4a.vercel.app/api/schedules/${schedule.id}`,
         {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
@@ -977,7 +977,7 @@ export default function AdminManajemenLayanan() {
       const action = shouldLock ? 'lock' : 'unlock';
 
       const response = await adminFetch(
-        `http://upabahasa-polnes-4p4a.vercel.app/api/schedules/${schedule.id}/${action}`,
+        `https://upabahasa-polnes-4p4a.vercel.app/api/schedules/${schedule.id}/${action}`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

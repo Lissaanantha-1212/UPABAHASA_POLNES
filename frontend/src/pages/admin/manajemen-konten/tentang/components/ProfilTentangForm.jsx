@@ -10,7 +10,7 @@ const DEFAULT_DATA = {
 function getImageUrl(path) {
   if (!path) return '';
   if (path.startsWith('http://') || path.startsWith('https://')) return path;
-  return `http://upabahasa-polnes-4p4a.vercel.app${path.startsWith('/') ? '' : '/'}${path}`;
+  return `https://upabahasa-polnes-4p4a.vercel.app${path.startsWith('/') ? '' : '/'}${path}`;
 }
 
 export default function ProfilTentangForm({ data, onSave, saving }) {

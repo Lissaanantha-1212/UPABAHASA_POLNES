@@ -13,7 +13,7 @@ import {
   ClipboardList
 } from 'lucide-react';
 
-const API_URL = 'http://upabahasa-polnes-4p4a.vercel.app/api/surveys';
+const API_URL = 'https://upabahasa-polnes-4p4a.vercel.app/api/surveys';
 
 const initialForm = {
   label: '',

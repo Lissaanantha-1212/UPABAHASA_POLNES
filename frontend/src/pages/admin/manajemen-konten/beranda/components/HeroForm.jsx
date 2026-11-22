@@ -5,7 +5,7 @@ import { ImagePlus, Save } from 'lucide-react';
 function getCmsImage(path) {
   if (!path) return null;
   if (path.startsWith('http://') || path.startsWith('https://')) return path;
-  return `http://upabahasa-polnes-4p4a.vercel.app${path}`;
+  return `https://upabahasa-polnes-4p4a.vercel.app${path}`;
 }
 
 export default function HeroForm({ data, onSave, saving }) {

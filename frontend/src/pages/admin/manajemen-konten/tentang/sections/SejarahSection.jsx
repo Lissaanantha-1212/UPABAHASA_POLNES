@@ -3,7 +3,7 @@ import { CheckCircle2 } from 'lucide-react';
 import SejarahForm from '../components/SejarahForm';
 import { adminFetch } from '../../../../../adminSession';
 
-const API_URL = 'http://upabahasa-polnes-4p4a.vercel.app/api/cms/admin/about-profiles';
+const API_URL = 'https://upabahasa-polnes-4p4a.vercel.app/api/cms/admin/about-profiles';
 
 async function readResponse(response) {
   const result = await response.json();

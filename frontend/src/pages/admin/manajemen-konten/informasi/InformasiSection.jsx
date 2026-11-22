@@ -17,7 +17,7 @@ import FaqTable from './components/FaqTable';
 import PostTable from './components/PostTable';
 import { adminFetch } from '../../../../adminSession';
 
-const API_URL = 'http://upabahasa-polnes-4p4a.vercel.app/api/cms/admin';
+const API_URL = 'https://upabahasa-polnes-4p4a.vercel.app/api/cms/admin';
 
 const initialForm = {
   title: '',

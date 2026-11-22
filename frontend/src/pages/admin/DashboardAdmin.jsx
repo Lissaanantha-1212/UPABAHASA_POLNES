@@ -16,7 +16,7 @@ import {
 import AdminLayout from '../../layouts/AdminLayout';
 import { adminFetch } from '../../adminSession';
 
-const API_BASE = 'http://upabahasa-polnes-4p4a.vercel.app';
+const API_BASE = 'https://upabahasa-polnes-4p4a.vercel.app';
 
 const ENDPOINTS = {
   complaints: `${API_BASE}/api/complaints/admin`,

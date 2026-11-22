@@ -25,7 +25,7 @@ import AdminLayout from '../../../layouts/AdminLayout';
 import SurveiTabs from './components/SurveiTabs';
 import KelolaAspek from './components/KelolaAspek';
 
-const API_URL = 'http://upabahasa-polnes-4p4a.vercel.app/api/surveys';
+const API_URL = 'https://upabahasa-polnes-4p4a.vercel.app/api/surveys';
 
 const ratingColors = {
   'Sangat Baik': '#10C35D',
