@@ -12,8 +12,8 @@ import {
 } from 'lucide-react';
 import { adminFetch } from '../../../../../adminSession';
 
-const API_URL = 'http://localhost:5000/api/cms/admin/head-history';
-const API_ORIGIN = 'http://localhost:5000';
+const API_URL = 'http://upabahasa-polnes-4p4a.vercel.app/api/cms/admin/head-history';
+const API_ORIGIN = 'http://upabahasa-polnes-4p4a.vercel.app';
 
 const emptyForm = {
   name: '',

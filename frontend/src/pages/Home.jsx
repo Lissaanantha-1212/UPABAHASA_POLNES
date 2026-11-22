@@ -25,7 +25,7 @@ import {
 // IMPORT ASSETS
 // ==========================================
 
-const CMS_API = 'http://localhost:5000/api/cms';
+const CMS_API = 'http://upabahasa-polnes-4p4a.vercel.app/api/cms';
 const HOME_CACHE_KEY = 'upa_cms_home_cache';
 
 function readHomeCache() {
@@ -53,7 +53,7 @@ function readHomeCache() {
 function getCmsImage(path) {
   if (!path) return null;
   if (path.startsWith('http://') || path.startsWith('https://')) return path;
-  return `http://localhost:5000${path}`;
+  return `http://upabahasa-polnes-4p4a.vercel.app${path}`;
 }
 
 function formatCmsDate(value) {

@@ -14,7 +14,7 @@ import {
 import SubtopicModal from './components/SubtopicModal';
 import { adminFetch } from '../../../../adminSession';
 
-const API_URL = 'http://localhost:5000/api/quizzes';
+const API_URL = 'http://upabahasa-polnes-4p4a.vercel.app/api/quizzes';
 
 const categoryLabels = {
   listening: 'Listening',

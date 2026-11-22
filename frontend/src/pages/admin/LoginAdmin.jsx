@@ -14,7 +14,7 @@ import {
 import logoPolnes from '../../assets/logo-polnes.png';
 import { clearAdminSession } from '../../adminSession';
 
-const API_URL = 'http://localhost:5000/api/admin';
+const API_URL = 'http://upabahasa-polnes-4p4a.vercel.app/api/admin';
 
 export default function LoginAdmin() {
   const navigate = useNavigate();

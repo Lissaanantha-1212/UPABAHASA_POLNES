@@ -4,7 +4,7 @@ import {
   normalizeCmsFaq,
 } from '../utils/informasiUtils';
 
-const API_BASE_URL = 'http://localhost:5000/api/cms';
+const API_BASE_URL = 'http://upabahasa-polnes-4p4a.vercel.app/api/cms';
 
 export default function useInformasiData() {
   const [posts, setPosts] = useState([]);

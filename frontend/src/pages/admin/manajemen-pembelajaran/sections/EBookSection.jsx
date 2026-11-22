@@ -26,7 +26,7 @@ import {
 // ==========================================
 // KONFIGURASI API
 // ==========================================
-const API_URL = 'http://localhost:5000/api/ebooks';
+const API_URL = 'http://upabahasa-polnes-4p4a.vercel.app/api/ebooks';
 
 const CATEGORIES = [
   'Bahasa Inggris',

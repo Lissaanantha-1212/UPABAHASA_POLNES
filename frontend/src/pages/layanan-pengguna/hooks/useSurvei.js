@@ -1,6 +1,6 @@
 ﻿import { useState, useEffect } from 'react';
 
-const API_URL = 'http://localhost:5000/api/surveys';
+const API_URL = 'http://upabahasa-polnes-4p4a.vercel.app/api/surveys';
 
 export default function useSurvei() {
   const [surveyAspects, setSurveyAspects] = useState([]);

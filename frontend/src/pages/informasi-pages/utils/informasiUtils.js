@@ -1,4 +1,4 @@
-﻿const CMS_ORIGIN = 'http://localhost:5000';
+﻿const CMS_ORIGIN = 'http://upabahasa-polnes-4p4a.vercel.app';
 
 export function formatInformasiDate(dateValue) {
   if (!dateValue) return '-';

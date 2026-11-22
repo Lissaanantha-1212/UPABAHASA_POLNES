@@ -1,7 +1,7 @@
 ﻿import React, { useEffect, useState } from 'react';
 import { ImagePlus, Save } from 'lucide-react';
 
-const API_BASE_URL = 'http://localhost:5000';
+const API_BASE_URL = 'http://upabahasa-polnes-4p4a.vercel.app';
 
 const defaultData = {
   title: 'Sejarah UPA Bahasa',

@@ -1,7 +1,7 @@
 ﻿import { adminFetch } from '../adminSession';
 import { useCallback, useState } from 'react';
 
-const API_BASE_URL = 'http://localhost:5000/api/schedules';
+const API_BASE_URL = 'http://upabahasa-polnes-4p4a.vercel.app/api/schedules';
 
 export default function useScheduleLifecycle({
   handleUnauthorized,

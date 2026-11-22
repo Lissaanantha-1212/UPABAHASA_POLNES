@@ -9,7 +9,7 @@ import { adminFetch } from '../../../../adminSession';
 import PaketKuisModal from './components/PaketKuisModal';
 import SoalMandiriModal from './components/SoalMandiriModal';
 
-const API_URL = 'http://localhost:5000/api/quizzes';
+const API_URL = 'http://upabahasa-polnes-4p4a.vercel.app/api/quizzes';
 
 const tabs = [
   { id: 'package', label: 'Paket Soal', icon: Package },

@@ -7,7 +7,7 @@ import BeritaPilihanForm from './components/BeritaPilihanForm';
 import GaleriPilihanForm from './components/GaleriPilihanForm';
 import BerandaTabs from './components/BerandaTabs';
 
-const API_URL = 'http://localhost:5000/api/cms/admin';
+const API_URL = 'http://upabahasa-polnes-4p4a.vercel.app/api/cms/admin';
 
 const SETTING_KEYS = {
   heroTitle: 'beranda_hero_title',

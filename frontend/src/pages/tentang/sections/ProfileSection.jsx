@@ -14,7 +14,7 @@ const DEFAULT_DESCRIPTION = [
 function getImageUrl(path) {
   if (!path) return aboutImg;
   if (path.startsWith("http://") || path.startsWith("https://")) return path;
-  return `http://localhost:5000${path.startsWith("/") ? "" : "/"}${path}`;
+  return `http://upabahasa-polnes-4p4a.vercel.app${path.startsWith("/") ? "" : "/"}${path}`;
 }
 
 function getDefaultProfile() {
@@ -58,7 +58,7 @@ export default function ProfileSection() {
 
     const loadProfile = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/cms/about");
+        const response = await fetch("http://upabahasa-polnes-4p4a.vercel.app/api/cms/about");
         if (!response.ok) return;
 
         const result = await response.json();

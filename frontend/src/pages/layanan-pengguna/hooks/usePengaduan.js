@@ -38,7 +38,7 @@ export default function usePengaduan() {
     const fetchMajors = async () => {
       try {
         const response = await fetch(
-          'http://localhost:5000/api/majors'
+          'http://upabahasa-polnes-4p4a.vercel.app/api/majors'
         );
 
         const data = await response.json();
@@ -195,7 +195,7 @@ export default function usePengaduan() {
       }
 
       const response = await fetch(
-        'http://localhost:5000/api/complaints',
+        'http://upabahasa-polnes-4p4a.vercel.app/api/complaints',
         {
           method: 'POST',
           body: formData,

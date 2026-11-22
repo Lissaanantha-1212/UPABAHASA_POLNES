@@ -33,9 +33,9 @@ const initialForm = {
   noWa: '',
 };
 
-const API_PROGRAM_URL = 'http://localhost:5000/api/non-test-programs';
-const API_REGISTRATION_URL = 'http://localhost:5000/api/registrations';
-const API_PUBLIC_SCHEDULE_URL = 'http://localhost:5000/api/schedules';
+const API_PROGRAM_URL = 'http://upabahasa-polnes-4p4a.vercel.app/api/non-test-programs';
+const API_REGISTRATION_URL = 'http://upabahasa-polnes-4p4a.vercel.app/api/registrations';
+const API_PUBLIC_SCHEDULE_URL = 'http://upabahasa-polnes-4p4a.vercel.app/api/schedules';
 
 // Identitas visual program tetap mengikuti desain frontend.
 const PROGRAM_METADATA = {
@@ -184,7 +184,7 @@ export default function LayananNonTes() {
     const fetchMajors = async () => {
       try {
         const response = await fetch(
-          'http://localhost:5000/api/majors'
+          'http://upabahasa-polnes-4p4a.vercel.app/api/majors'
         );
 
         const data = await response.json();

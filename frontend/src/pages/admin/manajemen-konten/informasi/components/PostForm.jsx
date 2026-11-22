@@ -13,7 +13,7 @@ function getCmsImage(path) {
     return path;
   }
 
-  return `http://localhost:5000${path}`;
+  return `http://upabahasa-polnes-4p4a.vercel.app${path}`;
 }
 
 export default function PostForm({

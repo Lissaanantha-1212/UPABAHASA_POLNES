@@ -16,7 +16,7 @@ import {
 import * as XLSX from 'xlsx';
 import { adminFetch } from '../../../../../adminSession';
 
-const API_URL = 'http://localhost:5000/api/quizzes';
+const API_URL = 'http://upabahasa-polnes-4p4a.vercel.app/api/quizzes';
 
 const EMPTY_QUESTION = {
   question_text: '',

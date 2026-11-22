@@ -1,7 +1,7 @@
 ﻿import React, { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
 
-const API_URL = "http://localhost:5000/api/cms/about";
+const API_URL = "http://upabahasa-polnes-4p4a.vercel.app/api/cms/about";
 const ABOUT_CACHE_KEY = "upa_cms_about_hero_cache";
 
 function readAboutCache() {
@@ -32,7 +32,7 @@ function getImageUrl(path) {
     return path;
   }
 
-  return `http://localhost:5000${path}`;
+  return `http://upabahasa-polnes-4p4a.vercel.app${path}`;
 }
 
 export default function AboutHero() {

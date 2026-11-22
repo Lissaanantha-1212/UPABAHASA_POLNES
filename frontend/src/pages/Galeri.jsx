@@ -1,12 +1,12 @@
 ﻿import React, { useEffect, useState } from 'react';
 import { CalendarDays, Image as ImageIcon, X, ZoomIn, ArrowLeft, ArrowRight } from 'lucide-react';
 
-const CMS_API = 'http://localhost:5000/api/cms';
+const CMS_API = 'http://upabahasa-polnes-4p4a.vercel.app/api/cms';
 
 function getCmsImage(path) {
   if (!path) return null;
   if (path.startsWith('http://') || path.startsWith('https://')) return path;
-  return `http://localhost:5000${path}`;
+  return `http://upabahasa-polnes-4p4a.vercel.app${path}`;
 }
 
 function formatCmsDate(value) {

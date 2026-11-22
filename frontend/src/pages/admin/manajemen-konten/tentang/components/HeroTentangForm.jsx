@@ -10,7 +10,7 @@ const defaultData = {
 function getCmsImage(path) {
   if (!path) return null;
   if (path.startsWith('http://') || path.startsWith('https://')) return path;
-  return `http://localhost:5000${path}`;
+  return `http://upabahasa-polnes-4p4a.vercel.app${path}`;
 }
 
 export default function HeroTentangForm({ data, onSave, saving }) {

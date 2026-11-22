@@ -3,7 +3,7 @@ import { CheckCircle2 } from 'lucide-react';
 import { adminFetch } from '../../../../../adminSession';
 import ProfilTentangForm from '../components/ProfilTentangForm';
 
-const API_URL = 'http://localhost:5000/api/cms/admin';
+const API_URL = 'http://upabahasa-polnes-4p4a.vercel.app/api/cms/admin';
 
 const SETTING_KEYS = {
   title: 'tentang_profil_title',

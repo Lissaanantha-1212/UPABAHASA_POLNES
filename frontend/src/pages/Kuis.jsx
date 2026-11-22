@@ -5,7 +5,7 @@ import PreviewSection from "./kuis/sections/PreviewSection";
 import QuizSection from "./kuis/sections/QuizSection";
 import ResultSection from "./kuis/sections/ResultSection";
 
-const API_URL = "http://localhost:5000/api/quizzes";
+const API_URL = "http://upabahasa-polnes-4p4a.vercel.app/api/quizzes";
 
 const getApiData = (payload) => {
   return payload?.data?.data ?? payload?.data ?? payload;
