@@ -470,7 +470,7 @@ function Home() {
 
             {quickServices.length > 0 ? (
               <div
-                className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-1 sm:gap-2"
+                className="grid grid-cols-5 gap-1 sm:gap-2"
               >
                 {quickServices.map((service, index) => {
                   const Icon = service.icon;
@@ -480,23 +480,22 @@ function Home() {
                       key={service.id || `${service.title}-${index}`}
                       href={service.link}
                       className={`
-                        group relative flex items-center gap-3
-                        px-2.5 py-3 sm:px-3 sm:py-3 md:px-3 md:py-4
+                        group relative flex flex-col items-center text-center gap-1 sm:flex-row sm:text-left sm:gap-2 md:gap-3
+                        px-1 py-2 sm:px-2 sm:py-3 md:px-3 md:py-4
                         rounded-xl hover:bg-[#F3F8F4] min-w-0
                         transition-all duration-300
-                        ${index === quickServices.length - 1 && quickServices.length % 2 !== 0 ? 'col-span-2 md:col-span-1 justify-center md:justify-start' : ''}
                         ${index !== 0 ? 'xl:border-l xl:border-[#E9EFEB]' : ''}
                       `}
                     >
-                      <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-11 md:h-11 shrink-0 flex items-center justify-center rounded-xl bg-[#EAF8EF] text-[#0A8F4D] group-hover:bg-[#0A8F4D] group-hover:text-white group-hover:scale-105 transition-all duration-300">
-                        <Icon className="w-[18px] h-[18px] sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]" />
+                      <div className="w-7 h-7 sm:w-9 sm:h-9 md:w-11 md:h-11 shrink-0 flex items-center justify-center rounded-lg sm:rounded-xl bg-[#EAF8EF] text-[#0A8F4D] group-hover:bg-[#0A8F4D] group-hover:text-white group-hover:scale-105 transition-all duration-300">
+                        <Icon className="w-4 h-4 sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]" />
                       </div>
 
                       <div className="min-w-0 flex-1">
-                        <h3 className="text-[11px] sm:text-xs md:text-[13px] font-bold text-[#183D2E] leading-snug mb-1 group-hover:text-[#0A8F4D] transition-colors duration-300">
+                        <h3 className="text-[9px] leading-tight sm:text-xs md:text-[13px] font-bold text-[#183D2E] sm:mb-1 group-hover:text-[#0A8F4D] transition-colors duration-300 line-clamp-2">
                           {service.title}
                         </h3>
-                        <p className="text-[9px] sm:text-[10px] md:text-[11px] text-gray-500 leading-relaxed">
+                        <p className="hidden md:block text-[9px] sm:text-[10px] md:text-[11px] text-gray-500 leading-relaxed">
                           {service.description}
                         </p>
                       </div>
