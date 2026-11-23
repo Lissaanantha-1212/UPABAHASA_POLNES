@@ -130,11 +130,7 @@ function MemberCarousel({ members }) {
   const [paused, setPaused] = useState(false);
 
   const hasCarousel = members.length > 4;
-
-  const visibleMembers = hasCarousel
-    ? members.slice(startIndex, startIndex + 4)
-    : members;
-
+  const visibleMembers = members.slice(startIndex, startIndex + 4);
   const maxStart = Math.max(0, members.length - 4);
 
   useEffect(() => {
@@ -171,39 +167,13 @@ function MemberCarousel({ members }) {
         }
       }}
     >
-      {hasCarousel && (
-        <>
-          <button
-            type="button"
-            aria-label="Geser personel ke kiri"
-            onClick={() => moveCarousel("previous")}
-            className="absolute -left-2 top-1/2 z-30 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-green-100 bg-white/95 text-[#0a3d2e] shadow-lg transition hover:bg-[#0a3d2e] hover:text-white md:-left-4"
-          >
-            <ChevronLeft size={21} />
-          </button>
-
-          <button
-            type="button"
-            aria-label="Geser personel ke kanan"
-            onClick={() => moveCarousel("next")}
-            className="absolute -right-2 top-1/2 z-30 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-green-100 bg-white/95 text-[#0a3d2e] shadow-lg transition hover:bg-[#0a3d2e] hover:text-white md:-right-4"
-          >
-            <ChevronRight size={21} />
-          </button>
-
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-8 bg-gradient-to-r from-white via-white/80 to-transparent md:w-16" />
-
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-8 bg-gradient-to-l from-white via-white/80 to-transparent md:w-16" />
-        </>
-      )}
-
-      {/* Area kartu yang dapat digeser horizontal */}
-      <div className="overflow-x-auto overscroll-x-contain snap-x snap-mandatory pb-3 md:overflow-visible">
-        <div className="flex w-max min-w-full items-stretch justify-start gap-5 px-1 md:w-full md:justify-center md:px-0">
-          {visibleMembers.map((person) => (
+      {/* Tampilan HP: semua anggota dalam satu baris */}
+      <div className="overflow-x-auto overscroll-x-contain snap-x snap-mandatory pb-4 md:hidden">
+        <div className="flex w-max items-stretch gap-4 px-1">
+          {members.map((person) => (
             <div
               key={person.id}
-              className="flex w-[min(78vw,220px)] max-w-[220px] shrink-0 snap-start"
+              className="flex w-[min(78vw,220px)] shrink-0 snap-start"
             >
               <MemberCard person={person} />
             </div>
@@ -211,23 +181,59 @@ function MemberCarousel({ members }) {
         </div>
       </div>
 
-      {hasCarousel && (
-        <div className="mt-5 flex items-center justify-center gap-2">
-          {Array.from({ length: maxStart + 1 }).map((_, index) => (
+      {/* Tampilan desktop: maksimal empat anggota sekaligus */}
+      <div className="hidden md:block">
+        {hasCarousel && (
+          <>
             <button
-              key={index}
               type="button"
-              aria-label={`Tampilkan posisi ${index + 1}`}
-              onClick={() => setStartIndex(index)}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                startIndex === index
-                  ? "w-7 bg-[#0a3d2e]"
-                  : "w-2 bg-[#b9dfc7] hover:bg-[#10C35D]"
-              }`}
-            />
+              aria-label="Geser personel ke kiri"
+              onClick={() => moveCarousel("previous")}
+              className="absolute -left-4 top-1/2 z-30 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-green-100 bg-white/95 text-[#0a3d2e] shadow-lg transition hover:bg-[#0a3d2e] hover:text-white"
+            >
+              <ChevronLeft size={21} />
+            </button>
+
+            <button
+              type="button"
+              aria-label="Geser personel ke kanan"
+              onClick={() => moveCarousel("next")}
+              className="absolute -right-4 top-1/2 z-30 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-green-100 bg-white/95 text-[#0a3d2e] shadow-lg transition hover:bg-[#0a3d2e] hover:text-white"
+            >
+              <ChevronRight size={21} />
+            </button>
+          </>
+        )}
+
+        <div className="flex w-full items-stretch justify-center gap-5">
+          {visibleMembers.map((person) => (
+            <div
+              key={person.id}
+              className="flex w-[220px] shrink-0"
+            >
+              <MemberCard person={person} />
+            </div>
           ))}
         </div>
-      )}
+
+        {hasCarousel && (
+          <div className="mt-5 flex items-center justify-center gap-2">
+            {Array.from({ length: maxStart + 1 }).map((_, index) => (
+              <button
+                key={index}
+                type="button"
+                aria-label={`Tampilkan posisi ${index + 1}`}
+                onClick={() => setStartIndex(index)}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  startIndex === index
+                    ? "w-7 bg-[#0a3d2e]"
+                    : "w-2 bg-[#b9dfc7] hover:bg-[#10C35D]"
+                }`}
+              />
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
