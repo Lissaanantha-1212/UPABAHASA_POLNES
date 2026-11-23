@@ -11,11 +11,41 @@ import {
   Menu,
   X,
   UserRound,
-  ChevronDown
+  ChevronDown,
+  Calendar,
+  FileUp,
+  FolderKanban
 } from 'lucide-react';
 
 import logoPolnes from '../assets/logo-polnes.png';
 import { clearAdminSession } from '../adminSession';
+
+const UPABAHASA_BASE_URL = 'https://DOMAIN-UPABAHASA-KAMU.vercel.app';
+
+const operasionalMenuItems = [
+  {
+    name: 'Penjadwalan',
+    icon: Calendar,
+    children: [
+      { name: 'Jadwal Test', href: `${UPABAHASA_BASE_URL}/jadwal-test.html` },
+      { name: 'Jadwal Remedial', href: `${UPABAHASA_BASE_URL}/jadwal-remedial.html` },
+      { name: 'Jadwal Kursus', href: `${UPABAHASA_BASE_URL}/jadwal-kursus.html` },
+    ],
+  },
+  {
+    name: 'Hasil Test',
+    icon: FileUp,
+    children: [
+      { name: 'TOEFL', href: `${UPABAHASA_BASE_URL}/toefl.html` },
+      { name: 'SSPECT', href: `${UPABAHASA_BASE_URL}/sspect.html` },
+    ],
+  },
+  {
+    name: 'Rekapan',
+    icon: FolderKanban,
+    href: `${UPABAHASA_BASE_URL}/rekapan.html`,
+  },
+];
 
 export default function AdminLayout({ children }) {
   const location = useLocation();
@@ -23,6 +53,10 @@ export default function AdminLayout({ children }) {
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [openOperasionalMenus, setOpenOperasionalMenus] = useState({
+    Penjadwalan: true,
+    'Hasil Test': true,
+  });
 
   let adminUser = {};
 
@@ -55,6 +89,13 @@ export default function AdminLayout({ children }) {
     { name: 'Manajemen Pengaduan', path: '/admin/pengaduan', icon: MessageSquare },
     { name: 'Manajemen Survei', path: '/admin/survei', icon: Smile },
   ];
+
+  const toggleOperasionalMenu = (menuName) => {
+    setOpenOperasionalMenus((prev) => ({
+      ...prev,
+      [menuName]: !prev[menuName],
+    }));
+  };
 
   const handleLogout = () => {
     setIsProfileOpen(false);
@@ -91,7 +132,7 @@ export default function AdminLayout({ children }) {
           </button>
         </div>
 
-        <nav className="px-4 py-6 space-y-2">
+        <nav className="px-4 py-6 space-y-2 overflow-y-auto max-h-[calc(100vh-4rem)]">
           {menuItems.map((item) => {
             const Icon = item.icon;
             const isActive = location.pathname === item.path;
@@ -112,6 +153,67 @@ export default function AdminLayout({ children }) {
               </Link>
             );
           })}
+
+          {/* MENU TAMBAHAN OPERASIONAL (UPABAHASA) */}
+          <div className="pt-3 mt-3 border-t border-white/15 space-y-1.5">
+            {operasionalMenuItems.map((item) => {
+              const Icon = item.icon;
+              const hasChildren = Array.isArray(item.children) && item.children.length > 0;
+              const isOpen = !!openOperasionalMenus[item.name];
+
+              if (!hasChildren) {
+                return (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    onClick={() => setIsSidebarOpen(false)}
+                    className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-300 hover:bg-white/10 hover:text-white transition-all duration-200"
+                  >
+                    <Icon size={18} />
+                    {item.name}
+                  </a>
+                );
+              }
+
+              return (
+                <div key={item.name} className="space-y-1">
+                  <button
+                    type="button"
+                    onClick={() => toggleOperasionalMenu(item.name)}
+                    aria-expanded={isOpen}
+                    className="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-300 hover:bg-white/10 hover:text-white transition-all duration-200"
+                  >
+                    <span className="flex items-center gap-3">
+                      <Icon size={18} />
+                      {item.name}
+                    </span>
+                    <ChevronDown
+                      size={16}
+                      className={`transition-transform duration-200 ${
+                        isOpen ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </button>
+
+                  {isOpen && (
+                    <div className="pl-11 pr-2 space-y-1">
+                      {item.children.map((subItem) => (
+                        <a
+                          key={subItem.name}
+                          href={subItem.href}
+                          onClick={() => setIsSidebarOpen(false)}
+                          className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium text-gray-300 hover:bg-white/10 hover:text-white transition-colors"
+                        >
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#10C35D]" />
+                          {subItem.name}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
         </nav>
       </aside>
 
