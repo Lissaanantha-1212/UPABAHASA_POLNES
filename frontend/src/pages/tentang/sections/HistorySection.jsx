@@ -1,4 +1,5 @@
-﻿import React, { useEffect, useState } from "react";
+﻿
+import React, { useEffect, useState } from "react";
 
 const API_URL = "https://upabahasa-polnes-4p4a.vercel.app/api/cms/about";
 const API_BASE_URL = "https://upabahasa-polnes-4p4a.vercel.app";
@@ -121,8 +122,8 @@ export default function HistorySection() {
       className={`relative scroll-mt-16 overflow-hidden bg-[#0a3d2e] ${sectionSpacing}`}
     >
       <div className={container}>
-        <div className="grid items-center gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
-          <div className="relative lg:-ml-8">
+        <div className="grid items-center gap-8 md:grid-cols-[1.05fr_0.95fr] md:gap-8 lg:gap-12">
+          <div className="relative md:-ml-2 lg:-ml-8">
             <div className="relative h-[280px] overflow-hidden rounded-2xl shadow-[0_15px_40px_rgba(0,0,0,0.18)] md:h-[370px] lg:h-[430px] lg:rounded-r-3xl lg:rounded-l-none">
               <img
                 src={history.image}
@@ -132,7 +133,7 @@ export default function HistorySection() {
             </div>
           </div>
 
-          <div className="relative z-10 max-w-xl py-4 lg:py-8">
+          <div className="relative z-10 max-w-xl py-4 md:py-8">
             <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#55e895] md:text-xs">
               Perjalanan Kami
             </p>

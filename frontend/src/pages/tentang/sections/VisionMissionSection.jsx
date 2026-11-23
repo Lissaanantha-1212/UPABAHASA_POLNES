@@ -1,4 +1,5 @@
-﻿import React, { useEffect, useState } from "react";
+﻿
+import React, { useEffect, useState } from "react";
 import {
   Target,
   Lightbulb,
@@ -166,16 +167,18 @@ export default function VisionMissionSection() {
             <span className="inline-block rounded-full bg-[#10C35D]/15 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#0A3D2E] shadow-xs">
               Landasan dan Pelaksanaan
             </span>
+
             <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-gray-900 md:text-4xl">
               Visi, Misi, Tugas, dan Fungsi
             </h2>
+
             <p className="mt-4 text-base text-gray-600">
               Mengenal arah pengembangan serta tanggung jawab UPA Bahasa dalam mendukung pelayanan kebahasaan di POLNES.
             </p>
           </div>
 
           {/* Grid 4 Kolom Card Minimalis Bersih & Profesional */}
-          <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
+          <div className="mt-16 grid grid-cols-1 gap-3 min-[480px]:grid-cols-2 min-[700px]:grid-cols-4 items-stretch">
             {cards.map((card, idx) => {
               const Icon = card.icon;
               const text = card.content || "";
@@ -257,6 +260,7 @@ export default function VisionMissionSection() {
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#10C35D] text-white shadow-sm">
                   <selectedCard.icon size={20} strokeWidth={1.8} />
                 </div>
+
                 <div>
                   <h3
                     id="vision-mission-modal-title"
@@ -264,6 +268,7 @@ export default function VisionMissionSection() {
                   >
                     {selectedCard.title}
                   </h3>
+
                   <p className="text-[11px] font-medium text-gray-500">
                     UPA Bahasa POLNES
                   </p>

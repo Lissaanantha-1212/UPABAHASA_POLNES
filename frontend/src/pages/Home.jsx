@@ -75,10 +75,10 @@ function formatCmsDate(value) {
 // ==========================================
 
 const primaryButton =
-  "group inline-flex items-center justify-center gap-3 min-h-[50px] px-7 py-3.5 rounded-xl bg-gradient-to-r from-[#0A8F4D] to-[#10C35D] text-white text-sm font-semibold tracking-wide shadow-[0_6px_18px_rgba(10,143,77,0.20)] hover:shadow-[0_10px_25px_rgba(10,143,77,0.28)] hover:-translate-y-1 hover:from-[#087A41] hover:to-[#0DAA50] active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20";
+  "group inline-flex items-center justify-center gap-2 min-h-[46px] flex-1 sm:flex-none px-4 sm:px-7 py-3 rounded-xl bg-gradient-to-r from-[#0A8F4D] to-[#10C35D] text-white text-xs sm:text-sm font-semibold tracking-wide shadow-[0_6px_18px_rgba(10,143,77,0.20)] hover:shadow-[0_10px_25px_rgba(10,143,77,0.28)] hover:-translate-y-1 hover:from-[#087A41] hover:to-[#0DAA50] active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20 whitespace-nowrap";
 
 const secondaryButton =
-  "group inline-flex items-center justify-center gap-3 min-h-[50px] px-7 py-3.5 rounded-xl bg-white/90 backdrop-blur-sm border border-[#0A3D2E]/15 text-[#0A3D2E] text-sm font-semibold tracking-wide shadow-sm hover:bg-[#EAF8EF] hover:border-[#10C35D]/50 hover:text-[#087A41] hover:-translate-y-1 hover:shadow-md active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20";
+  "group inline-flex items-center justify-center gap-2 min-h-[46px] flex-1 sm:flex-none px-4 sm:px-7 py-3 rounded-xl bg-white/90 backdrop-blur-sm border border-[#0A3D2E]/15 text-[#0A3D2E] text-xs sm:text-sm font-semibold tracking-wide shadow-sm hover:bg-[#EAF8EF] hover:border-[#10C35D]/50 hover:text-[#087A41] hover:-translate-y-1 hover:shadow-md active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20 whitespace-nowrap";
 
 const outlineButton =
   "group inline-flex items-center justify-center gap-3 min-h-[46px] px-6 py-3 rounded-xl border border-[#0A8F4D]/30 bg-white text-[#0A8F4D] text-sm font-semibold tracking-wide hover:bg-[#0A8F4D] hover:border-[#0A8F4D] hover:text-white hover:-translate-y-0.5 hover:shadow-[0_7px_18px_rgba(10,143,77,0.16)] active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20";
@@ -366,7 +366,7 @@ function Home() {
           1. HERO SECTION
       ========================================== */}
 
-      <section className="relative min-h-[400px] md:min-h-[440px] lg:min-h-[470px] flex items-center bg-white overflow-hidden">
+      <section className="relative min-h-[430px] sm:min-h-[400px] md:min-h-[440px] lg:min-h-[470px] flex items-center bg-white overflow-hidden">
 
         <div className="absolute inset-0">
 
@@ -377,11 +377,11 @@ function Home() {
               onError={(event) => {
                 event.currentTarget.style.display = 'none';
               }}
-              className="absolute top-0 bottom-0 left-[6%] w-[110%] h-full max-w-none object-cover object-center"
+              className="absolute top-0 bottom-0 left-0 sm:left-[3%] w-full sm:w-[110%] h-full max-w-none object-cover object-[62%_center] sm:object-center"
             />
           )}
 
-          <div className="absolute inset-0 bg-[#092F27]/45" />
+          <div className="absolute inset-0 bg-[#092F27]/25 sm:bg-[#092F27]/40" />
 
           <div
             className="absolute inset-0"
@@ -401,9 +401,9 @@ function Home() {
 
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto w-full px-5 md:px-8 py-12 md:py-14 lg:py-16">
+        <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-5 md:px-8 py-8 sm:py-12 md:py-14 lg:py-16">
 
-          <div className="max-w-[540px]">
+          <div className="max-w-[540px] sm:max-w-[540px]">
 
             {homeLoading ? (
               <p className="py-8 text-sm text-gray-500">
@@ -416,20 +416,20 @@ function Home() {
             ) : (
               <>
                 {heroTitle && (
-                  <h1 className="font-extrabold text-3xl sm:text-4xl md:text-[44px] lg:text-[40px] leading-[1.15] tracking-tight text-[#0A3D2E] mb-4">
+                  <h1 className="font-extrabold text-[27px] leading-[1.12] sm:text-4xl md:text-[44px] lg:text-[40px] tracking-tight text-[#0A3D2E] mb-3 sm:mb-4">
                     {heroTitle}
                   </h1>
                 )}
 
                 {heroDescription && (
-                  <p className="text-gray-600 text-sm md:text-base leading-[1.8] max-w-[460px] mb-6">
+                  <p className="text-gray-600 text-[13px] sm:text-sm md:text-base leading-[1.65] sm:leading-[1.8] max-w-[460px] mb-5 sm:mb-6">
                     {heroDescription}
                   </p>
                 )}
               </>
             )}
 
-            <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+            <div className="flex w-full max-w-[440px] items-center gap-2 sm:gap-4">
 
               {/* TOMBOL MEMBUKA DROPDOWN LAYANAN */}
 
@@ -462,18 +462,15 @@ function Home() {
           2. QUICK ACCESS - WHITE
       ========================================== */}
 
-      <section className="relative z-20 px-5 md:px-8 -mt-7 md:-mt-8 pb-4 bg-white">
+      <section className="relative z-20 px-4 sm:px-5 md:px-8 -mt-5 sm:-mt-7 md:-mt-8 pb-4 bg-white">
 
         <div className="max-w-7xl mx-auto">
 
-          <div className="bg-white rounded-2xl border border-[#E7EFE9] shadow-[0_12px_35px_rgba(10,61,46,0.09)] px-3 py-2 md:px-4 md:py-3">
+          <div className="bg-white rounded-2xl border border-[#E7EFE9] shadow-[0_12px_35px_rgba(10,61,46,0.09)] p-2 sm:px-3 sm:py-2 md:px-4 md:py-3">
 
             {quickServices.length > 0 ? (
               <div
-                className="grid"
-                style={{
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 210px), 1fr))',
-                }}
+                className="grid grid-cols-5 gap-1 sm:gap-2"
               >
                 {quickServices.map((service, index) => {
                   const Icon = service.icon;
@@ -483,22 +480,22 @@ function Home() {
                       key={service.id || `${service.title}-${index}`}
                       href={service.link}
                       className={`
-                        group relative flex items-center gap-3
-                        px-3 py-3 md:px-4 md:py-4
-                        rounded-xl hover:bg-[#F3F8F4]
+                        group relative flex flex-col items-center text-center gap-1 sm:flex-row sm:text-left sm:gap-2 md:gap-3
+                        px-1 py-2 sm:px-2 sm:py-3 md:px-3 md:py-4
+                        rounded-xl hover:bg-[#F3F8F4] min-w-0
                         transition-all duration-300
-                        ${index !== 0 ? 'lg:border-l lg:border-[#E9EFEB]' : ''}
+                        ${index !== 0 ? 'xl:border-l xl:border-[#E9EFEB]' : ''}
                       `}
                     >
-                      <div className="w-10 h-10 md:w-11 md:h-11 shrink-0 flex items-center justify-center rounded-xl bg-[#EAF8EF] text-[#0A8F4D] group-hover:bg-[#0A8F4D] group-hover:text-white group-hover:scale-105 transition-all duration-300">
-                        <Icon className="w-5 h-5 md:w-[22px] md:h-[22px]" />
+                      <div className="w-7 h-7 sm:w-9 sm:h-9 md:w-11 md:h-11 shrink-0 flex items-center justify-center rounded-lg sm:rounded-xl bg-[#EAF8EF] text-[#0A8F4D] group-hover:bg-[#0A8F4D] group-hover:text-white group-hover:scale-105 transition-all duration-300">
+                        <Icon className="w-4 h-4 sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]" />
                       </div>
 
                       <div className="min-w-0 flex-1">
-                        <h3 className="text-xs md:text-[13px] font-bold text-[#183D2E] leading-snug mb-1 group-hover:text-[#0A8F4D] transition-colors duration-300">
+                        <h3 className="text-[9px] leading-tight sm:text-xs md:text-[13px] font-bold text-[#183D2E] sm:mb-1 group-hover:text-[#0A8F4D] transition-colors duration-300 line-clamp-2">
                           {service.title}
                         </h3>
-                        <p className="text-[10px] md:text-[11px] text-gray-500 leading-relaxed">
+                        <p className="hidden md:block text-[9px] sm:text-[10px] md:text-[11px] text-gray-500 leading-relaxed">
                           {service.description}
                         </p>
                       </div>
@@ -752,7 +749,8 @@ function Home() {
 
         <div className="relative max-w-6xl mx-auto px-5 md:px-8">
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 rounded-3xl overflow-hidden shadow-[0_18px_45px_rgba(10,61,46,0.13)]">
+          {/* PERUBAHAN: sm:grid-cols-2 */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 rounded-3xl overflow-hidden shadow-[0_18px_45px_rgba(10,61,46,0.13)]">
 
             <div className="relative min-h-[300px] md:min-h-[420px]">
               {profileImage ? (
@@ -879,7 +877,7 @@ function Home() {
 
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1fr_1.08fr_1fr] items-center gap-5 lg:gap-4 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-[1fr_1.08fr_1fr] items-center gap-5 lg:gap-4 max-w-6xl mx-auto">
 
             {homeLoading ? (
               <p className="col-span-full py-10 text-center text-sm text-gray-500">
