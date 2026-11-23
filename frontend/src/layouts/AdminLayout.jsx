@@ -20,7 +20,7 @@ import {
 import logoPolnes from '../assets/logo-polnes.png';
 import { clearAdminSession } from '../adminSession';
 
-const UPABAHASA_BASE_URL = 'https://DOMAIN-UPABAHASA-KAMU.vercel.app';
+const UPABAHASA_BASE_URL = 'https://upabahasa.vercel.app';
 
 const operasionalMenuItems = [
   {
