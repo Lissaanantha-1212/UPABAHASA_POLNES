@@ -373,8 +373,7 @@ function Home() {
 
   return (
     <main className="w-full overflow-hidden bg-white">
-
-      {/* ==========================================
+{/* ==========================================
           1. HERO SECTION
       ========================================== */}
 
@@ -389,17 +388,17 @@ function Home() {
               onError={(event) => {
                 event.currentTarget.style.display = 'none';
               }}
-              className="absolute top-0 bottom-0 left-[22%] sm:left-[3%] w-[95%] sm:w-[110%] h-full max-w-none object-cover object-[72%_center] sm:object-center"
+              className="absolute top-0 bottom-0 left-[22%] sm:left-[12%] md:left-[16%] lg:left-[18%] w-[95%] sm:w-[92%] md:w-[90%] lg:w-[88%] h-full max-w-none object-cover object-[72%_center] sm:object-[65%_center] md:object-[72%_center]"
             />
           )}
 
-          <div className="absolute inset-0 bg-[#092F27]/20 sm:bg-[#092F27]/40" />
+          <div className="absolute inset-0 bg-[#092F27]/20 sm:bg-[#092F27]/35" />
 
           <div
             className="absolute inset-0"
             style={{
               background:
-                'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.99) 34%, rgba(255,255,255,0.92) 48%, rgba(255,255,255,0.68) 62%, rgba(255,255,255,0.28) 78%, rgba(255,255,255,0.05) 92%, transparent 100%)'
+                'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.99) 34%, rgba(255,255,255,0.94) 48%, rgba(255,255,255,0.72) 62%, rgba(255,255,255,0.32) 78%, rgba(255,255,255,0.06) 92%, transparent 100%)'
             }}
           />
 
