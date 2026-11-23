@@ -21,7 +21,6 @@ import { clearAdminSession } from '../adminSession';
 
 const UPABAHASA_BASE_URL = 'https://upabahasa.vercel.app';
 
-// GANTI DUA BARIS INI DENGAN URL & ANON KEY DARI ./js/supabase-config.js MILIKMU
 const SUPABASE_URL = 'https://aquqdodntgzjdfcvxgbs.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_aaAmOWSAFRFfnXfPFqftQw_v948Hbr0';
 
@@ -160,10 +159,7 @@ export default function AdminLayout({ children }) {
   const handleLogout = () => {
     setIsProfileOpen(false);
     setDbUser(null);
-    sessionStorage.removeItem('active_user_app_id');
-    sessionStorage.removeItem('active_user_app_email');
-    clearAdminSession();
-    window.location.replace(`${UPABAHASA_BASE_URL}/login.html`);
+    clearAdminSession(true);
   };
 
   return (

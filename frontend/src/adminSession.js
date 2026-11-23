@@ -1,4 +1,5 @@
 ﻿const API_URL = 'https://upabahasa-polnes-4p4a.vercel.app/api/admin';
+const LOGIN_REDIRECT_URL = 'https://upabahasa.vercel.app/login.html';
 
 const REFRESH_BUFFER_MS = 60 * 1000;
 const REFRESH_RETRY_MS = 30 * 1000;
@@ -14,7 +15,7 @@ const notifySessionExpired = () => {
   }
 };
 
-export const clearAdminSession = () => {
+export const clearAdminSession = (redirectToLogin = false) => {
   sessionVersion += 1;
   if (refreshTimer) {
     clearTimeout(refreshTimer);
@@ -25,6 +26,19 @@ export const clearAdminSession = () => {
   localStorage.removeItem('adminRefreshToken');
   localStorage.removeItem('adminTokenExpiresAt');
   localStorage.removeItem('adminUser');
+
+  if (typeof window !== 'undefined') {
+    sessionStorage.removeItem('active_user_app_id');
+    sessionStorage.removeItem('active_user_app_email');
+
+    if (redirectToLogin) {
+      window.location.replace(LOGIN_REDIRECT_URL);
+    }
+  }
+};
+
+export const logoutAdminToCustomLogin = () => {
+  clearAdminSession(true);
 };
 
 const saveSession = (session) => {
@@ -231,6 +245,19 @@ const verifyAdminSession = async () => {
 };
 
 export const ensureAdminSession = async () => {
+  // Jika masuk melalui login.html (membawa ?uid= dari tabel user_app), izinkan sesi aktif
+  if (typeof window !== 'undefined') {
+    const params = new URLSearchParams(window.location.search);
+    const uidFromUrl = params.get('uid');
+    if (uidFromUrl) {
+      sessionStorage.setItem('active_user_app_id', uidFromUrl);
+      return true;
+    }
+    if (sessionStorage.getItem('active_user_app_id')) {
+      return true;
+    }
+  }
+
   let token = localStorage.getItem('adminToken');
   const refreshToken = localStorage.getItem('adminRefreshToken');
 
@@ -333,4 +360,3 @@ export const adminFetch = async (input, init = {}) => {
   // Ulangi permintaan maksimal satu kali setelah refresh berhasil.
   return sendRequest();
 };
-
