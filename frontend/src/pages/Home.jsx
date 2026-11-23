@@ -74,10 +74,10 @@ function formatCmsDate(value) {
 // ==========================================
 
 const primaryButton =
-  "group inline-flex items-center justify-center gap-2 min-h-[46px] px-7 py-3 rounded-xl bg-gradient-to-r from-[#0A8F4D] to-[#10C35D] text-white text-sm font-semibold tracking-wide shadow-[0_6px_18px_rgba(10,143,77,0.20)] hover:shadow-[0_10px_25px_rgba(10,143,77,0.28)] hover:-translate-y-1 hover:from-[#087A41] hover:to-[#0DAA50] active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20 whitespace-nowrap";
+  "group inline-flex items-center justify-center gap-1 sm:gap-2 min-h-[34px] sm:min-h-[46px] flex-1 sm:flex-none px-2.5 sm:px-7 py-1.5 sm:py-3 rounded-lg sm:rounded-xl bg-gradient-to-r from-[#0A8F4D] to-[#10C35D] text-white text-[9.5px] sm:text-sm font-semibold tracking-wide shadow-[0_6px_18px_rgba(10,143,77,0.20)] hover:shadow-[0_10px_25px_rgba(10,143,77,0.28)] hover:-translate-y-1 hover:from-[#087A41] hover:to-[#0DAA50] active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20 whitespace-nowrap";
 
 const secondaryButton =
-  "group inline-flex items-center justify-center gap-2 min-h-[46px] px-7 py-3 rounded-xl bg-white/95 backdrop-blur-sm border border-[#0A3D2E]/15 text-[#0A3D2E] text-sm font-semibold tracking-wide shadow-sm hover:bg-[#EAF8EF] hover:border-[#10C35D]/50 hover:text-[#087A41] hover:-translate-y-1 hover:shadow-md active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20 whitespace-nowrap";
+  "group inline-flex items-center justify-center gap-1 sm:gap-2 min-h-[34px] sm:min-h-[46px] flex-1 sm:flex-none px-2.5 sm:px-7 py-1.5 sm:py-3 rounded-lg sm:rounded-xl bg-white/95 backdrop-blur-sm border border-[#0A3D2E]/15 text-[#0A3D2E] text-[9.5px] sm:text-sm font-semibold tracking-wide shadow-sm hover:bg-[#EAF8EF] hover:border-[#10C35D]/50 hover:text-[#087A41] hover:-translate-y-1 hover:shadow-md active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20 whitespace-nowrap";
 
 const outlineButton =
   "group inline-flex items-center justify-center gap-3 min-h-[46px] px-6 py-3 rounded-xl border border-[#0A8F4D]/30 bg-white text-[#0A8F4D] text-sm font-semibold tracking-wide hover:bg-[#0A8F4D] hover:border-[#0A8F4D] hover:text-white hover:-translate-y-0.5 hover:shadow-[0_7px_18px_rgba(10,143,77,0.16)] active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20";
@@ -378,99 +378,105 @@ function Home() {
           1. HERO SECTION
       ========================================== */}
 
-      <div className="relative w-full h-[184px] sm:h-auto overflow-hidden bg-white">
-        <section className="relative w-[920px] sm:w-full h-[470px] sm:h-auto min-h-[470px] flex items-center bg-white overflow-hidden origin-top-left scale-[0.391] sm:scale-100">
+      <section className="relative min-h-[260px] sm:min-h-[410px] md:min-h-[445px] lg:min-h-[470px] flex items-center bg-white overflow-hidden">
 
-          <div className="absolute inset-0">
+        <div className="absolute inset-0">
 
-            {heroImage && (
-              <img
-                src={heroImage}
-                alt="Gedung Politeknik Negeri Samarinda"
-                onError={(event) => {
-                  event.currentTarget.style.display = 'none';
-                }}
-                className="absolute top-0 bottom-0 left-[38%] w-[64%] h-full max-w-none object-cover object-[88%_center]"
-              />
+          {heroImage && (
+            <img
+              src={heroImage}
+              alt="Gedung Politeknik Negeri Samarinda"
+              onError={(event) => {
+                event.currentTarget.style.display = 'none';
+              }}
+              className="absolute top-0 bottom-0 left-[28%] sm:left-[34%] md:left-[40%] lg:left-[44%] w-[76%] sm:w-[72%] md:w-[68%] lg:w-[64%] h-full max-w-none object-cover object-[76%_center] sm:object-[82%_center] md:object-[88%_center] lg:object-[92%_center]"
+            />
+          )}
+
+          <div className="absolute inset-0 bg-[#092F27]/10 sm:bg-[#092F27]/25" />
+
+          <div
+            className="absolute inset-0 sm:hidden"
+            style={{
+              background:
+                'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 54%, rgba(255,255,255,0.92) 68%, rgba(255,255,255,0.45) 84%, rgba(255,255,255,0.08) 100%)'
+            }}
+          />
+
+          <div
+            className="hidden sm:block absolute inset-0"
+            style={{
+              background:
+                'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.98) 34%, rgba(255,255,255,0.88) 48%, rgba(255,255,255,0.62) 62%, rgba(255,255,255,0.25) 78%, rgba(255,255,255,0.04) 92%, transparent 100%)'
+            }}
+          />
+
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                'linear-gradient(0deg, rgba(255,255,255,0.22) 0%, transparent 25%, transparent 80%, rgba(255,255,255,0.08) 100%)'
+            }}
+          />
+
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto w-full px-3 sm:px-6 md:px-8 py-5 sm:py-12 md:py-14 lg:py-16">
+
+          <div className="max-w-[205px] sm:max-w-[440px] md:max-w-[480px] lg:max-w-[540px]">
+
+            {homeLoading ? (
+              <p className="py-8 text-sm text-gray-500">
+                Memuat konten Beranda...
+              </p>
+            ) : homeError ? (
+              <p role="alert" className="py-8 text-sm text-red-700">
+                Konten Beranda gagal dimuat. Silakan coba beberapa saat lagi.
+              </p>
+            ) : (
+              <>
+                {heroTitle && (
+                  <h1 className="font-extrabold text-[17px] leading-[1.2] sm:text-3xl md:text-[38px] lg:text-[40px] tracking-tight text-[#0A3D2E] mb-1.5 sm:mb-4">
+                    {heroTitle}
+                  </h1>
+                )}
+
+                {heroDescription && (
+                  <p className="text-gray-700 sm:text-gray-600 text-[9.5px] leading-[1.45] sm:text-sm md:text-[15px] sm:leading-[1.75] max-w-[195px] sm:max-w-[430px] md:max-w-[460px] mb-3 sm:mb-6">
+                    {heroDescription}
+                  </p>
+                )}
+              </>
             )}
 
-            <div className="absolute inset-0 bg-[#092F27]/25" />
+            <div className="flex w-full max-w-[215px] sm:max-w-[440px] items-center gap-1.5 sm:gap-4">
 
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.98) 34%, rgba(255,255,255,0.88) 48%, rgba(255,255,255,0.62) 62%, rgba(255,255,255,0.25) 78%, rgba(255,255,255,0.04) 92%, transparent 100%)'
-              }}
-            />
+              {/* TOMBOL MEMBUKA DROPDOWN LAYANAN */}
 
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  'linear-gradient(0deg, rgba(255,255,255,0.22) 0%, transparent 25%, transparent 80%, rgba(255,255,255,0.08) 100%)'
-              }}
-            />
+              <button
+                type="button"
+                onClick={openLayananDropdown}
+                className={primaryButton}
+              >
+                <span>Jelajahi Layanan</span>
+                <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform duration-300" />
+              </button>
 
-          </div>
-
-          <div className="relative z-10 max-w-7xl mx-auto w-full px-8 py-16">
-
-            <div className="max-w-[540px]">
-
-              {homeLoading ? (
-                <p className="py-8 text-sm text-gray-500">
-                  Memuat konten Beranda...
-                </p>
-              ) : homeError ? (
-                <p role="alert" className="py-8 text-sm text-red-700">
-                  Konten Beranda gagal dimuat. Silakan coba beberapa saat lagi.
-                </p>
-              ) : (
-                <>
-                  {heroTitle && (
-                    <h1 className="font-extrabold text-[40px] leading-[1.15] tracking-tight text-[#0A3D2E] mb-4">
-                      {heroTitle}
-                    </h1>
-                  )}
-
-                  {heroDescription && (
-                    <p className="text-gray-600 text-[15px] leading-[1.75] max-w-[460px] mb-6">
-                      {heroDescription}
-                    </p>
-                  )}
-                </>
-              )}
-
-              <div className="flex w-full max-w-[440px] items-center gap-4">
-
-                {/* TOMBOL MEMBUKA DROPDOWN LAYANAN */}
-
-                <button
-                  type="button"
-                  onClick={openLayananDropdown}
-                  className={primaryButton}
-                >
-                  <span>Jelajahi Layanan</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                </button>
-
-                <a
-                  href="/tentang"
-                  className={secondaryButton}
-                >
-                  <span>Tentang Kami</span>
-                  <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300" />
-                </a>
-
-              </div>
+              <a
+                href="/tentang"
+                className={secondaryButton}
+              >
+                <span>Tentang Kami</span>
+                <ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300" />
+              </a>
 
             </div>
 
           </div>
 
-        </section>
-      </div>
+        </div>
+
+      </section>
 
       {/* ==========================================
           2. QUICK ACCESS - WHITE
