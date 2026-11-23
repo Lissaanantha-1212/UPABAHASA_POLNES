@@ -388,7 +388,7 @@ function Home() {
               onError={(event) => {
                 event.currentTarget.style.display = 'none';
               }}
-              className="absolute top-0 bottom-0 left-[22%] sm:left-[12%] md:left-[16%] lg:left-[18%] w-[95%] sm:w-[92%] md:w-[90%] lg:w-[88%] h-full max-w-none object-cover object-[72%_center] sm:object-[65%_center] md:object-[72%_center]"
+              className="absolute top-0 bottom-0 left-[22%] sm:left-[22%] md:left-[26%] lg:left-[28%] w-[95%] sm:w-[85%] md:w-[82%] lg:w-[80%] h-full max-w-none object-cover object-[72%_center] sm:object-[72%_center] md:object-[78%_center] lg:object-[82%_center]"
             />
           )}
 
