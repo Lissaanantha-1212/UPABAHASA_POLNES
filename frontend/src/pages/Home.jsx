@@ -877,7 +877,9 @@ function Home() {
 
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-[1fr_1.08fr_1fr] items-center gap-5 lg:gap-4 max-w-6xl mx-auto">
+          {/* GRID GALERI RESPONSIVE */}
+
+          <div className="grid grid-cols-[1fr_1.08fr_1fr] items-center gap-2 sm:gap-3 lg:gap-4 max-w-6xl mx-auto">
 
             {homeLoading ? (
               <p className="col-span-full py-10 text-center text-sm text-gray-500">
