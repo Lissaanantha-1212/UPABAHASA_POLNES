@@ -375,7 +375,7 @@ function Home() {
     <main className="w-full overflow-hidden bg-white">
 
       {/* ==========================================
-1. HERO SECTION (REVISI MOBILE, DESKTOP TETAP)
+          1. HERO SECTION (REVISI MOBILE, DESKTOP TETAP)
       ========================================== */}
 
       <section className="relative min-h-[450px] sm:min-h-[400px] md:min-h-[440px] lg:min-h-[470px] flex items-center bg-white overflow-hidden">
@@ -481,7 +481,7 @@ function Home() {
       </section>
 
       {/* ==========================================
-2. QUICK ACCESS - WHITE
+          2. QUICK ACCESS - WHITE
       ========================================== */}
 
       <section className="relative z-20 px-4 sm:px-5 md:px-8 -mt-5 sm:-mt-7 md:-mt-8 pb-4 bg-white">
@@ -540,7 +540,7 @@ function Home() {
       </section>
 
       {/* ==========================================
-3. NEWS & ANNOUNCEMENTS
+          3. NEWS & ANNOUNCEMENTS
       ========================================== */}
 
       <section className="relative py-14 md:py-16 bg-white overflow-hidden">
@@ -771,7 +771,7 @@ function Home() {
       </section>
 
       {/* ==========================================
-4. ABOUT UPA BAHASA
+          4. ABOUT UPA BAHASA
       ========================================== */}
 
       <section className="relative py-14 md:py-20 bg-[#EAF5EE] overflow-hidden">
@@ -866,7 +866,7 @@ function Home() {
       </section>
 
       {/* ==========================================
-5. GALLERY
+          5. GALLERY
       ========================================== */}
 
       <section className="relative py-14 md:py-16 bg-white overflow-hidden">
