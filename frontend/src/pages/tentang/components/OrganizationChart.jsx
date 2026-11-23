@@ -22,6 +22,7 @@ function MemberCard({ person }) {
   return (
     <>
       <article className="group flex h-full min-w-0 flex-col overflow-hidden rounded-tl-xl rounded-tr-xl rounded-bl-xl rounded-br-[64px] border border-gray-100 bg-white shadow-[0_8px_25px_rgba(10,61,46,0.09)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(10,61,46,0.15)]">
+
         <div className="relative aspect-[4/4.3] w-full shrink-0 overflow-hidden rounded-tl-xl rounded-tr-xl rounded-bl-none rounded-br-[68px] bg-[#e8f8ee]">
           {photo ? (
             <img
@@ -167,13 +168,14 @@ function MemberCarousel({ members }) {
         }
       }}
     >
-      {/* Tampilan HP: semua anggota dalam satu baris */}
-      <div className="overflow-x-auto overscroll-x-contain snap-x snap-mandatory pb-4 md:hidden">
-        <div className="flex w-max items-stretch gap-4 px-1">
+
+      {/* MOBILE: Dua kartu terlihat, semua anggota sejajar horizontal */}
+      <div className="w-full overflow-x-auto overscroll-x-contain snap-x snap-mandatory pb-4 md:hidden">
+        <div className="flex w-max items-stretch gap-3 px-1">
           {members.map((person) => (
             <div
               key={person.id}
-              className="flex w-[min(78vw,220px)] shrink-0 snap-start"
+              className="flex w-[calc((100vw-48px)/2)] max-w-[220px] min-w-[145px] shrink-0 snap-start"
             >
               <MemberCard person={person} />
             </div>
@@ -181,8 +183,9 @@ function MemberCarousel({ members }) {
         </div>
       </div>
 
-      {/* Tampilan desktop: maksimal empat anggota sekaligus */}
+      {/* DESKTOP: Maksimal empat anggota sekaligus */}
       <div className="hidden md:block">
+
         {hasCarousel && (
           <>
             <button
