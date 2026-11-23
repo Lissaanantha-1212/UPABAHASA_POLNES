@@ -389,7 +389,7 @@ function Home() {
               onError={(event) => {
                 event.currentTarget.style.display = 'none';
               }}
-              className="absolute top-0 bottom-0 left-[35%] sm:left-[34%] md:left-[40%] lg:left-[44%] w-[78%] sm:w-[72%] md:w-[68%] lg:w-[64%] h-full max-w-none object-cover object-[76%_center] sm:object-[82%_center] md:object-[88%_center] lg:object-[92%_center]"
+              className="absolute top-0 bottom-0 left-[42%] sm:left-[34%] md:left-[40%] lg:left-[44%] w-[78%] sm:w-[72%] md:w-[68%] lg:w-[64%] h-full max-w-none object-cover object-[76%_center] sm:object-[82%_center] md:object-[88%_center] lg:object-[92%_center]"
             />
           )}
 
@@ -399,7 +399,7 @@ function Home() {
             className="absolute inset-0 sm:hidden"
             style={{
               background:
-                'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.98) 35%, rgba(255,255,255,0.92) 52%, rgba(255,255,255,0.66) 68%, rgba(255,255,255,0.16) 100%)'
+                'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 42%, rgba(255,255,255,0.98) 58%, rgba(255,255,255,0.88) 72%, rgba(255,255,255,0.45) 88%, rgba(255,255,255,0.08) 100%)'
             }}
           />
 
