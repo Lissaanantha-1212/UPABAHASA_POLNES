@@ -157,7 +157,7 @@ export default function VisionMissionSection() {
         id="visi-misi"
         className={`relative scroll-mt-16 overflow-hidden bg-gradient-to-b from-[#F4FBF7] via-[#EAEFF5] to-[#F4FBF7] ${sectionSpacing}`}
       >
-        {/* Ornamen Latar Belakang Profesional (Tidak Polosan) */}
+        {/* Ornamen Latar Belakang */}
         <div className="absolute inset-0 opacity-30 bg-[radial-gradient(#10C35D_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
         <div className="absolute top-1/4 -left-32 h-96 w-96 rounded-full bg-[#10C35D]/10 blur-3xl pointer-events-none" />
         <div className="absolute bottom-1/4 -right-32 h-96 w-96 rounded-full bg-[#0A3D2E]/10 blur-3xl pointer-events-none" />
@@ -177,63 +177,65 @@ export default function VisionMissionSection() {
             </p>
           </div>
 
-          {/* Grid 4 Kolom Card Minimalis Bersih & Profesional */}
-          <div className="mt-16 grid grid-cols-1 gap-3 min-[480px]:grid-cols-2 min-[700px]:grid-cols-4 items-stretch">
-            {cards.map((card, idx) => {
-              const Icon = card.icon;
-              const text = card.content || "";
+          {/* Kartu sejajar dan dapat digeser pada layar HP */}
+          <div className="mt-16 -mx-5 overflow-x-auto overscroll-x-contain snap-x snap-mandatory px-5 pb-2 md:mx-0 md:overflow-visible md:px-0">
+            <div className="flex w-max items-stretch gap-3 md:w-full">
+              {cards.map((card, idx) => {
+                const Icon = card.icon;
+                const text = card.content || "";
 
-              return (
-                <article
-                  key={card.title}
-                  onClick={() => setSelectedCard(card)}
-                  style={{ animationDelay: `${idx * 150}ms` }}
-                  className="group relative flex cursor-pointer flex-col justify-between rounded-3xl bg-white/90 backdrop-blur-md p-7 border border-gray-200/80 shadow-[0_10px_30px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(16,195,93,0.12)] hover:border-[#10C35D]/60"
-                >
-                  <div>
-                    {/* Ikon Ilustrasi di Atas */}
-                    <div className="flex justify-center">
-                      <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#10C35D]/10 text-[#10C35D] transition-transform duration-300 group-hover:scale-110 shadow-xs">
-                        <Icon size={32} strokeWidth={1.8} />
+                return (
+                  <article
+                    key={card.title}
+                    onClick={() => setSelectedCard(card)}
+                    style={{ animationDelay: `${idx * 150}ms` }}
+                    className="group relative flex w-[78vw] max-w-[280px] shrink-0 snap-start cursor-pointer flex-col justify-between rounded-3xl bg-white/90 backdrop-blur-md p-7 border border-gray-200/80 shadow-[0_10px_30px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(16,195,93,0.12)] hover:border-[#10C35D]/60 md:w-0 md:min-w-0 md:max-w-none md:flex-1"
+                  >
+                    <div>
+                      {/* Ikon */}
+                      <div className="flex justify-center">
+                        <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#10C35D]/10 text-[#10C35D] transition-transform duration-300 group-hover:scale-110 shadow-xs">
+                          <Icon size={32} strokeWidth={1.8} />
+                        </div>
+                      </div>
+
+                      {/* Judul */}
+                      <h3 className="mt-6 text-center text-xl font-extrabold tracking-tight text-gray-900 group-hover:text-[#10C35D] transition-colors">
+                        {card.title}
+                      </h3>
+
+                      {/* Cuplikan Konten */}
+                      <div className="mt-3 max-h-[90px] overflow-hidden text-center">
+                        <p className="line-clamp-3 text-xs md:text-sm font-normal leading-relaxed text-gray-600">
+                          {loading ? (
+                            <span className="animate-pulse text-gray-400">
+                              Memuat konten...
+                            </span>
+                          ) : loadError ? (
+                            <span className="text-gray-400">
+                              Gagal memuat konten.
+                            </span>
+                          ) : (
+                            text
+                          )}
+                        </p>
                       </div>
                     </div>
 
-                    {/* Judul */}
-                    <h3 className="mt-6 text-center text-xl font-extrabold tracking-tight text-gray-900 group-hover:text-[#10C35D] transition-colors">
-                      {card.title}
-                    </h3>
-
-                    {/* Cuplikan Konten */}
-                    <div className="mt-3 max-h-[90px] overflow-hidden text-center">
-                      <p className="line-clamp-3 text-xs md:text-sm font-normal leading-relaxed text-gray-600">
-                        {loading ? (
-                          <span className="animate-pulse text-gray-400">
-                            Memuat konten...
-                          </span>
-                        ) : loadError ? (
-                          <span className="text-gray-400">
-                            Gagal memuat konten.
-                          </span>
-                        ) : (
-                          text
-                        )}
-                      </p>
+                    {/* Tombol Baca Selengkapnya */}
+                    <div className="mt-8 pt-4 border-t border-gray-100 flex justify-center">
+                      <button
+                        type="button"
+                        className="w-full flex items-center justify-center gap-2 rounded-2xl bg-gray-50 py-2.5 text-xs font-bold text-gray-700 transition-all duration-300 group-hover:bg-[#10C35D] group-hover:text-white shadow-2xs"
+                      >
+                        <span>Baca Selengkapnya</span>
+                        <ArrowRight size={14} />
+                      </button>
                     </div>
-                  </div>
-
-                  {/* Tombol Baca Selengkapnya di Bawah */}
-                  <div className="mt-8 pt-4 border-t border-gray-100 flex justify-center">
-                    <button
-                      type="button"
-                      className="w-full flex items-center justify-center gap-2 rounded-2xl bg-gray-50 py-2.5 text-xs font-bold text-gray-700 transition-all duration-300 group-hover:bg-[#10C35D] group-hover:text-white shadow-2xs"
-                    >
-                      <span>Baca Selengkapnya</span>
-                      <ArrowRight size={14} />
-                    </button>
-                  </div>
-                </article>
-              );
-            })}
+                  </article>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>

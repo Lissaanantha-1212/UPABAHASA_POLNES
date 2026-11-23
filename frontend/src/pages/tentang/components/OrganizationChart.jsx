@@ -21,7 +21,7 @@ function MemberCard({ person }) {
 
   return (
     <>
-      <article className="group flex flex-col h-full min-w-0 overflow-hidden rounded-tl-xl rounded-tr-xl rounded-bl-xl rounded-br-[64px] border border-gray-100 bg-white shadow-[0_8px_25px_rgba(10,61,46,0.09)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(10,61,46,0.15)]">
+      <article className="group flex h-full min-w-0 flex-col overflow-hidden rounded-tl-xl rounded-tr-xl rounded-bl-xl rounded-br-[64px] border border-gray-100 bg-white shadow-[0_8px_25px_rgba(10,61,46,0.09)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(10,61,46,0.15)]">
         <div className="relative aspect-[4/4.3] w-full shrink-0 overflow-hidden rounded-tl-xl rounded-tr-xl rounded-bl-none rounded-br-[68px] bg-[#e8f8ee]">
           {photo ? (
             <img
@@ -128,7 +128,6 @@ function MemberCard({ person }) {
 function MemberCarousel({ members }) {
   const [startIndex, setStartIndex] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [touchStartX, setTouchStartX] = useState(null);
 
   const hasCarousel = members.length > 4;
 
@@ -142,7 +141,9 @@ function MemberCarousel({ members }) {
     if (!hasCarousel || paused) return undefined;
 
     const interval = setInterval(() => {
-      setStartIndex((current) => (current >= maxStart ? 0 : current + 1));
+      setStartIndex((current) =>
+        current >= maxStart ? 0 : current + 1
+      );
     }, 5000);
 
     return () => clearInterval(interval);
@@ -158,23 +159,6 @@ function MemberCarousel({ members }) {
     });
   };
 
-  const handleTouchStart = (event) => {
-    setTouchStartX(event.touches[0].clientX);
-    setPaused(true);
-  };
-
-  const handleTouchEnd = (event) => {
-    if (touchStartX === null) return;
-
-    const distance = event.changedTouches[0].clientX - touchStartX;
-
-    if (distance < -45) moveCarousel("next");
-    if (distance > 45) moveCarousel("previous");
-
-    setTouchStartX(null);
-    setPaused(false);
-  };
-
   return (
     <div
       className="relative"
@@ -186,8 +170,6 @@ function MemberCarousel({ members }) {
           setPaused(false);
         }
       }}
-      onTouchStart={hasCarousel ? handleTouchStart : undefined}
-      onTouchEnd={hasCarousel ? handleTouchEnd : undefined}
     >
       {hasCarousel && (
         <>
@@ -209,29 +191,24 @@ function MemberCarousel({ members }) {
             <ChevronRight size={21} />
           </button>
 
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-12 bg-gradient-to-r from-white via-white/80 to-transparent backdrop-blur-[3px] md:w-16" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-8 bg-gradient-to-r from-white via-white/80 to-transparent md:w-16" />
 
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-12 bg-gradient-to-l from-white via-white/80 to-transparent backdrop-blur-[3px] md:w-16" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-8 bg-gradient-to-l from-white via-white/80 to-transparent md:w-16" />
         </>
       )}
 
-      <div
-        className={
-          hasCarousel
-            ? "flex items-stretch justify-center gap-5"
-            : "grid grid-cols-1 min-[480px]:grid-cols-2 min-[768px]:grid-cols-4 items-stretch justify-items-center gap-5"
-        }
-      >
-        {visibleMembers.map((person) => (
-          <div
-            key={person.id}
-            className={`w-full max-w-[220px] flex ${
-              hasCarousel ? "shrink-0" : ""
-            }`}
-          >
-            <MemberCard person={person} />
-          </div>
-        ))}
+      {/* Area kartu yang dapat digeser horizontal */}
+      <div className="overflow-x-auto overscroll-x-contain snap-x snap-mandatory pb-3 md:overflow-visible">
+        <div className="flex w-max min-w-full items-stretch justify-start gap-5 px-1 md:w-full md:justify-center md:px-0">
+          {visibleMembers.map((person) => (
+            <div
+              key={person.id}
+              className="flex w-[min(78vw,220px)] max-w-[220px] shrink-0 snap-start"
+            >
+              <MemberCard person={person} />
+            </div>
+          ))}
+        </div>
       </div>
 
       {hasCarousel && (
