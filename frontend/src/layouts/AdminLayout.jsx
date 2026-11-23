@@ -1,5 +1,5 @@
-﻿import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+﻿import React, { useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard,
   FileText,
@@ -10,6 +10,7 @@ import {
   LogOut,
   Menu,
   X,
+  UserRound,
   ChevronDown,
   Calendar,
   FileUp,
@@ -20,9 +21,6 @@ import logoPolnes from '../assets/logo-polnes.png';
 import { clearAdminSession } from '../adminSession';
 
 const UPABAHASA_BASE_URL = 'https://upabahasa.vercel.app';
-
-const SUPABASE_URL = 'https://aquqdodntgzjdfcvxgbs.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_aaAmOWSAFRFfnXfPFqftQw_v948Hbr0';
 
 const operasionalMenuItems = [
   {
@@ -50,6 +48,7 @@ const operasionalMenuItems = [
 
 export default function AdminLayout({ children }) {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -58,87 +57,28 @@ export default function AdminLayout({ children }) {
     'Hasil Test': false,
   });
 
-  // State profil yang diambil langsung dari tabel database `user_app`
-  const [dbUser, setDbUser] = useState(null);
+  let adminUser = {};
 
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const uidFromUrl = params.get('uid');
-    const emailFromUrl = params.get('email');
+  try {
+    adminUser = JSON.parse(localStorage.getItem('adminUser') || '{}') || {};
+  } catch (error) {
+    console.error('Data profil admin tidak valid:', error);
+  }
 
-    if (uidFromUrl) sessionStorage.setItem('active_user_app_id', uidFromUrl);
-    if (emailFromUrl) sessionStorage.setItem('active_user_app_email', emailFromUrl);
-
-    if (uidFromUrl || emailFromUrl) {
-      window.history.replaceState({}, document.title, window.location.pathname);
-    }
-
-    const targetUid = uidFromUrl || sessionStorage.getItem('active_user_app_id');
-    const targetEmail = emailFromUrl || sessionStorage.getItem('active_user_app_email');
-
-    async function fetchUserFromDatabase() {
-      try {
-        const res = await fetch(
-          `${SUPABASE_URL}/rest/v1/user_app?select=*&order=id.asc`,
-          {
-            headers: {
-              apikey: SUPABASE_ANON_KEY,
-              Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-            },
-          }
-        );
-
-        if (!res.ok) return;
-        const rows = await res.json();
-        if (!Array.isArray(rows) || rows.length === 0) return;
-
-        let matchedIndex = -1;
-        if (targetUid) {
-          matchedIndex = rows.findIndex((u) => String(u.id) === String(targetUid));
-        }
-        if (matchedIndex === -1 && targetEmail) {
-          matchedIndex = rows.findIndex(
-            (u) => String(u.email || '').toLowerCase() === String(targetEmail).toLowerCase()
-          );
-        }
-
-        if (matchedIndex !== -1) {
-          const found = rows[matchedIndex];
-          setDbUser({
-            ...found,
-            nomorUrutAdmin: matchedIndex + 1,
-          });
-        }
-      } catch (err) {
-        console.error('Gagal mengambil profil dari tabel user_app:', err);
-      }
-    }
-
-    fetchUserFromDatabase();
-  }, [location.pathname]);
-
-  const adminName = dbUser?.nama || dbUser?.username || 'Admin UPA';
-  const adminEmail = dbUser?.email || '-';
+  const adminName = adminUser.fullName || 'Admin UPA';
+  const adminEmail = adminUser.email || '-';
   const adminInitial = adminName.trim().charAt(0).toUpperCase() || 'A';
+  const staffNumber = adminUser.staffNumber;
+  const adminNumber =
+    staffNumber !== null &&
+    staffNumber !== undefined &&
+    staffNumber !== ''
+      ? `Admin ${staffNumber}`
+      : 'Nomor admin belum tersedia';
 
-  const adminNumber = dbUser?.nomorUrutAdmin
-    ? `Admin ${dbUser.nomorUrutAdmin}`
-    : 'Nomor admin belum tersedia';
-
-  const roleLabel =
-    dbUser?.role === 'kepala'
-      ? 'Kepala UPA Bahasa'
-      : dbUser?.role === 'staff' || dbUser?.role === 'staf'
-      ? 'Staf'
-      : dbUser?.role
-      ? dbUser.role.charAt(0).toUpperCase() + dbUser.role.slice(1)
-      : 'Administrator';
-
-  // Helper agar setiap link menuju halaman operasional di upabahasa.vercel.app selalu membawa ?uid=<id_user_app>
-  const buildOperasionalUrl = (baseHref) => {
-    const activeUid = dbUser?.id || sessionStorage.getItem('active_user_app_id');
-    return activeUid ? `${baseHref}?uid=${encodeURIComponent(activeUid)}` : baseHref;
-  };
+  const roleLabel = adminUser.role
+    ? adminUser.role.charAt(0).toUpperCase() + adminUser.role.slice(1)
+    : 'Administrator';
 
   const menuItems = [
     { name: 'Dashboard', path: '/admin/dashboard', icon: LayoutDashboard },
@@ -158,8 +98,9 @@ export default function AdminLayout({ children }) {
 
   const handleLogout = () => {
     setIsProfileOpen(false);
-    setDbUser(null);
-    clearAdminSession(true);
+    clearAdminSession();
+    alert('Anda berhasil Logout!');
+    navigate('/admin/login', { replace: true });
   };
 
   return (
@@ -221,7 +162,7 @@ export default function AdminLayout({ children }) {
               return (
                 <a
                   key={item.name}
-                  href={buildOperasionalUrl(item.href)}
+                  href={item.href}
                   onClick={() => setIsSidebarOpen(false)}
                   className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-300 hover:bg-white/10 hover:text-white transition-all duration-200"
                 >
@@ -256,7 +197,7 @@ export default function AdminLayout({ children }) {
                     {item.children.map((subItem) => (
                       <a
                         key={subItem.name}
-                        href={buildOperasionalUrl(subItem.href)}
+                        href={subItem.href}
                         onClick={() => setIsSidebarOpen(false)}
                         className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium text-gray-300 hover:bg-white/10 hover:text-white transition-colors"
                       >
