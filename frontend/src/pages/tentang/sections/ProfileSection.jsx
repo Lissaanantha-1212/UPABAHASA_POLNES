@@ -121,8 +121,7 @@ export default function ProfileSection() {
       className="relative scroll-mt-16 overflow-hidden bg-white"
     >
       <div className={`${container} relative`}>
-        <div className="grid min-h-[430px] items-center gap-8 py-12 md:grid-cols-[0.95fr_1.05fr] md:gap-5 md:py-0 lg:gap-5 lg:py-0">
-
+        <div className="grid min-h-[430px] items-center gap-8 py-12 md:grid-cols-[0.95fr_1.05fr] md:gap-5 md:py-0">
           <div className="relative z-10 max-w-xl py-2 md:py-12">
             <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.22em] text-[#10a653] md:text-xs">
               Profil UPA Bahasa
@@ -142,7 +141,7 @@ export default function ProfileSection() {
             ))}
           </div>
 
-          <div className="relative md:-mr-8">
+          <div className="relative md:-mr-2 lg:-mr-8">
             <div className="absolute -right-5 -top-5 h-40 w-40 rounded-full bg-[#10C35D]/10 blur-3xl" />
 
             <div className="relative h-[280px] overflow-hidden rounded-2xl shadow-[0_15px_40px_rgba(10,61,46,0.12)] md:h-[370px] lg:h-[430px] lg:rounded-l-3xl lg:rounded-r-none">
@@ -153,10 +152,8 @@ export default function ProfileSection() {
               />
             </div>
           </div>
-
         </div>
       </div>
     </section>
   );
 }
- 
