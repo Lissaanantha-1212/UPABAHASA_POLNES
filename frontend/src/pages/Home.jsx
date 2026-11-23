@@ -749,7 +749,8 @@ function Home() {
 
         <div className="relative max-w-6xl mx-auto px-5 md:px-8">
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 rounded-3xl overflow-hidden shadow-[0_18px_45px_rgba(10,61,46,0.13)]">
+          {/* PERUBAHAN: sm:grid-cols-2 */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 rounded-3xl overflow-hidden shadow-[0_18px_45px_rgba(10,61,46,0.13)]">
 
             <div className="relative min-h-[300px] md:min-h-[420px]">
               {profileImage ? (
