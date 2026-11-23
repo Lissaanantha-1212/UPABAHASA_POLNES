@@ -74,10 +74,10 @@ function formatCmsDate(value) {
 // ==========================================
 
 const primaryButton =
-  "group inline-flex items-center justify-center gap-1 sm:gap-2 min-h-[36px] sm:min-h-[46px] flex-1 sm:flex-none px-2.5 sm:px-7 py-2 sm:py-3 rounded-lg sm:rounded-xl bg-gradient-to-r from-[#0A8F4D] to-[#10C35D] text-white text-[9.5px] sm:text-sm font-semibold tracking-wide shadow-[0_6px_18px_rgba(10,143,77,0.20)] hover:shadow-[0_10px_25px_rgba(10,143,77,0.28)] hover:-translate-y-1 hover:from-[#087A41] hover:to-[#0DAA50] active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20 whitespace-nowrap";
+  "group inline-flex items-center justify-center gap-1.5 sm:gap-2 min-h-[42px] sm:min-h-[46px] flex-1 sm:flex-none px-3.5 sm:px-7 py-2.5 sm:py-3 rounded-xl bg-gradient-to-r from-[#0A8F4D] to-[#10C35D] text-white text-[11px] sm:text-sm font-semibold tracking-wide shadow-[0_6px_18px_rgba(10,143,77,0.20)] hover:shadow-[0_10px_25px_rgba(10,143,77,0.28)] hover:-translate-y-1 hover:from-[#087A41] hover:to-[#0DAA50] active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20 whitespace-nowrap";
 
 const secondaryButton =
-  "group inline-flex items-center justify-center gap-1 sm:gap-2 min-h-[36px] sm:min-h-[46px] flex-1 sm:flex-none px-2.5 sm:px-7 py-2 sm:py-3 rounded-lg sm:rounded-xl bg-white/95 backdrop-blur-sm border border-[#0A3D2E]/15 text-[#0A3D2E] text-[9.5px] sm:text-sm font-semibold tracking-wide shadow-sm hover:bg-[#EAF8EF] hover:border-[#10C35D]/50 hover:text-[#087A41] hover:-translate-y-1 hover:shadow-md active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20 whitespace-nowrap";
+  "group inline-flex items-center justify-center gap-1.5 sm:gap-2 min-h-[42px] sm:min-h-[46px] flex-1 sm:flex-none px-3.5 sm:px-7 py-2.5 sm:py-3 rounded-xl bg-white/95 backdrop-blur-sm border border-[#0A3D2E]/15 text-[#0A3D2E] text-[11px] sm:text-sm font-semibold tracking-wide shadow-sm hover:bg-[#EAF8EF] hover:border-[#10C35D]/50 hover:text-[#087A41] hover:-translate-y-1 hover:shadow-md active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20 whitespace-nowrap";
 
 const outlineButton =
   "group inline-flex items-center justify-center gap-3 min-h-[46px] px-6 py-3 rounded-xl border border-[#0A8F4D]/30 bg-white text-[#0A8F4D] text-sm font-semibold tracking-wide hover:bg-[#0A8F4D] hover:border-[#0A8F4D] hover:text-white hover:-translate-y-0.5 hover:shadow-[0_7px_18px_rgba(10,143,77,0.16)] active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20";
@@ -378,7 +378,7 @@ function Home() {
           1. HERO SECTION
       ========================================== */}
 
-      <section className="relative min-h-[290px] sm:min-h-[410px] md:min-h-[445px] lg:min-h-[470px] flex items-center bg-white overflow-hidden">
+      <section className="relative min-h-[340px] sm:min-h-[410px] md:min-h-[445px] lg:min-h-[470px] flex items-center bg-white overflow-hidden">
 
         <div className="absolute inset-0">
 
@@ -389,7 +389,7 @@ function Home() {
               onError={(event) => {
                 event.currentTarget.style.display = 'none';
               }}
-              className="absolute top-0 bottom-0 left-[24%] sm:left-[34%] md:left-[40%] lg:left-[44%] w-[82%] sm:w-[72%] md:w-[68%] lg:w-[64%] h-full max-w-none object-cover object-[78%_center] sm:object-[82%_center] md:object-[88%_center] lg:object-[92%_center]"
+              className="absolute top-0 bottom-0 left-[22%] sm:left-[34%] md:left-[40%] lg:left-[44%] w-[95%] sm:w-[72%] md:w-[68%] lg:w-[64%] h-full max-w-none object-cover object-[72%_center] sm:object-[82%_center] md:object-[88%_center] lg:object-[92%_center]"
             />
           )}
 
@@ -399,7 +399,7 @@ function Home() {
             className="absolute inset-0"
             style={{
               background:
-                'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 44%, rgba(255,255,255,0.95) 56%, rgba(255,255,255,0.68) 68%, rgba(255,255,255,0.28) 80%, rgba(255,255,255,0.04) 94%, transparent 100%)'
+                'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.98) 34%, rgba(255,255,255,0.88) 48%, rgba(255,255,255,0.62) 62%, rgba(255,255,255,0.25) 78%, rgba(255,255,255,0.04) 92%, transparent 100%)'
             }}
           />
 
@@ -407,15 +407,15 @@ function Home() {
             className="absolute inset-0"
             style={{
               background:
-                'linear-gradient(0deg, rgba(255,255,255,0.25) 0%, transparent 25%, transparent 82%, rgba(255,255,255,0.12) 100%)'
+                'linear-gradient(0deg, rgba(255,255,255,0.22) 0%, transparent 25%, transparent 80%, rgba(255,255,255,0.08) 100%)'
             }}
           />
 
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto w-full px-3.5 sm:px-6 md:px-8 py-6 sm:py-12 md:py-14 lg:py-16">
+        <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-8 py-7 sm:py-12 md:py-14 lg:py-16">
 
-          <div className="max-w-[210px] sm:max-w-[440px] md:max-w-[480px] lg:max-w-[500px]">
+          <div className="max-w-[300px] sm:max-w-[440px] md:max-w-[480px] lg:max-w-[500px]">
 
             {homeLoading ? (
               <p className="py-8 text-sm text-gray-500">
@@ -428,20 +428,20 @@ function Home() {
             ) : (
               <>
                 {heroTitle && (
-                  <h1 className="font-extrabold text-[18px] leading-[1.16] sm:text-3xl md:text-[38px] lg:text-[40px] tracking-tight text-[#0A3D2E] mb-2 sm:mb-4">
+                  <h1 className="font-extrabold text-[22px] leading-[1.15] sm:text-3xl md:text-[38px] lg:text-[40px] tracking-tight text-[#0A3D2E] mb-2.5 sm:mb-4">
                     {heroTitle}
                   </h1>
                 )}
 
                 {heroDescription && (
-                  <p className="text-gray-700 sm:text-gray-600 text-[9.5px] sm:text-sm md:text-[15px] leading-[1.48] sm:leading-[1.75] max-w-[200px] sm:max-w-[430px] md:max-w-[460px] mb-3.5 sm:mb-6">
+                  <p className="text-gray-700 sm:text-gray-600 text-[11px] sm:text-sm md:text-[15px] leading-[1.55] sm:leading-[1.75] max-w-[285px] sm:max-w-[430px] md:max-w-[460px] mb-4 sm:mb-6">
                     {heroDescription}
                   </p>
                 )}
               </>
             )}
 
-            <div className="flex w-full max-w-[212px] sm:max-w-[430px] items-center gap-1.5 sm:gap-3.5">
+            <div className="flex w-full max-w-[300px] sm:max-w-[430px] items-center gap-2 sm:gap-3.5">
 
               {/* TOMBOL MEMBUKA DROPDOWN LAYANAN */}
 
@@ -451,7 +451,7 @@ function Home() {
                 className={primaryButton}
               >
                 <span>Jelajahi Layanan</span>
-                <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform duration-300" />
               </button>
 
               <a
@@ -459,7 +459,7 @@ function Home() {
                 className={secondaryButton}
               >
                 <span>Tentang Kami</span>
-                <ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300" />
               </a>
 
             </div>
