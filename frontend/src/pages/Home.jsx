@@ -373,7 +373,8 @@ function Home() {
 
   return (
     <main className="w-full overflow-hidden bg-white">
-{/* ==========================================
+
+      {/* ==========================================
           1. HERO SECTION
       ========================================== */}
 
@@ -388,7 +389,7 @@ function Home() {
               onError={(event) => {
                 event.currentTarget.style.display = 'none';
               }}
-              className="absolute top-0 bottom-0 left-[22%] sm:left-[22%] md:left-[26%] lg:left-[28%] w-[95%] sm:w-[85%] md:w-[82%] lg:w-[80%] h-full max-w-none object-cover object-[72%_center] sm:object-[72%_center] md:object-[78%_center] lg:object-[82%_center]"
+              className="absolute top-0 bottom-0 left-[22%] sm:left-[28%] md:left-[34%] lg:left-[38%] w-[95%] sm:w-[78%] md:w-[74%] lg:w-[70%] h-full max-w-none object-cover object-[72%_center] sm:object-[78%_center] md:object-[84%_center] lg:object-[88%_center]"
             />
           )}
 
