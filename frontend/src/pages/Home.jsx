@@ -533,18 +533,18 @@ function Home() {
           3. NEWS & ANNOUNCEMENTS (5 CARDS IN MOBILE)
       ========================================== */}
 
-      <section className="relative py-14 md:py-16 bg-white overflow-hidden">
+      <section className="relative pt-8 pb-9 sm:py-14 md:py-16 bg-white overflow-hidden">
 
         <div className="absolute -top-32 -right-32 w-96 h-96 bg-[#10C35D]/[0.06] rounded-full blur-[100px]" />
 
         <div className="relative max-w-7xl mx-auto px-3 sm:px-5 md:px-8">
 
-          <div className="text-center max-w-2xl mx-auto mb-9 px-2">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#10C35D] mb-3">
+          <div className="text-center max-w-2xl mx-auto mb-5 sm:mb-9 px-2">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#10C35D] mb-2 sm:mb-3">
               Berita & Pengumuman Terbaru
             </h2>
 
-            <p className="text-gray-600 text-xs sm:text-sm md:text-base font-bold leading-[1.7] sm:leading-[1.8]">
+            <p className="text-gray-600 text-xs sm:text-sm md:text-base font-bold leading-[1.65] sm:leading-[1.8]">
               Temukan informasi terbaru mengenai kegiatan, layanan,
               dan pengumuman dari UPA Bahasa POLNES.
             </p>
@@ -570,7 +570,7 @@ function Home() {
                 onTouchEnd={handleNewsTouchEnd}
               >
 
-                <div className="relative min-h-[290px] sm:min-h-[475px] md:min-h-[500px] overflow-hidden">
+                <div className="relative min-h-[212px] sm:min-h-[475px] md:min-h-[500px] overflow-hidden">
 
                   {visibleNews.map(({ item, offset }) => {
                     const distance = Math.abs(offset);
@@ -699,7 +699,7 @@ function Home() {
               {/* NEWS PAGINATION */}
 
               {news.length > 1 && (
-                <div className="mt-6 flex items-center justify-center gap-4 sm:gap-5">
+                <div className="mt-3 sm:mt-6 flex items-center justify-center gap-4 sm:gap-5">
 
                   <button
                     type="button"
@@ -745,7 +745,7 @@ function Home() {
             </p>
           )}
 
-          <div className="flex justify-center mt-9">
+          <div className="flex justify-center mt-5 sm:mt-9">
             <a href="/informasi/berita" className={outlineButton}>
               <span>Lihat Semua Berita</span>
               <span className="w-7 h-7 rounded-full bg-[#EAF8EF] flex items-center justify-center group-hover:bg-white/20 transition-colors duration-300">
