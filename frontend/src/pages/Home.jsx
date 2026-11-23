@@ -1,4 +1,5 @@
-﻿import React, { useEffect, useRef, useState } from 'react';
+﻿
+import React, { useEffect, useRef, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import {
   BookOpen,
@@ -74,10 +75,10 @@ function formatCmsDate(value) {
 // ==========================================
 
 const primaryButton =
-  "group inline-flex items-center justify-center gap-1 sm:gap-2 min-h-[44px] sm:min-h-[46px] flex-1 sm:flex-none px-3 sm:px-7 py-2.5 sm:py-3 rounded-xl sm:rounded-xl bg-gradient-to-r from-[#0A8F4D] to-[#10C35D] text-white text-[11px] sm:text-sm font-semibold tracking-wide shadow-[0_6px_18px_rgba(10,143,77,0.20)] hover:shadow-[0_10px_25px_rgba(10,143,77,0.28)] hover:-translate-y-1 hover:from-[#087A41] hover:to-[#0DAA50] active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20 whitespace-nowrap";
+  "group inline-flex items-center justify-center gap-1 sm:gap-2 min-h-[27px] sm:min-h-[46px] flex-1 sm:flex-none px-2 sm:px-7 py-1.5 sm:py-3 rounded-md sm:rounded-xl bg-gradient-to-r from-[#0A8F4D] to-[#10C35D] text-white text-[8px] sm:text-sm font-semibold tracking-wide shadow-[0_6px_18px_rgba(10,143,77,0.20)] hover:shadow-[0_10px_25px_rgba(10,143,77,0.28)] hover:-translate-y-1 hover:from-[#087A41] hover:to-[#0DAA50] active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20 whitespace-nowrap";
 
 const secondaryButton =
-  "group inline-flex items-center justify-center gap-1 sm:gap-2 min-h-[44px] sm:min-h-[46px] flex-1 sm:flex-none px-3 sm:px-7 py-2.5 sm:py-3 rounded-xl sm:rounded-xl bg-white/95 backdrop-blur-sm border border-[#0A3D2E]/15 text-[#0A3D2E] text-[11px] sm:text-sm font-semibold tracking-wide shadow-sm hover:bg-[#EAF8EF] hover:border-[#10C35D]/50 hover:text-[#087A41] hover:-translate-y-1 hover:shadow-md active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20 whitespace-nowrap";
+  "group inline-flex items-center justify-center gap-1 sm:gap-2 min-h-[27px] sm:min-h-[46px] flex-1 sm:flex-none px-2 sm:px-7 py-1.5 sm:py-3 rounded-md sm:rounded-xl bg-white/95 backdrop-blur-sm border border-[#0A3D2E]/15 text-[#0A3D2E] text-[8px] sm:text-sm font-semibold tracking-wide shadow-sm hover:bg-[#EAF8EF] hover:border-[#10C35D]/50 hover:text-[#087A41] hover:-translate-y-1 hover:shadow-md active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20 whitespace-nowrap";
 
 const outlineButton =
   "group inline-flex items-center justify-center gap-3 min-h-[46px] px-6 py-3 rounded-xl border border-[#0A8F4D]/30 bg-white text-[#0A8F4D] text-sm font-semibold tracking-wide hover:bg-[#0A8F4D] hover:border-[#0A8F4D] hover:text-white hover:-translate-y-0.5 hover:shadow-[0_7px_18px_rgba(10,143,77,0.16)] active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20";
@@ -87,7 +88,6 @@ const outlineButton =
 // ==========================================
 
 function Home() {
-  // Mengambil fungsi pembuka dropdown dari MainLayout
   const { openLayananDropdown } = useOutletContext();
 
   const [homeData, setHomeData] = useState(() =>
@@ -112,6 +112,7 @@ function Home() {
   const [selectedNews, setSelectedNews] = useState(null);
   const [loadingNewsDetail, setLoadingNewsDetail] = useState(false);
   const [newsDetailError, setNewsDetailError] = useState('');
+
   const [isMobileView, setIsMobileView] = useState(() =>
     typeof window !== 'undefined' ? window.innerWidth < 640 : false
   );
@@ -308,7 +309,7 @@ function Home() {
   }));
 
   // ==========================================
-  // QUICK ACCESS - PERMANEN
+  // QUICK ACCESS
   // ==========================================
 
   const quickServices = [
@@ -378,7 +379,7 @@ function Home() {
           1. HERO SECTION
       ========================================== */}
 
-      <section className="relative min-h-[370px] sm:min-h-[410px] md:min-h-[445px] lg:min-h-[470px] flex items-center bg-white overflow-hidden">
+      <section className="relative min-h-[210px] sm:min-h-[410px] md:min-h-[445px] lg:min-h-[470px] flex items-center bg-white overflow-hidden">
 
         <div className="absolute inset-0">
 
@@ -389,7 +390,7 @@ function Home() {
               onError={(event) => {
                 event.currentTarget.style.display = 'none';
               }}
-              className="absolute top-0 bottom-0 left-[42%] sm:left-[34%] md:left-[40%] lg:left-[44%] w-[78%] sm:w-[72%] md:w-[68%] lg:w-[64%] h-full max-w-none object-cover object-[76%_center] sm:object-[82%_center] md:object-[88%_center] lg:object-[92%_center]"
+              className="absolute top-0 bottom-0 left-[47%] sm:left-[34%] md:left-[40%] lg:left-[44%] w-[65%] sm:w-[72%] md:w-[68%] lg:w-[64%] h-full max-w-none object-cover object-[76%_center] sm:object-[82%_center] md:object-[88%_center] lg:object-[92%_center]"
             />
           )}
 
@@ -399,7 +400,7 @@ function Home() {
             className="absolute inset-0 sm:hidden"
             style={{
               background:
-                'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 42%, rgba(255,255,255,0.98) 58%, rgba(255,255,255,0.88) 72%, rgba(255,255,255,0.45) 88%, rgba(255,255,255,0.08) 100%)'
+                'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.98) 38%, rgba(255,255,255,0.88) 52%, rgba(255,255,255,0.35) 72%, rgba(255,255,255,0.04) 100%)'
             }}
           />
 
@@ -421,9 +422,9 @@ function Home() {
 
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto w-full px-5 sm:px-6 md:px-8 py-8 sm:py-12 md:py-14 lg:py-16">
+        <div className="relative z-10 max-w-7xl mx-auto w-full px-2 sm:px-6 md:px-8 py-4 sm:py-12 md:py-14 lg:py-16">
 
-          <div className="max-w-[100%] sm:max-w-[440px] md:max-w-[480px] lg:max-w-[540px]">
+          <div className="w-[62%] sm:max-w-[440px] md:max-w-[480px] lg:max-w-[540px]">
 
             {homeLoading ? (
               <p className="py-8 text-sm text-gray-500">
@@ -436,22 +437,20 @@ function Home() {
             ) : (
               <>
                 {heroTitle && (
-                  <h1 className="font-extrabold text-[25px] leading-[1.24] sm:text-3xl md:text-[38px] lg:text-[40px] tracking-tight text-[#0A3D2E] mb-3 sm:mb-4 max-w-[370px]">
+                  <h1 className="font-extrabold text-[16px] leading-[1.2] sm:text-3xl md:text-[38px] lg:text-[40px] tracking-tight text-[#0A3D2E] mb-2 sm:mb-4 max-w-[230px] sm:max-w-[370px]">
                     {heroTitle}
                   </h1>
                 )}
 
                 {heroDescription && (
-                  <p className="text-gray-700 sm:text-gray-600 text-[13px] leading-[1.65] sm:text-sm md:text-[15px] sm:leading-[1.75] max-w-[350px] sm:max-w-[430px] md:max-w-[460px] mb-5 sm:mb-6">
+                  <p className="text-gray-700 sm:text-gray-600 text-[8px] leading-[1.5] sm:text-sm md:text-[15px] sm:leading-[1.75] max-w-[220px] sm:max-w-[430px] md:max-w-[460px] mb-3 sm:mb-6">
                     {heroDescription}
                   </p>
                 )}
               </>
             )}
 
-            <div className="flex w-full max-w-[370px] sm:max-w-[440px] items-center gap-3 sm:gap-4">
-
-              {/* TOMBOL MEMBUKA DROPDOWN LAYANAN */}
+            <div className="flex w-full max-w-[260px] sm:max-w-[440px] items-center gap-1.5 sm:gap-4">
 
               <button
                 type="button"
@@ -479,19 +478,18 @@ function Home() {
       </section>
 
       {/* ==========================================
-          2. QUICK ACCESS - WHITE
+          2. QUICK ACCESS
       ========================================== */}
 
-      <section className="relative z-20 px-4 sm:px-5 md:px-8 -mt-5 sm:-mt-7 md:-mt-8 pb-4 bg-white">
+      <section className="relative z-20 px-2 sm:px-5 md:px-8 -mt-3 sm:-mt-7 md:-mt-8 pb-4 bg-white">
 
         <div className="max-w-7xl mx-auto">
 
-          <div className="bg-white rounded-2xl border border-[#E7EFE9] shadow-[0_12px_35px_rgba(10,61,46,0.09)] px-2 py-3 sm:px-3 sm:py-2 md:px-4 md:py-3">
+          <div className="bg-white rounded-xl sm:rounded-2xl border border-[#E7EFE9] shadow-[0_12px_35px_rgba(10,61,46,0.09)] px-1 py-1.5 sm:px-3 sm:py-2 md:px-4 md:py-3">
 
             {quickServices.length > 0 ? (
-              <div
-                className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-2"
-              >
+              <div className="grid grid-cols-5 gap-0.5 sm:gap-2">
+
                 {quickServices.map((service, index) => {
                   const Icon = service.icon;
 
@@ -500,30 +498,35 @@ function Home() {
                       key={service.id || `${service.title}-${index}`}
                       href={service.link}
                       className={`
-                        group relative flex flex-row items-center justify-center text-left gap-1 sm:gap-2 md:gap-3
-                        px-2 py-3 sm:px-2 sm:py-3 md:px-3 md:py-4
-                        rounded-xl hover:bg-[#F3F8F4] min-w-0
+                        group relative flex flex-row items-center justify-center text-left
+                        gap-1 sm:gap-2 md:gap-3
+                        px-0.5 py-1.5 sm:px-2 sm:py-3 md:px-3 md:py-4
+                        rounded-lg sm:rounded-xl hover:bg-[#F3F8F4] min-w-0
                         transition-all duration-300
-                        ${index === 4 ? 'col-span-2 sm:col-span-1 sm:col-auto' : ''} ${index !== 0 ? 'lg:border-l lg:border-[#E9EFEB]' : ''}
+                        ${index !== 0 ? 'xl:border-l xl:border-[#E9EFEB]' : ''}
                       `}
                     >
-                      <div className="w-9 h-9 sm:w-9 sm:h-9 md:w-11 md:h-11 shrink-0 flex items-center justify-center rounded-lg sm:rounded-xl bg-[#EAF8EF] text-[#0A8F4D] group-hover:bg-[#0A8F4D] group-hover:text-white group-hover:scale-105 transition-all duration-300">
-                        <Icon className="w-4 h-4 sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]" />
+
+                      <div className="w-5 h-5 sm:w-9 sm:h-9 md:w-11 md:h-11 shrink-0 flex items-center justify-center rounded-md sm:rounded-xl bg-[#EAF8EF] text-[#0A8F4D] group-hover:bg-[#0A8F4D] group-hover:text-white group-hover:scale-105 transition-all duration-300">
+                        <Icon className="w-3 h-3 sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]" />
                       </div>
 
                       <div className="min-w-0 flex-1">
-                        <h3 className="text-[11px] leading-[1.25] sm:text-xs md:text-[13px] font-bold text-[#183D2E] sm:mb-1 group-hover:text-[#0A8F4D] transition-colors duration-300 line-clamp-2">
+                        <h3 className="text-[6.5px] leading-tight sm:text-xs md:text-[13px] font-bold text-[#183D2E] sm:mb-1 group-hover:text-[#0A8F4D] transition-colors duration-300 line-clamp-2">
                           {service.title}
                         </h3>
+
                         <p className="hidden md:block text-[9px] sm:text-[10px] md:text-[11px] text-gray-500 leading-relaxed">
                           {service.description}
                         </p>
                       </div>
 
                       <ArrowUpRight className="hidden xl:block w-4 h-4 shrink-0 text-[#0A8F4D] opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300" />
+
                     </a>
                   );
                 })}
+
               </div>
             ) : (
               <p className="px-4 py-8 text-center text-sm text-gray-500">
@@ -538,7 +541,7 @@ function Home() {
       </section>
 
       {/* ==========================================
-          3. NEWS & ANNOUNCEMENTS (5 CARDS IN MOBILE)
+          3. NEWS & ANNOUNCEMENTS
       ========================================== */}
 
       <section className="relative pt-12 pb-12 sm:py-14 md:py-16 bg-white overflow-hidden">
@@ -578,15 +581,15 @@ function Home() {
                 onTouchEnd={handleNewsTouchEnd}
               >
 
-                <div className="relative min-h-[430px] sm:min-h-[475px] md:min-h-[500px] overflow-hidden">
+                <div className="relative min-h-[410px] sm:min-h-[475px] md:min-h-[500px] overflow-hidden">
 
                   {visibleNews.map(({ item, offset }) => {
                     const distance = Math.abs(offset);
 
                     const scale =
                       distance === 0 ? 1 :
-                      distance === 1 ? (isMobileView ? 0.82 : 0.86) :
-                      (isMobileView ? 0.72 : 0.74);
+                      distance === 1 ? (isMobileView ? 0.88 : 0.86) :
+                      (isMobileView ? 0.76 : 0.74);
 
                     const rotation =
                       offset === 0 ? 0 :
@@ -598,11 +601,11 @@ function Home() {
 
                     const opacity =
                       distance === 0 ? 1 :
-                      distance === 1 ? (isMobileView ? 0.55 : 0.86) :
-                      (isMobileView ? 0.25 : 0.62);
+                      distance === 1 ? (isMobileView ? 0.92 : 0.86) :
+                      (isMobileView ? 0.72 : 0.62);
 
                     const horizontalPercent = isMobileView
-                      ? offset * 88
+                      ? offset * 21.5
                       : offset * 19;
 
                     return (
@@ -610,7 +613,7 @@ function Home() {
                         key={item.id}
                         className="
                           absolute top-0
-                          w-[min(320px,calc(100vw-40px))] sm:w-[270px] md:w-[320px]
+                          w-[260px] sm:w-[270px] md:w-[320px]
                           flex flex-col
                           bg-white rounded-xl sm:rounded-2xl overflow-hidden
                           border border-[#E4EDE6]
@@ -633,7 +636,7 @@ function Home() {
                         <button
                           type="button"
                           onClick={() => openNewsDetail(item)}
-                          className="relative block w-full h-[175px] sm:h-[180px] md:h-[210px] overflow-hidden text-left"
+                          className="relative block w-full h-[145px] sm:h-[180px] md:h-[210px] overflow-hidden text-left"
                         >
                           {item.image ? (
                             <img
@@ -661,7 +664,7 @@ function Home() {
 
                         <div className="flex flex-col flex-1 p-4 sm:p-5">
 
-                          <div className="flex items-center gap-1.5 sm:gap-2 text-gray-400 text-[11px] sm:text-xs mb-2 sm:mb-3">
+                          <div className="flex items-center gap-1.5 sm:gap-2 text-gray-400 text-[10px] sm:text-xs mb-2 sm:mb-3">
                             <CalendarDays className="w-2.5 h-2.5 sm:w-4 sm:h-4 shrink-0" />
                             <span className="truncate">{item.date}</span>
                           </div>
@@ -676,7 +679,7 @@ function Home() {
                             </h3>
                           </button>
 
-                          <p className="text-gray-500 text-[12px] sm:text-sm leading-[1.65] sm:leading-[1.8] line-clamp-3 mb-3 sm:mb-5">
+                          <p className="text-gray-500 text-[11px] sm:text-sm leading-[1.65] sm:leading-[1.8] line-clamp-3 mb-3 sm:mb-5">
                             {item.summary}
                           </p>
 
@@ -703,8 +706,6 @@ function Home() {
                 <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-4 sm:w-10 md:w-24 bg-gradient-to-l from-white via-white/70 to-transparent" />
 
               </div>
-
-              {/* NEWS PAGINATION */}
 
               {news.length > 1 && (
                 <div className="mt-3 sm:mt-6 flex items-center justify-center gap-4 sm:gap-5">
