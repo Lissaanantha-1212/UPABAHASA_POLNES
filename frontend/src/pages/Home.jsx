@@ -74,10 +74,10 @@ function formatCmsDate(value) {
 // ==========================================
 
 const primaryButton =
-  "group inline-flex items-center justify-center gap-1 sm:gap-2 min-h-[34px] sm:min-h-[46px] flex-1 sm:flex-none px-2.5 sm:px-7 py-1.5 sm:py-3 rounded-lg sm:rounded-xl bg-gradient-to-r from-[#0A8F4D] to-[#10C35D] text-white text-[9.5px] sm:text-sm font-semibold tracking-wide shadow-[0_6px_18px_rgba(10,143,77,0.20)] hover:shadow-[0_10px_25px_rgba(10,143,77,0.28)] hover:-translate-y-1 hover:from-[#087A41] hover:to-[#0DAA50] active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20 whitespace-nowrap";
+  "group inline-flex items-center justify-center gap-1 sm:gap-2 min-h-[44px] sm:min-h-[46px] flex-1 sm:flex-none px-3 sm:px-7 py-2.5 sm:py-3 rounded-xl sm:rounded-xl bg-gradient-to-r from-[#0A8F4D] to-[#10C35D] text-white text-[11px] sm:text-sm font-semibold tracking-wide shadow-[0_6px_18px_rgba(10,143,77,0.20)] hover:shadow-[0_10px_25px_rgba(10,143,77,0.28)] hover:-translate-y-1 hover:from-[#087A41] hover:to-[#0DAA50] active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20 whitespace-nowrap";
 
 const secondaryButton =
-  "group inline-flex items-center justify-center gap-1 sm:gap-2 min-h-[34px] sm:min-h-[46px] flex-1 sm:flex-none px-2.5 sm:px-7 py-1.5 sm:py-3 rounded-lg sm:rounded-xl bg-white/95 backdrop-blur-sm border border-[#0A3D2E]/15 text-[#0A3D2E] text-[9.5px] sm:text-sm font-semibold tracking-wide shadow-sm hover:bg-[#EAF8EF] hover:border-[#10C35D]/50 hover:text-[#087A41] hover:-translate-y-1 hover:shadow-md active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20 whitespace-nowrap";
+  "group inline-flex items-center justify-center gap-1 sm:gap-2 min-h-[44px] sm:min-h-[46px] flex-1 sm:flex-none px-3 sm:px-7 py-2.5 sm:py-3 rounded-xl sm:rounded-xl bg-white/95 backdrop-blur-sm border border-[#0A3D2E]/15 text-[#0A3D2E] text-[11px] sm:text-sm font-semibold tracking-wide shadow-sm hover:bg-[#EAF8EF] hover:border-[#10C35D]/50 hover:text-[#087A41] hover:-translate-y-1 hover:shadow-md active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20 whitespace-nowrap";
 
 const outlineButton =
   "group inline-flex items-center justify-center gap-3 min-h-[46px] px-6 py-3 rounded-xl border border-[#0A8F4D]/30 bg-white text-[#0A8F4D] text-sm font-semibold tracking-wide hover:bg-[#0A8F4D] hover:border-[#0A8F4D] hover:text-white hover:-translate-y-0.5 hover:shadow-[0_7px_18px_rgba(10,143,77,0.16)] active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20";
@@ -378,7 +378,7 @@ function Home() {
           1. HERO SECTION
       ========================================== */}
 
-      <section className="relative min-h-[260px] sm:min-h-[410px] md:min-h-[445px] lg:min-h-[470px] flex items-center bg-white overflow-hidden">
+      <section className="relative min-h-[370px] sm:min-h-[410px] md:min-h-[445px] lg:min-h-[470px] flex items-center bg-white overflow-hidden">
 
         <div className="absolute inset-0">
 
@@ -389,7 +389,7 @@ function Home() {
               onError={(event) => {
                 event.currentTarget.style.display = 'none';
               }}
-              className="absolute top-0 bottom-0 left-[28%] sm:left-[34%] md:left-[40%] lg:left-[44%] w-[76%] sm:w-[72%] md:w-[68%] lg:w-[64%] h-full max-w-none object-cover object-[76%_center] sm:object-[82%_center] md:object-[88%_center] lg:object-[92%_center]"
+              className="absolute top-0 bottom-0 left-[35%] sm:left-[34%] md:left-[40%] lg:left-[44%] w-[78%] sm:w-[72%] md:w-[68%] lg:w-[64%] h-full max-w-none object-cover object-[76%_center] sm:object-[82%_center] md:object-[88%_center] lg:object-[92%_center]"
             />
           )}
 
@@ -399,7 +399,7 @@ function Home() {
             className="absolute inset-0 sm:hidden"
             style={{
               background:
-                'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 54%, rgba(255,255,255,0.92) 68%, rgba(255,255,255,0.45) 84%, rgba(255,255,255,0.08) 100%)'
+                'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.98) 35%, rgba(255,255,255,0.92) 52%, rgba(255,255,255,0.66) 68%, rgba(255,255,255,0.16) 100%)'
             }}
           />
 
@@ -421,9 +421,9 @@ function Home() {
 
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto w-full px-3 sm:px-6 md:px-8 py-5 sm:py-12 md:py-14 lg:py-16">
+        <div className="relative z-10 max-w-7xl mx-auto w-full px-5 sm:px-6 md:px-8 py-8 sm:py-12 md:py-14 lg:py-16">
 
-          <div className="max-w-[205px] sm:max-w-[440px] md:max-w-[480px] lg:max-w-[540px]">
+          <div className="max-w-[100%] sm:max-w-[440px] md:max-w-[480px] lg:max-w-[540px]">
 
             {homeLoading ? (
               <p className="py-8 text-sm text-gray-500">
@@ -436,20 +436,20 @@ function Home() {
             ) : (
               <>
                 {heroTitle && (
-                  <h1 className="font-extrabold text-[17px] leading-[1.2] sm:text-3xl md:text-[38px] lg:text-[40px] tracking-tight text-[#0A3D2E] mb-1.5 sm:mb-4">
+                  <h1 className="font-extrabold text-[25px] leading-[1.22] sm:text-3xl md:text-[38px] lg:text-[40px] tracking-tight text-[#0A3D2E] mb-3 sm:mb-4 max-w-[370px]">
                     {heroTitle}
                   </h1>
                 )}
 
                 {heroDescription && (
-                  <p className="text-gray-700 sm:text-gray-600 text-[9.5px] leading-[1.45] sm:text-sm md:text-[15px] sm:leading-[1.75] max-w-[195px] sm:max-w-[430px] md:max-w-[460px] mb-3 sm:mb-6">
+                  <p className="text-gray-700 sm:text-gray-600 text-[13px] leading-[1.65] sm:text-sm md:text-[15px] sm:leading-[1.75] max-w-[350px] sm:max-w-[430px] md:max-w-[460px] mb-5 sm:mb-6">
                     {heroDescription}
                   </p>
                 )}
               </>
             )}
 
-            <div className="flex w-full max-w-[215px] sm:max-w-[440px] items-center gap-1.5 sm:gap-4">
+            <div className="flex w-full max-w-[370px] sm:max-w-[440px] items-center gap-3 sm:gap-4">
 
               {/* TOMBOL MEMBUKA DROPDOWN LAYANAN */}
 
@@ -486,7 +486,7 @@ function Home() {
 
         <div className="max-w-7xl mx-auto">
 
-          <div className="bg-white rounded-2xl border border-[#E7EFE9] shadow-[0_12px_35px_rgba(10,61,46,0.09)] p-2 sm:px-3 sm:py-2 md:px-4 md:py-3">
+          <div className="bg-white rounded-2xl border border-[#E7EFE9] shadow-[0_12px_35px_rgba(10,61,46,0.09)] px-2 py-3 sm:px-3 sm:py-2 md:px-4 md:py-3">
 
             {quickServices.length > 0 ? (
               <div
@@ -500,19 +500,19 @@ function Home() {
                       key={service.id || `${service.title}-${index}`}
                       href={service.link}
                       className={`
-                        group relative flex flex-col items-center text-center gap-1 sm:flex-row sm:text-left sm:gap-2 md:gap-3
-                        px-1 py-2 sm:px-2 sm:py-3 md:px-3 md:py-4
+                        group relative flex flex-row items-center justify-center text-left gap-1 sm:gap-2 md:gap-3
+                        px-0.5 py-2 sm:px-2 sm:py-3 md:px-3 md:py-4
                         rounded-xl hover:bg-[#F3F8F4] min-w-0
                         transition-all duration-300
                         ${index !== 0 ? 'xl:border-l xl:border-[#E9EFEB]' : ''}
                       `}
                     >
-                      <div className="w-7 h-7 sm:w-9 sm:h-9 md:w-11 md:h-11 shrink-0 flex items-center justify-center rounded-lg sm:rounded-xl bg-[#EAF8EF] text-[#0A8F4D] group-hover:bg-[#0A8F4D] group-hover:text-white group-hover:scale-105 transition-all duration-300">
+                      <div className="w-8 h-8 sm:w-9 sm:h-9 md:w-11 md:h-11 shrink-0 flex items-center justify-center rounded-lg sm:rounded-xl bg-[#EAF8EF] text-[#0A8F4D] group-hover:bg-[#0A8F4D] group-hover:text-white group-hover:scale-105 transition-all duration-300">
                         <Icon className="w-4 h-4 sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]" />
                       </div>
 
                       <div className="min-w-0 flex-1">
-                        <h3 className="text-[9px] leading-tight sm:text-xs md:text-[13px] font-bold text-[#183D2E] sm:mb-1 group-hover:text-[#0A8F4D] transition-colors duration-300 line-clamp-2">
+                        <h3 className="text-[8.5px] leading-tight sm:text-xs md:text-[13px] font-bold text-[#183D2E] sm:mb-1 group-hover:text-[#0A8F4D] transition-colors duration-300 line-clamp-2">
                           {service.title}
                         </h3>
                         <p className="hidden md:block text-[9px] sm:text-[10px] md:text-[11px] text-gray-500 leading-relaxed">
@@ -541,18 +541,18 @@ function Home() {
           3. NEWS & ANNOUNCEMENTS (5 CARDS IN MOBILE)
       ========================================== */}
 
-      <section className="relative pt-8 pb-9 sm:py-14 md:py-16 bg-white overflow-hidden">
+      <section className="relative pt-12 pb-12 sm:py-14 md:py-16 bg-white overflow-hidden">
 
         <div className="absolute -top-32 -right-32 w-96 h-96 bg-[#10C35D]/[0.06] rounded-full blur-[100px]" />
 
         <div className="relative max-w-7xl mx-auto px-3 sm:px-5 md:px-8">
 
           <div className="text-center max-w-2xl mx-auto mb-5 sm:mb-9 px-2">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#10C35D] mb-2 sm:mb-3">
+            <h2 className="text-[23px] leading-tight md:text-3xl lg:text-4xl font-bold text-[#10C35D] mb-3 sm:mb-3">
               Berita & Pengumuman Terbaru
             </h2>
 
-            <p className="text-gray-600 text-xs sm:text-sm md:text-base font-bold leading-[1.65] sm:leading-[1.8]">
+            <p className="text-gray-600 text-[12px] sm:text-sm md:text-base font-bold leading-[1.7] sm:leading-[1.8]">
               Temukan informasi terbaru mengenai kegiatan, layanan,
               dan pengumuman dari UPA Bahasa POLNES.
             </p>
@@ -578,7 +578,7 @@ function Home() {
                 onTouchEnd={handleNewsTouchEnd}
               >
 
-                <div className="relative min-h-[212px] sm:min-h-[475px] md:min-h-[500px] overflow-hidden">
+                <div className="relative min-h-[410px] sm:min-h-[475px] md:min-h-[500px] overflow-hidden">
 
                   {visibleNews.map(({ item, offset }) => {
                     const distance = Math.abs(offset);
@@ -610,7 +610,7 @@ function Home() {
                         key={item.id}
                         className="
                           absolute top-0
-                          w-[132px] sm:w-[270px] md:w-[320px]
+                          w-[260px] sm:w-[270px] md:w-[320px]
                           flex flex-col
                           bg-white rounded-xl sm:rounded-2xl overflow-hidden
                           border border-[#E4EDE6]
@@ -633,7 +633,7 @@ function Home() {
                         <button
                           type="button"
                           onClick={() => openNewsDetail(item)}
-                          className="relative block w-full h-[82px] sm:h-[180px] md:h-[210px] overflow-hidden text-left"
+                          className="relative block w-full h-[145px] sm:h-[180px] md:h-[210px] overflow-hidden text-left"
                         >
                           {item.image ? (
                             <img
@@ -648,7 +648,7 @@ function Home() {
                             <div className="w-full h-full bg-[#EAF5EE]" aria-label="Gambar berita tidak tersedia" />
                           )}
 
-                          <span className="absolute bottom-1.5 left-1.5 sm:bottom-4 sm:left-4 bg-white text-[#0A8F4D] text-[6.5px] sm:text-[10px] font-bold tracking-wide px-1.5 py-0.5 sm:px-3 sm:py-2 rounded sm:rounded-md shadow-sm">
+                          <span className="absolute bottom-1.5 left-1.5 sm:bottom-4 sm:left-4 bg-white text-[#0A8F4D] text-[9px] sm:text-[10px] font-bold tracking-wide px-1.5 py-0.5 sm:px-3 sm:py-2 rounded sm:rounded-md shadow-sm">
                             {item.category.toUpperCase()}
                           </span>
 
@@ -659,9 +659,9 @@ function Home() {
                           )}
                         </button>
 
-                        <div className="flex flex-col flex-1 p-2 sm:p-5">
+                        <div className="flex flex-col flex-1 p-4 sm:p-5">
 
-                          <div className="flex items-center gap-1 sm:gap-2 text-gray-400 text-[7.5px] sm:text-xs mb-1 sm:mb-3">
+                          <div className="flex items-center gap-1.5 sm:gap-2 text-gray-400 text-[10px] sm:text-xs mb-2 sm:mb-3">
                             <CalendarDays className="w-2.5 h-2.5 sm:w-4 sm:h-4 shrink-0" />
                             <span className="truncate">{item.date}</span>
                           </div>
@@ -671,12 +671,12 @@ function Home() {
                             onClick={() => openNewsDetail(item)}
                             className="text-left"
                           >
-                            <h3 className="font-bold text-[#0A3D2E] leading-snug mb-1 sm:mb-3 line-clamp-2 min-h-[24px] sm:min-h-[48px] hover:text-[#10A653] transition-colors text-[8.5px] sm:text-base">
+                            <h3 className="font-bold text-[#0A3D2E] leading-snug mb-2 sm:mb-3 line-clamp-2 min-h-[40px] sm:min-h-[48px] hover:text-[#10A653] transition-colors text-[14px] sm:text-base">
                               {item.title}
                             </h3>
                           </button>
 
-                          <p className="text-gray-500 text-[7.5px] sm:text-sm leading-[1.45] sm:leading-[1.8] line-clamp-2 mb-2 sm:mb-5">
+                          <p className="text-gray-500 text-[11px] sm:text-sm leading-[1.65] sm:leading-[1.8] line-clamp-3 mb-3 sm:mb-5">
                             {item.summary}
                           </p>
 
@@ -684,7 +684,7 @@ function Home() {
                             <button
                               type="button"
                               onClick={() => openNewsDetail(item)}
-                              className="inline-flex items-center gap-1 sm:gap-2 text-[#0A8F4D] font-bold text-[7.5px] sm:text-xs hover:text-[#10C35D] transition-colors"
+                              className="inline-flex items-center gap-1.5 sm:gap-2 text-[#0A8F4D] font-bold text-[10px] sm:text-xs hover:text-[#10C35D] transition-colors"
                             >
                               <span className="truncate">Baca Selengkapnya</span>
                               <ArrowRight className="w-2.5 h-2.5 sm:w-4 sm:h-4 shrink-0" />
