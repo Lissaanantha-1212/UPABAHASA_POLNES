@@ -28,7 +28,7 @@ const operasionalMenuItems = [
     icon: Calendar,
     children: [
       { name: 'Jadwal Test', href: `${UPABAHASA_BASE_URL}/jadwal-test.html` },
-      { name: 'Jadwal Kursus', href: `${UPABAHASA_BASE_URL}/jadwal-kursus.html` },
+      { name: 'Jadwal Remedial', href: `${UPABAHASA_BASE_URL}/jadwal-remedial.html` },
     ],
   },
   {
