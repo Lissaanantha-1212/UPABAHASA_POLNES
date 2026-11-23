@@ -490,7 +490,7 @@ function Home() {
 
             {quickServices.length > 0 ? (
               <div
-                className="grid grid-cols-5 gap-1 sm:gap-2"
+                className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-2"
               >
                 {quickServices.map((service, index) => {
                   const Icon = service.icon;
@@ -501,18 +501,18 @@ function Home() {
                       href={service.link}
                       className={`
                         group relative flex flex-row items-center justify-center text-left gap-1 sm:gap-2 md:gap-3
-                        px-0.5 py-2 sm:px-2 sm:py-3 md:px-3 md:py-4
+                        px-2 py-3 sm:px-2 sm:py-3 md:px-3 md:py-4
                         rounded-xl hover:bg-[#F3F8F4] min-w-0
                         transition-all duration-300
-                        ${index !== 0 ? 'xl:border-l xl:border-[#E9EFEB]' : ''}
+                        ${index === 4 ? 'col-span-2 sm:col-span-1 sm:col-auto' : ''} ${index !== 0 ? 'lg:border-l lg:border-[#E9EFEB]' : ''}
                       `}
                     >
-                      <div className="w-8 h-8 sm:w-9 sm:h-9 md:w-11 md:h-11 shrink-0 flex items-center justify-center rounded-lg sm:rounded-xl bg-[#EAF8EF] text-[#0A8F4D] group-hover:bg-[#0A8F4D] group-hover:text-white group-hover:scale-105 transition-all duration-300">
+                      <div className="w-9 h-9 sm:w-9 sm:h-9 md:w-11 md:h-11 shrink-0 flex items-center justify-center rounded-lg sm:rounded-xl bg-[#EAF8EF] text-[#0A8F4D] group-hover:bg-[#0A8F4D] group-hover:text-white group-hover:scale-105 transition-all duration-300">
                         <Icon className="w-4 h-4 sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]" />
                       </div>
 
                       <div className="min-w-0 flex-1">
-                        <h3 className="text-[9px] leading-[1.15] sm:text-xs md:text-[13px] font-bold text-[#183D2E] sm:mb-1 group-hover:text-[#0A8F4D] transition-colors duration-300 line-clamp-2">
+                        <h3 className="text-[11px] leading-[1.25] sm:text-xs md:text-[13px] font-bold text-[#183D2E] sm:mb-1 group-hover:text-[#0A8F4D] transition-colors duration-300 line-clamp-2">
                           {service.title}
                         </h3>
                         <p className="hidden md:block text-[9px] sm:text-[10px] md:text-[11px] text-gray-500 leading-relaxed">
@@ -578,15 +578,15 @@ function Home() {
                 onTouchEnd={handleNewsTouchEnd}
               >
 
-                <div className="relative min-h-[410px] sm:min-h-[475px] md:min-h-[500px] overflow-hidden">
+                <div className="relative min-h-[430px] sm:min-h-[475px] md:min-h-[500px] overflow-hidden">
 
                   {visibleNews.map(({ item, offset }) => {
                     const distance = Math.abs(offset);
 
                     const scale =
                       distance === 0 ? 1 :
-                      distance === 1 ? (isMobileView ? 0.88 : 0.86) :
-                      (isMobileView ? 0.76 : 0.74);
+                      distance === 1 ? (isMobileView ? 0.82 : 0.86) :
+                      (isMobileView ? 0.72 : 0.74);
 
                     const rotation =
                       offset === 0 ? 0 :
@@ -598,11 +598,11 @@ function Home() {
 
                     const opacity =
                       distance === 0 ? 1 :
-                      distance === 1 ? (isMobileView ? 0.92 : 0.86) :
-                      (isMobileView ? 0.72 : 0.62);
+                      distance === 1 ? (isMobileView ? 0.55 : 0.86) :
+                      (isMobileView ? 0.25 : 0.62);
 
                     const horizontalPercent = isMobileView
-                      ? offset * 21.5
+                      ? offset * 88
                       : offset * 19;
 
                     return (
@@ -610,7 +610,7 @@ function Home() {
                         key={item.id}
                         className="
                           absolute top-0
-                          w-[min(260px,calc(100vw-48px))] sm:w-[270px] md:w-[320px]
+                          w-[min(320px,calc(100vw-40px))] sm:w-[270px] md:w-[320px]
                           flex flex-col
                           bg-white rounded-xl sm:rounded-2xl overflow-hidden
                           border border-[#E4EDE6]
@@ -633,7 +633,7 @@ function Home() {
                         <button
                           type="button"
                           onClick={() => openNewsDetail(item)}
-                          className="relative block w-full h-[145px] sm:h-[180px] md:h-[210px] overflow-hidden text-left"
+                          className="relative block w-full h-[175px] sm:h-[180px] md:h-[210px] overflow-hidden text-left"
                         >
                           {item.image ? (
                             <img
@@ -661,7 +661,7 @@ function Home() {
 
                         <div className="flex flex-col flex-1 p-4 sm:p-5">
 
-                          <div className="flex items-center gap-1.5 sm:gap-2 text-gray-400 text-[10px] sm:text-xs mb-2 sm:mb-3">
+                          <div className="flex items-center gap-1.5 sm:gap-2 text-gray-400 text-[11px] sm:text-xs mb-2 sm:mb-3">
                             <CalendarDays className="w-2.5 h-2.5 sm:w-4 sm:h-4 shrink-0" />
                             <span className="truncate">{item.date}</span>
                           </div>
@@ -676,7 +676,7 @@ function Home() {
                             </h3>
                           </button>
 
-                          <p className="text-gray-500 text-[11px] sm:text-sm leading-[1.65] sm:leading-[1.8] line-clamp-3 mb-3 sm:mb-5">
+                          <p className="text-gray-500 text-[12px] sm:text-sm leading-[1.65] sm:leading-[1.8] line-clamp-3 mb-3 sm:mb-5">
                             {item.summary}
                           </p>
 
