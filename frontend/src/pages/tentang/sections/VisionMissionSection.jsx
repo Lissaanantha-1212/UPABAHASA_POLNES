@@ -175,7 +175,7 @@ export default function VisionMissionSection() {
           </div>
 
           {/* Grid 4 Kolom Card Minimalis Bersih & Profesional */}
-          <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
+          <<div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4 items-stretch">
             {cards.map((card, idx) => {
               const Icon = card.icon;
               const text = card.content || "";
