@@ -1,4 +1,5 @@
-﻿import { useEffect, useMemo, useState } from "react";
+﻿
+import { useEffect, useMemo, useState } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 const API_URL = "https://upabahasa-polnes-4p4a.vercel.app/api/cms/about";
@@ -20,9 +21,7 @@ function MemberCard({ person }) {
 
   return (
     <>
-      {/* Tambahkan flex flex-col h-full agar tinggi card seragam dan rata */}
       <article className="group flex flex-col h-full min-w-0 overflow-hidden rounded-tl-xl rounded-tr-xl rounded-bl-xl rounded-br-[64px] border border-gray-100 bg-white shadow-[0_8px_25px_rgba(10,61,46,0.09)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(10,61,46,0.15)]">
-        {/* Foto dengan lengkungan khusus di kanan bawah */}
         <div className="relative aspect-[4/4.3] w-full shrink-0 overflow-hidden rounded-tl-xl rounded-tr-xl rounded-bl-none rounded-br-[68px] bg-[#e8f8ee]">
           {photo ? (
             <img
@@ -40,7 +39,6 @@ function MemberCard({ person }) {
           )}
         </div>
 
-        {/* Informasi personel: flex-1 membuat area teks melar fleksibel, mt-auto memaksa tombol ke bawah */}
         <div className="flex flex-1 flex-col px-4 pb-6 pt-4 md:px-5 md:pb-7">
           <h4 className="line-clamp-2 text-base font-bold leading-snug text-gray-800 md:text-lg">
             {person.name}
@@ -63,7 +61,6 @@ function MemberCard({ person }) {
         </div>
       </article>
 
-      {/* Card rincian tugas */}
       {showDetail && (
         <div
           className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 px-4 py-6 backdrop-blur-sm"
@@ -134,6 +131,7 @@ function MemberCarousel({ members }) {
   const [touchStartX, setTouchStartX] = useState(null);
 
   const hasCarousel = members.length > 4;
+
   const visibleMembers = hasCarousel
     ? members.slice(startIndex, startIndex + 4)
     : members;
@@ -212,22 +210,24 @@ function MemberCarousel({ members }) {
           </button>
 
           <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-12 bg-gradient-to-r from-white via-white/80 to-transparent backdrop-blur-[3px] md:w-16" />
+
           <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-12 bg-gradient-to-l from-white via-white/80 to-transparent backdrop-blur-[3px] md:w-16" />
         </>
       )}
 
-      {/* Gunakan items-stretch agar tinggi kontainer anak-anaknya di dalam flex mengikuti tinggi maksimum */}
       <div
         className={
           hasCarousel
             ? "flex items-stretch justify-center gap-5"
-            : "flex flex-wrap items-stretch justify-center gap-5"
+            : "grid grid-cols-1 min-[480px]:grid-cols-2 min-[768px]:grid-cols-4 items-stretch justify-items-center gap-5"
         }
       >
         {visibleMembers.map((person) => (
           <div
             key={person.id}
-            className="w-full max-w-[220px] shrink-0 flex"
+            className={`w-full max-w-[220px] flex ${
+              hasCarousel ? "shrink-0" : ""
+            }`}
           >
             <MemberCard person={person} />
           </div>
@@ -242,7 +242,7 @@ function MemberCarousel({ members }) {
               type="button"
               aria-label={`Tampilkan posisi ${index + 1}`}
               onClick={() => setStartIndex(index)}
-            className={`h-2 rounded-full transition-all duration-300 ${
+              className={`h-2 rounded-full transition-all duration-300 ${
                 startIndex === index
                   ? "w-7 bg-[#0a3d2e]"
                   : "w-2 bg-[#b9dfc7] hover:bg-[#10C35D]"
@@ -328,6 +328,7 @@ export default function OrganizationChart() {
     return (
       <div className="mx-auto max-w-3xl px-5 py-12 text-center">
         <p className="text-sm text-red-600">{error}</p>
+
         <button
           type="button"
           onClick={() => setRetry((value) => value + 1)}
