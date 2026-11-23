@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 // ==========================================
@@ -23,7 +23,6 @@ import LayananPengguna from './pages/LayananPengguna';
 // ==========================================
 // IMPORT HALAMAN ADMIN
 // ==========================================
-import LoginAdmin from './pages/admin/LoginAdmin';
 import RegisterAdmin from './pages/admin/RegisterAdmin';
 import LupaPassword from './pages/admin/LupaPassword';
 import ResetPassword from './pages/admin/ResetPassword';
@@ -33,6 +32,14 @@ import AdminPengaduan from './pages/admin/pengaduan/AdminPengaduan';
 import AdminSurvei from './pages/admin/survei/AdminSurvei';
 import ManajemenPembelajaran from './pages/admin/manajemen-pembelajaran/ManajemenPembelajaran';
 import AdminManajemenLayanan from './pages/admin/manajemen-layanan/AdminManajemenLayanan';
+
+function RedirectToCustomLogin() {
+  useEffect(() => {
+    window.location.replace('https://upabahasa.vercel.app/login.html');
+  }, []);
+
+  return null;
+}
 
 function App() {
   return (
@@ -71,12 +78,11 @@ function App() {
       </Route>
 
       {/* ==========================================
-          2. LOGIN ADMIN
-          Tetap bisa diakses tanpa login
+          2. LOGIN ADMIN (LANGSUNG KE LOGIN.HTML)
       ========================================== */}
       <Route
         path="/admin/login"
-        element={<LoginAdmin />}
+        element={<RedirectToCustomLogin />}
       />
       <Route path="/admin/register" element={<RegisterAdmin />} />
 

@@ -1,6 +1,7 @@
 ﻿import React from 'react';
+import { Outlet } from 'react-router-dom';
 
-export default function ProtectedAdminRoute({ children }) {
+export default function ProtectedAdminRoute() {
   const params = new URLSearchParams(window.location.search);
   const uidFromUrl = params.get('uid');
 
@@ -16,5 +17,5 @@ export default function ProtectedAdminRoute({ children }) {
     return null;
   }
 
-  return children;
+  return <Outlet />;
 }
