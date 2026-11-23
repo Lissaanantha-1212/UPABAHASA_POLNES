@@ -22,6 +22,15 @@ export default function Tentang() {
     <main className="overflow-hidden bg-white text-gray-700">
       <AboutHero />
 
+      <div className="relative z-[999] bg-red-600 px-4 py-5 text-center text-white">
+  <p className="text-xl font-extrabold">
+    TES DEPLOYMENT FRONTEND
+  </p>
+  <p className="mt-1 text-sm">
+    Jika tulisan ini muncul, perubahan frontend berhasil ditayangkan.
+  </p>
+</div>
+
       {/* NAVIGASI DALAM HALAMAN */}
       <nav className="sticky top-0 z-30 border-b border-gray-100 bg-white/95 shadow-[0_3px_12px_rgba(10,61,46,0.04)] backdrop-blur-md">
         <div className={`${container} flex gap-6 overflow-x-auto py-3.5`}>
