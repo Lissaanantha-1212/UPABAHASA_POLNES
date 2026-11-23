@@ -1,5 +1,5 @@
 ﻿import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard,
   FileText,
@@ -22,8 +22,8 @@ import { clearAdminSession } from '../adminSession';
 const UPABAHASA_BASE_URL = 'https://upabahasa.vercel.app';
 
 // GANTI DUA BARIS INI DENGAN URL & ANON KEY DARI ./js/supabase-config.js MILIKMU
-const SUPABASE_URL = 'https://ISI_PROJECT_ID_KAMU.supabase.co';
-const SUPABASE_ANON_KEY = 'ISI_SUPABASE_ANON_KEY_KAMU';
+const SUPABASE_URL = 'https://aquqdodntgzjdfcvxgbs.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_aaAmOWSAFRFfnXfPFqftQw_v948Hbr0';
 
 const operasionalMenuItems = [
   {
@@ -51,7 +51,6 @@ const operasionalMenuItems = [
 
 export default function AdminLayout({ children }) {
   const location = useLocation();
-  const navigate = useNavigate();
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -68,7 +67,6 @@ export default function AdminLayout({ children }) {
     const uidFromUrl = params.get('uid');
     const emailFromUrl = params.get('email');
 
-    // Simpan id/email acuan query ke sessionStorage tab aktif (bukan data profil mentah)
     if (uidFromUrl) sessionStorage.setItem('active_user_app_id', uidFromUrl);
     if (emailFromUrl) sessionStorage.setItem('active_user_app_email', emailFromUrl);
 
@@ -81,7 +79,6 @@ export default function AdminLayout({ children }) {
 
     async function fetchUserFromDatabase() {
       try {
-        // Ambil semua user di tabel user_app urut berdasarkan id/created_at untuk menghitung Nomor Admin otomatis
         const res = await fetch(
           `${SUPABASE_URL}/rest/v1/user_app?select=*&order=id.asc`,
           {
@@ -138,7 +135,7 @@ export default function AdminLayout({ children }) {
       ? dbUser.role.charAt(0).toUpperCase() + dbUser.role.slice(1)
       : 'Administrator';
 
-  // Helper agar link menuju halaman operasional di upabahasa.vercel.app selalu membawa ?uid=<id_user_app>
+  // Helper agar setiap link menuju halaman operasional di upabahasa.vercel.app selalu membawa ?uid=<id_user_app>
   const buildOperasionalUrl = (baseHref) => {
     const activeUid = dbUser?.id || sessionStorage.getItem('active_user_app_id');
     return activeUid ? `${baseHref}?uid=${encodeURIComponent(activeUid)}` : baseHref;
@@ -166,8 +163,7 @@ export default function AdminLayout({ children }) {
     sessionStorage.removeItem('active_user_app_id');
     sessionStorage.removeItem('active_user_app_email');
     clearAdminSession();
-    alert('Anda berhasil Logout!');
-    window.location.href = `${UPABAHASA_BASE_URL}/login.html`;
+    window.location.replace(`${UPABAHASA_BASE_URL}/login.html`);
   };
 
   return (
@@ -305,7 +301,7 @@ export default function AdminLayout({ children }) {
             </div>
           </div>
 
-          {/* PROFILE DROPDOWN (DATA LANGSUNG DARI TABEL user_app SUPABASE) */}
+          {/* PROFILE DROPDOWN */}
           <div className="relative">
             <button
               type="button"
