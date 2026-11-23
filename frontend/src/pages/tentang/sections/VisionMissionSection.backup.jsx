@@ -1,305 +1,159 @@
-﻿import React, { useEffect, useState } from "react";
-import {
-  Target,
-  Lightbulb,
-  ClipboardList,
-  Settings,
-  X,
-  ArrowRight,
-} from "lucide-react";
-import SectionHeading from "../components/SectionHeading";
-import {
-  duties,
-  functions,
-  missions,
-} from "../data/aboutContent";
-
-const API_URL = "https://upabahasa-polnes-4p4a.vercel.app/api/cms/about";
+﻿
+import React, { useEffect, useState } from "react";
+import aboutImg from "../../../assets/about-img.jpg";
 
 const container = "mx-auto w-full max-w-7xl px-5 md:px-8 lg:px-10";
-const sectionSpacing = "py-16 md:py-24 lg:py-28";
+const PROFILE_CACHE_KEY = "upa_cms_about_profile_cache";
 
-const defaultContent = {
-  visi: "Menjadi Lembaga Bahasa yang Berkualitas dan Terkemuka di Tingkat Nasional.",
-  misi: missions.join(" "),
-  tugas: duties.join(" "),
-  fungsi: functions.join(" "),
-};
+const DEFAULT_TITLE = "Mengenal Lebih Dekat UPA Bahasa POLNES";
 
-function getContentByType(items, type) {
-  const filtered = items
-    .filter(
-      (item) =>
-        item.section_type === type &&
-        item.is_active !== false &&
-        item.content?.trim()
-    )
-    .sort(
-      (a, b) =>
-        Number(a.sort_order) - Number(b.sort_order) ||
-        Number(a.id) - Number(b.id)
-    );
+const DEFAULT_DESCRIPTION = [
+  "Unit Penunjang Akademik Bahasa merupakan unit penunjang akademik di bidang kebahasaan. UPA Bahasa terdiri atas kepala dan kelompok jabatan fungsional, serta mempunyai tugas melaksanakan pengembangan pembelajaran, peningkatan kemampuan, dan pelayanan uji kemampuan bahasa.",
+  "UPA Bahasa menyediakan berbagai layanan yang berkaitan dengan pengembangan kemampuan berbahasa dan keterampilan komunikasi bagi sivitas akademika POLNES. Layanan tersebut mendukung kebutuhan akademik, pengembangan diri, komunikasi profesional, serta kesiapan mahasiswa menghadapi dunia kerja dan lingkungan global.",
+];
 
-  if (filtered.length === 0) {
-    return defaultContent[type];
-  }
-
-  if (type === "visi") {
-    return filtered[0].content.trim();
-  }
-
-  return filtered.map((item) => item.content.trim()).join("\n");
+function getImageUrl(path) {
+  if (!path) return aboutImg;
+  if (path.startsWith("http://") || path.startsWith("https://")) return path;
+  return `https://upabahasa-polnes-4p4a.vercel.app${path.startsWith("/") ? "" : "/"}${path}`;
 }
 
-export default function VisionMissionSection() {
-  const [content, setContent] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [loadError, setLoadError] = useState(false);
-  const [selectedCard, setSelectedCard] = useState(null);
+function getDefaultProfile() {
+  return {
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION.join("\n\n"),
+    image: aboutImg,
+  };
+}
 
-  useEffect(() => {
-    let isMounted = true;
+function readProfileCache() {
+  try {
+    const cached = localStorage.getItem(PROFILE_CACHE_KEY);
+    if (!cached) return null;
 
-    async function loadContent() {
-      try {
-        const response = await fetch(API_URL);
+    const parsed = JSON.parse(cached);
 
-        if (!response.ok) {
-          throw new Error("Gagal mengambil konten CMS.");
-        }
-
-        const result = await response.json();
-
-        if (!result.success) {
-          throw new Error("Respons CMS tidak berhasil.");
-        }
-
-        const items = Array.isArray(result.data?.items)
-          ? result.data.items
-          : [];
-
-        if (isMounted) {
-          setContent({
-            visi: getContentByType(items, "visi"),
-            misi: getContentByType(items, "misi"),
-            tugas: getContentByType(items, "tugas"),
-            fungsi: getContentByType(items, "fungsi"),
-          });
-          setLoadError(false);
-        }
-      } catch (error) {
-        console.error("Gagal memuat konten visi dan misi:", error);
-
-        if (isMounted) {
-          setLoadError(true);
-        }
-      } finally {
-        if (isMounted) {
-          setLoading(false);
-        }
-      }
+    if (
+      !parsed ||
+      typeof parsed.title !== "string" ||
+      typeof parsed.description !== "string" ||
+      typeof parsed.image !== "string"
+    ) {
+      return null;
     }
 
-    loadContent();
+    return parsed;
+  } catch (error) {
+    console.warn("Cache Profil UPA Bahasa tidak dapat dibaca:", error);
+    return null;
+  }
+}
+
+export default function ProfileSection() {
+  const [profile, setProfile] = useState(
+    () => readProfileCache() || getDefaultProfile()
+  );
+
+  useEffect(() => {
+    let active = true;
+
+    const loadProfile = async () => {
+      try {
+        const response = await fetch(
+          "https://upabahasa-polnes-4p4a.vercel.app/api/cms/about"
+        );
+
+        if (!response.ok) return;
+
+        const result = await response.json();
+        if (!result.success || !active) return;
+
+        const settings = Array.isArray(result.data?.settings)
+          ? result.data.settings
+          : [];
+
+        const settingMap = Object.fromEntries(
+          settings.map((item) => [
+            item.setting_key,
+            item.setting_value || "",
+          ])
+        );
+
+        const description =
+          settingMap.tentang_profil_description || "";
+
+        const nextProfile = {
+          title: settingMap.tentang_profil_title || DEFAULT_TITLE,
+          description: description || DEFAULT_DESCRIPTION.join("\n\n"),
+          image: getImageUrl(settingMap.tentang_profil_image),
+        };
+
+        setProfile(nextProfile);
+
+        try {
+          localStorage.setItem(
+            PROFILE_CACHE_KEY,
+            JSON.stringify(nextProfile)
+          );
+        } catch (error) {
+          console.warn("Cache Profil UPA Bahasa gagal disimpan:", error);
+        }
+      } catch (error) {
+        console.error("Gagal memuat Profil UPA Bahasa:", error);
+      }
+    };
+
+    loadProfile();
 
     return () => {
-      isMounted = false;
+      active = false;
     };
   }, []);
 
-  useEffect(() => {
-    if (!selectedCard) return;
-
-    const previousOverflow = document.body.style.overflow;
-
-    const handleKeyDown = (event) => {
-      if (event.key === "Escape") {
-        setSelectedCard(null);
-      }
-    };
-
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [selectedCard]);
-
-  const cards = [
-    {
-      title: "Visi",
-      icon: Target,
-      content: content?.visi,
-    },
-    {
-      title: "Misi",
-      icon: Lightbulb,
-      content: content?.misi,
-    },
-    {
-      title: "Tugas",
-      icon: ClipboardList,
-      content: content?.tugas,
-    },
-    {
-      title: "Fungsi",
-      icon: Settings,
-      content: content?.fungsi,
-    },
-  ];
+  const paragraphs = profile.description
+    .split(/\n\s*\n/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean);
 
   return (
-    <>
-      <section
-        id="visi-misi"
-        className={`relative scroll-mt-16 overflow-hidden bg-gradient-to-b from-[#F4FBF7] via-[#EAEFF5] to-[#F4FBF7] ${sectionSpacing}`}
-      >
-        {/* Ornamen Latar Belakang Profesional (Tidak Polosan) */}
-        <div className="absolute inset-0 opacity-30 bg-[radial-gradient(#10C35D_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
-        <div className="absolute top-1/4 -left-32 h-96 w-96 rounded-full bg-[#10C35D]/10 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-1/4 -right-32 h-96 w-96 rounded-full bg-[#0A3D2E]/10 blur-3xl pointer-events-none" />
-
-        <div className={`${container} relative z-10`}>
-          <div className="mx-auto max-w-3xl text-center">
-            <span className="inline-block rounded-full bg-[#10C35D]/15 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#0A3D2E] shadow-xs">
-              Landasan dan Pelaksanaan
-            </span>
-            <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-gray-900 md:text-4xl">
-              Visi, Misi, Tugas, dan Fungsi
-            </h2>
-            <p className="mt-4 text-base text-gray-600">
-              Mengenal arah pengembangan serta tanggung jawab UPA Bahasa dalam mendukung pelayanan kebahasaan di POLNES.
+    <section
+      id="profil"
+      className="relative scroll-mt-16 overflow-hidden bg-white"
+    >
+      <div className={`${container} relative`}>
+        <div className="grid min-h-[430px] items-center gap-8 py-12 md:grid-cols-[0.95fr_1.05fr] md:gap-5 md:py-0">
+          <div className="relative z-10 max-w-xl py-2 md:py-12">
+            <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.22em] text-[#10a653] md:text-xs">
+              Profil UPA Bahasa
             </p>
-          </div>
 
-          {/* Grid 4 Kolom Card Minimalis Bersih & Profesional */}
-          <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
-            {cards.map((card, idx) => {
-              const Icon = card.icon;
-              const text = card.content || "";
+            <h2 className="max-w-lg text-3xl font-extrabold leading-[1.15] tracking-tight text-[#0a3d2e] md:text-4xl lg:text-[42px]">
+              {profile.title}
+            </h2>
 
-              return (
-                <article
-                  key={card.title}
-                  onClick={() => setSelectedCard(card)}
-                  style={{ animationDelay: `${idx * 150}ms` }}
-                  className="group relative flex cursor-pointer flex-col justify-between rounded-3xl bg-white/90 backdrop-blur-md p-7 border border-gray-200/80 shadow-[0_10px_30px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(16,195,93,0.12)] hover:border-[#10C35D]/60"
-                >
-                  <div>
-                    {/* Ikon Ilustrasi di Atas */}
-                    <div className="flex justify-center">
-                      <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#10C35D]/10 text-[#10C35D] transition-transform duration-300 group-hover:scale-110 shadow-xs">
-                        <Icon size={32} strokeWidth={1.8} />
-                      </div>
-                    </div>
-
-                    {/* Judul */}
-                    <h3 className="mt-6 text-center text-xl font-extrabold tracking-tight text-gray-900 group-hover:text-[#10C35D] transition-colors">
-                      {card.title}
-                    </h3>
-
-                    {/* Cuplikan Konten */}
-                    <div className="mt-3 max-h-[90px] overflow-hidden text-center">
-                      <p className="line-clamp-3 text-xs md:text-sm font-normal leading-relaxed text-gray-600">
-                        {loading ? (
-                          <span className="animate-pulse text-gray-400">
-                            Memuat konten...
-                          </span>
-                        ) : loadError ? (
-                          <span className="text-gray-400">
-                            Gagal memuat konten.
-                          </span>
-                        ) : (
-                          text
-                        )}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Tombol Baca Selengkapnya di Bawah */}
-                  <div className="mt-8 pt-4 border-t border-gray-100 flex justify-center">
-                    <button
-                      type="button"
-                      className="w-full flex items-center justify-center gap-2 rounded-2xl bg-gray-50 py-2.5 text-xs font-bold text-gray-700 transition-all duration-300 group-hover:bg-[#10C35D] group-hover:text-white shadow-2xs"
-                    >
-                      <span>Baca Selengkapnya</span>
-                      <ArrowRight size={14} />
-                    </button>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Modal Popup Interaktif */}
-      {selectedCard && (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4 backdrop-blur-md transition-opacity animate-fadeIn"
-          onClick={(event) => {
-            if (event.target === event.currentTarget) {
-              setSelectedCard(null);
-            }
-          }}
-        >
-          <div
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="vision-mission-modal-title"
-            className="relative flex max-h-[85vh] w-full max-w-xl flex-col overflow-hidden rounded-3xl bg-white shadow-2xl border border-gray-100 animate-scaleUp"
-          >
-            {/* Header Modal */}
-            <div className="flex shrink-0 items-center justify-between border-b border-gray-100 bg-gray-50 px-6 py-4">
-              <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#10C35D] text-white shadow-sm">
-                  <selectedCard.icon size={20} strokeWidth={1.8} />
-                </div>
-                <div>
-                  <h3
-                    id="vision-mission-modal-title"
-                    className="text-lg font-extrabold text-gray-900"
-                  >
-                    {selectedCard.title}
-                  </h3>
-                  <p className="text-[11px] font-medium text-gray-500">
-                    UPA Bahasa POLNES
-                  </p>
-                </div>
-              </div>
-
-              <button
-                type="button"
-                onClick={() => setSelectedCard(null)}
-                aria-label="Tutup"
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-600 transition-all hover:bg-[#10C35D] hover:text-white"
+            {paragraphs.map((paragraph, index) => (
+              <p
+                key={index}
+                className={`${index === 0 ? "mt-5" : "mt-3"} text-sm leading-7 text-gray-600 md:text-[15px]`}
               >
-                <X size={18} />
-              </button>
-            </div>
-
-            {/* Konten Detail Lengkap */}
-            <div className="overflow-y-auto px-6 py-6">
-              <p className="whitespace-pre-wrap break-words text-sm md:text-base leading-7 text-gray-700">
-                {selectedCard.content}
+                {paragraph}
               </p>
-            </div>
+            ))}
+          </div>
 
-            {/* Footer Modal */}
-            <div className="flex shrink-0 justify-end border-t border-gray-100 bg-gray-50 px-6 py-3.5">
-              <button
-                type="button"
-                onClick={() => setSelectedCard(null)}
-                className="rounded-xl bg-[#0A3D2E] px-5 py-2 text-xs font-semibold text-white shadow-md transition-all hover:bg-[#10C35D]"
-              >
-                Tutup
-              </button>
+          <div className="relative md:-mr-2 lg:-mr-8">
+            <div className="absolute -right-5 -top-5 h-40 w-40 rounded-full bg-[#10C35D]/10 blur-3xl" />
+
+            <div className="relative h-[280px] overflow-hidden rounded-2xl shadow-[0_15px_40px_rgba(10,61,46,0.12)] md:h-[370px] lg:h-[430px] lg:rounded-l-3xl lg:rounded-r-none">
+              <img
+                src={profile.image}
+                alt="Dokumentasi UPA Bahasa POLNES"
+                className="h-full w-full object-cover object-center transition duration-700 hover:scale-105"
+              />
             </div>
           </div>
         </div>
-      )}
-    </>
+      </div>
+    </section>
   );
 }
