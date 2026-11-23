@@ -378,7 +378,7 @@ function Home() {
           1. HERO SECTION (REVISI MOBILE, DESKTOP TETAP)
       ========================================== */}
 
-      <section className="relative min-h-[450px] sm:min-h-[400px] md:min-h-[440px] lg:min-h-[470px] flex items-center bg-white overflow-hidden">
+      <section className="relative min-h-[430px] sm:min-h-[400px] md:min-h-[440px] lg:min-h-[470px] flex items-center bg-white overflow-hidden">
 
         <div className="absolute inset-0">
 
@@ -389,22 +389,29 @@ function Home() {
               onError={(event) => {
                 event.currentTarget.style.display = 'none';
               }}
-              className="absolute top-0 bottom-0 left-0 sm:left-[3%] w-full sm:w-[110%] h-full max-w-none object-cover object-[78%_65%] sm:object-center"
+              className="
+                absolute top-0 bottom-0
+                left-0 sm:left-[3%]
+                w-full sm:w-[110%]
+                h-full max-w-none
+                object-cover
+                object-[72%_center] sm:object-center
+              "
             />
           )}
 
           <div className="absolute inset-0 bg-[#092F27]/15 sm:bg-[#092F27]/40" />
 
-          {/* Overlay khusus MOBILE (< 640px) */}
+          {/* Overlay khusus MOBILE (< 640px): terang di sisi kiri-tengah, gedung kanan tetap tampak */}
           <div
             className="block sm:hidden absolute inset-0"
             style={{
               background:
-                'linear-gradient(180deg, rgba(255,255,255,0.97) 0%, rgba(255,255,255,0.93) 60%, rgba(255,255,255,0.68) 82%, rgba(255,255,255,0.28) 100%)'
+                'linear-gradient(90deg, rgba(255,255,255,0.97) 0%, rgba(255,255,255,0.93) 48%, rgba(255,255,255,0.56) 76%, rgba(255,255,255,0.20) 100%)'
             }}
           />
 
-          {/* Overlay DESKTOP/TABLET (>= 640px) */}
+          {/* Overlay DESKTOP/TABLET (>= 640px): dipertahankan seperti layout desktop */}
           <div
             className="hidden sm:block absolute inset-0"
             style={{
@@ -417,13 +424,13 @@ function Home() {
             className="absolute inset-0"
             style={{
               background:
-                'linear-gradient(0deg, rgba(255,255,255,0.25) 0%, transparent 25%, transparent 80%, rgba(255,255,255,0.08) 100%)'
+                'linear-gradient(0deg, rgba(255,255,255,0.14) 0%, transparent 25%, transparent 80%, rgba(255,255,255,0.08) 100%)'
             }}
           />
 
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-5 md:px-8 pt-7 pb-11 sm:py-12 md:py-14 lg:py-16">
+        <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-5 md:px-8 pt-7 pb-10 sm:py-12 md:py-14 lg:py-16">
 
           <div className="max-w-[540px] sm:max-w-[540px]">
 
@@ -438,13 +445,13 @@ function Home() {
             ) : (
               <>
                 {heroTitle && (
-                  <h1 className="font-extrabold text-[24px] leading-[1.16] sm:text-4xl md:text-[44px] lg:text-[40px] tracking-tight text-[#0A3D2E] mb-2.5 sm:mb-4">
+                  <h1 className="font-extrabold text-[25px] leading-[1.15] sm:text-4xl md:text-[44px] lg:text-[40px] tracking-tight text-[#0A3D2E] mb-2.5 sm:mb-4">
                     {heroTitle}
                   </h1>
                 )}
 
                 {heroDescription && (
-                  <p className="text-gray-700 sm:text-gray-600 text-[12.5px] sm:text-sm md:text-base font-medium sm:font-normal leading-[1.6] sm:leading-[1.8] max-w-[460px] mb-5 sm:mb-6">
+                  <p className="text-gray-700 sm:text-gray-600 text-[12.5px] sm:text-sm md:text-base font-medium sm:font-normal leading-[1.62] sm:leading-[1.8] max-w-[460px] mb-5 sm:mb-6">
                     {heroDescription}
                   </p>
                 )}
@@ -540,7 +547,7 @@ function Home() {
       </section>
 
       {/* ==========================================
-          3. NEWS & ANNOUNCEMENTS
+          3. NEWS & ANNOUNCEMENTS (REVISI MOBILE, DESKTOP TETAP)
       ========================================== */}
 
       <section className="relative py-14 md:py-16 bg-white overflow-hidden">
@@ -580,7 +587,7 @@ function Home() {
                 onTouchEnd={handleNewsTouchEnd}
               >
 
-                <div className="relative min-h-[415px] sm:min-h-[475px] md:min-h-[500px] overflow-hidden">
+                <div className="relative min-h-[430px] sm:min-h-[475px] md:min-h-[500px] overflow-hidden">
 
                   {visibleNews.map(({ item, offset }) => {
                     const distance = Math.abs(offset);
@@ -588,11 +595,11 @@ function Home() {
 
                     const scale =
                       distance === 0 ? 1 :
-                      distance === 1 ? 0.86 : 0.74;
+                      distance === 1 ? 0.85 : 0.74;
 
                     const rotation =
                       offset === 0 ? 0 :
-                      offset < 0 ? 12 : -12;
+                      offset < 0 ? 10 : -10;
 
                     const depth =
                       distance === 0 ? 60 :
@@ -603,11 +610,11 @@ function Home() {
                       : distance === 0
                         ? 1
                         : distance === 1
-                          ? 0.86
+                          ? 0.88
                           : 0.62;
 
                     const horizontalPercent = isMobileView
-                      ? offset * 27
+                      ? offset * 34
                       : offset * 19;
 
                     return (
@@ -615,7 +622,7 @@ function Home() {
                         key={item.id}
                         className="
                           absolute top-0
-                          w-[205px] sm:w-[270px] md:w-[320px]
+                          w-[215px] sm:w-[270px] md:w-[320px]
                           flex flex-col
                           bg-white rounded-2xl overflow-hidden
                           border border-[#E4EDE6]
@@ -638,7 +645,7 @@ function Home() {
                         <button
                           type="button"
                           onClick={() => openNewsDetail(item)}
-                          className="relative block w-full h-[135px] sm:h-[180px] md:h-[210px] overflow-hidden text-left"
+                          className="relative block w-full h-[142px] sm:h-[180px] md:h-[210px] overflow-hidden text-left"
                         >
                           {item.image ? (
                             <img
@@ -703,9 +710,9 @@ function Home() {
 
                 </div>
 
-                <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-8 sm:w-10 md:w-24 bg-gradient-to-r from-white via-white/80 to-transparent" />
+                <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-7 sm:w-10 md:w-24 bg-gradient-to-r from-white via-white/80 to-transparent" />
 
-                <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-8 sm:w-10 md:w-24 bg-gradient-to-l from-white via-white/80 to-transparent" />
+                <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-7 sm:w-10 md:w-24 bg-gradient-to-l from-white via-white/80 to-transparent" />
 
               </div>
 
