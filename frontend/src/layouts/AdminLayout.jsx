@@ -10,7 +10,6 @@ import {
   LogOut,
   Menu,
   X,
-  UserRound,
   ChevronDown,
   Calendar,
   FileUp,
@@ -79,6 +78,21 @@ export default function AdminLayout({ children }) {
   const roleLabel = adminUser.role
     ? adminUser.role.charAt(0).toUpperCase() + adminUser.role.slice(1)
     : 'Administrator';
+
+  // Kirim data profil yang sedang login di Piya ke halaman operasional (upabahasa.vercel.app)
+  const buildUpaBahasaUrl = (baseHref) => {
+    if (!adminUser || !adminUser.email) return baseHref;
+    const payload = {
+      fullName: adminName,
+      email: adminEmail,
+      role: roleLabel,
+      staffNumber: staffNumber ?? '',
+    };
+    const encoded = encodeURIComponent(
+      btoa(unescape(encodeURIComponent(JSON.stringify(payload))))
+    );
+    return `${baseHref}?piya_user=${encoded}`;
+  };
 
   const menuItems = [
     { name: 'Dashboard', path: '/admin/dashboard', icon: LayoutDashboard },
@@ -162,7 +176,7 @@ export default function AdminLayout({ children }) {
               return (
                 <a
                   key={item.name}
-                  href={item.href}
+                  href={buildUpaBahasaUrl(item.href)}
                   onClick={() => setIsSidebarOpen(false)}
                   className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-300 hover:bg-white/10 hover:text-white transition-all duration-200"
                 >
@@ -197,7 +211,7 @@ export default function AdminLayout({ children }) {
                     {item.children.map((subItem) => (
                       <a
                         key={subItem.name}
-                        href={subItem.href}
+                        href={buildUpaBahasaUrl(subItem.href)}
                         onClick={() => setIsSidebarOpen(false)}
                         className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium text-gray-300 hover:bg-white/10 hover:text-white transition-colors"
                       >
