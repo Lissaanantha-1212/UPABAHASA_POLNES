@@ -389,7 +389,7 @@ function Home() {
               onError={(event) => {
                 event.currentTarget.style.display = 'none';
               }}
-              className="absolute top-0 bottom-0 left-[22%] sm:left-[28%] md:left-[34%] lg:left-[38%] w-[95%] sm:w-[78%] md:w-[74%] lg:w-[70%] h-full max-w-none object-cover object-[72%_center] sm:object-[78%_center] md:object-[84%_center] lg:object-[88%_center]"
+              className="absolute top-0 bottom-0 left-[22%] sm:left-[34%] md:left-[40%] lg:left-[44%] w-[95%] sm:w-[72%] md:w-[68%] lg:w-[64%] h-full max-w-none object-cover object-[72%_center] sm:object-[82%_center] md:object-[88%_center] lg:object-[92%_center]"
             />
           )}
 
