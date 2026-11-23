@@ -375,13 +375,10 @@ function Home() {
     <main className="w-full overflow-hidden bg-white">
 
       {/* ==========================================
-1. HERO SECTION
+          1. HERO SECTION
       ========================================== */}
-
-      <section className="relative min-h-[430px] sm:min-h-[400px] md:min-h-[440px] lg:min-h-[470px] flex items-center bg-white overflow-hidden">
-
+      <section className="relative min-h-[450px] sm:min-h-[400px] md:min-h-[440px] lg:min-h-[470px] flex items-center bg-white overflow-hidden">
         <div className="absolute inset-0">
-
           {heroImage && (
             <img
               src={heroImage}
@@ -389,17 +386,35 @@ function Home() {
               onError={(event) => {
                 event.currentTarget.style.display = 'none';
               }}
-              className="absolute top-0 bottom-0 left-0 sm:left-[3%] w-full sm:w-[110%] h-full max-w-none object-cover object-[62%_center] sm:object-center"
+              className="
+                absolute top-0 bottom-0
+                left-0 sm:left-[3%]
+                w-full sm:w-[110%]
+                h-full max-w-none
+                object-cover
+                object-[78%_65%] sm:object-center
+              "
             />
           )}
 
-          <div className="absolute inset-0 bg-[#092F27]/25 sm:bg-[#092F27]/40" />
+          {/* Tint halus agar kontras foto konsisten */}
+          <div className="absolute inset-0 bg-[#092F27]/15 sm:bg-[#092F27]/40" />
 
+          {/* Overlay khusus MOBILE (< 640px): terang di area teks atas, transparan bertahap ke bawah */}
           <div
-            className="absolute inset-0"
+            className="block sm:hidden absolute inset-0"
             style={{
               background:
-                'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.99) 27%, rgba(255,255,255,0.93) 39%, rgba(255,255,255,0.76) 51%, rgba(255,255,255,0.32) 68%, rgba(255,255,255,0.04) 88%, transparent 100%)'
+                'linear-gradient(180deg, rgba(255,255,255,0.97) 0%, rgba(255,255,255,0.93) 60%, rgba(255,255,255,0.68) 82%, rgba(255,255,255,0.28) 100%)',
+            }}
+          />
+
+          {/* Overlay DESKTOP/TABLET (>= 640px): dipertahankan seperti layout desktop */}
+          <div
+            className="hidden sm:block absolute inset-0"
+            style={{
+              background:
+                'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.99) 27%, rgba(255,255,255,0.93) 39%, rgba(255,255,255,0.76) 51%, rgba(255,255,255,0.32) 68%, rgba(255,255,255,0.04) 88%, transparent 100%)',
             }}
           />
 
@@ -407,16 +422,13 @@ function Home() {
             className="absolute inset-0"
             style={{
               background:
-                'linear-gradient(0deg, rgba(255,255,255,0.12) 0%, transparent 25%, transparent 80%, rgba(255,255,255,0.08) 100%)'
+                'linear-gradient(0deg, rgba(255,255,255,0.25) 0%, transparent 25%, transparent 80%, rgba(255,255,255,0.08) 100%)',
             }}
           />
-
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-5 md:px-8 py-8 sm:py-12 md:py-14 lg:py-16">
-
-          <div className="max-w-[540px] sm:max-w-[540px]">
-
+        <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-5 md:px-8 pt-7 pb-11 sm:py-12 md:py-14 lg:py-16">
+          <div className="max-w-[540px]">
             {homeLoading ? (
               <p className="py-8 text-sm text-gray-500">
                 Memuat konten Beranda...
@@ -428,23 +440,21 @@ function Home() {
             ) : (
               <>
                 {heroTitle && (
-                  <h1 className="font-extrabold text-[27px] leading-[1.12] sm:text-4xl md:text-[44px] lg:text-[40px] tracking-tight text-[#0A3D2E] mb-3 sm:mb-4">
+                  <h1 className="font-extrabold text-[24px] leading-[1.16] sm:text-4xl md:text-[44px] lg:text-[40px] tracking-tight text-[#0A3D2E] mb-2.5 sm:mb-4">
                     {heroTitle}
                   </h1>
                 )}
 
                 {heroDescription && (
-                  <p className="text-gray-600 text-[13px] sm:text-sm md:text-base leading-[1.65] sm:leading-[1.8] max-w-[460px] mb-5 sm:mb-6">
+                  <p className="text-gray-700 sm:text-gray-600 text-[12.5px] sm:text-sm md:text-base font-medium sm:font-normal leading-[1.6] sm:leading-[1.8] max-w-[460px] mb-5 sm:mb-6">
                     {heroDescription}
                   </p>
                 )}
               </>
             )}
 
-            <div className="flex w-full max-w-[440px] items-center gap-2 sm:gap-4">
-
+            <div className="flex w-full max-w-[440px] items-center gap-2.5 sm:gap-4">
               {/* TOMBOL MEMBUKA DROPDOWN LAYANAN */}
-
               <button
                 type="button"
                 onClick={openLayananDropdown}
@@ -454,22 +464,15 @@ function Home() {
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
               </button>
 
-              <a
-                href="/tentang"
-                className={secondaryButton}
-              >
+              <a href="/tentang" className={secondaryButton}>
                 <span>Tentang Kami</span>
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300" />
               </a>
-
             </div>
-
           </div>
-
         </div>
-
       </section>
-
+      
       {/* ==========================================
 2. QUICK ACCESS - WHITE
       ========================================== */}
