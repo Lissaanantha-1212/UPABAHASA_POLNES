@@ -1,5 +1,4 @@
-﻿
-import React, { useEffect, useRef, useState } from 'react';
+﻿import React, { useEffect, useRef, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import {
   BookOpen,
@@ -113,6 +112,19 @@ function Home() {
   const [selectedNews, setSelectedNews] = useState(null);
   const [loadingNewsDetail, setLoadingNewsDetail] = useState(false);
   const [newsDetailError, setNewsDetailError] = useState('');
+  const [isMobileView, setIsMobileView] = useState(() =>
+    typeof window !== 'undefined' ? window.innerWidth < 640 : false
+  );
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 639px)');
+    const handleChange = (event) => setIsMobileView(event.matches);
+
+    setIsMobileView(mediaQuery.matches);
+    mediaQuery.addEventListener('change', handleChange);
+
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
 
   const openNewsDetail = async (item) => {
     setSelectedNews(item);
@@ -363,7 +375,7 @@ function Home() {
     <main className="w-full overflow-hidden bg-white">
 
       {/* ==========================================
-          1. HERO SECTION
+          1. HERO SECTION (REVISI MOBILE, DESKTOP TETAP)
       ========================================== */}
 
       <section className="relative min-h-[430px] sm:min-h-[400px] md:min-h-[440px] lg:min-h-[470px] flex items-center bg-white overflow-hidden">
@@ -377,14 +389,31 @@ function Home() {
               onError={(event) => {
                 event.currentTarget.style.display = 'none';
               }}
-              className="absolute top-0 bottom-0 left-0 sm:left-[3%] w-full sm:w-[110%] h-full max-w-none object-cover object-[62%_center] sm:object-center"
+              className="
+                absolute top-0 bottom-0
+                left-0 sm:left-[3%]
+                w-full sm:w-[110%]
+                h-full max-w-none
+                object-cover
+                object-[72%_center] sm:object-center
+              "
             />
           )}
 
-          <div className="absolute inset-0 bg-[#092F27]/25 sm:bg-[#092F27]/40" />
+          <div className="absolute inset-0 bg-[#092F27]/15 sm:bg-[#092F27]/40" />
 
+          {/* Overlay khusus MOBILE (< 640px): terang di sisi kiri-tengah, gedung kanan tetap tampak */}
           <div
-            className="absolute inset-0"
+            className="block sm:hidden absolute inset-0"
+            style={{
+              background:
+                'linear-gradient(90deg, rgba(255,255,255,0.97) 0%, rgba(255,255,255,0.93) 48%, rgba(255,255,255,0.56) 76%, rgba(255,255,255,0.20) 100%)'
+            }}
+          />
+
+          {/* Overlay DESKTOP/TABLET (>= 640px): dipertahankan seperti layout desktop */}
+          <div
+            className="hidden sm:block absolute inset-0"
             style={{
               background:
                 'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.99) 27%, rgba(255,255,255,0.93) 39%, rgba(255,255,255,0.76) 51%, rgba(255,255,255,0.32) 68%, rgba(255,255,255,0.04) 88%, transparent 100%)'
@@ -395,13 +424,13 @@ function Home() {
             className="absolute inset-0"
             style={{
               background:
-                'linear-gradient(0deg, rgba(255,255,255,0.12) 0%, transparent 25%, transparent 80%, rgba(255,255,255,0.08) 100%)'
+                'linear-gradient(0deg, rgba(255,255,255,0.14) 0%, transparent 25%, transparent 80%, rgba(255,255,255,0.08) 100%)'
             }}
           />
 
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-5 md:px-8 py-8 sm:py-12 md:py-14 lg:py-16">
+        <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-5 md:px-8 pt-7 pb-10 sm:py-12 md:py-14 lg:py-16">
 
           <div className="max-w-[540px] sm:max-w-[540px]">
 
@@ -416,20 +445,20 @@ function Home() {
             ) : (
               <>
                 {heroTitle && (
-                  <h1 className="font-extrabold text-[27px] leading-[1.12] sm:text-4xl md:text-[44px] lg:text-[40px] tracking-tight text-[#0A3D2E] mb-3 sm:mb-4">
+                  <h1 className="font-extrabold text-[25px] leading-[1.15] sm:text-4xl md:text-[44px] lg:text-[40px] tracking-tight text-[#0A3D2E] mb-2.5 sm:mb-4">
                     {heroTitle}
                   </h1>
                 )}
 
                 {heroDescription && (
-                  <p className="text-gray-600 text-[13px] sm:text-sm md:text-base leading-[1.65] sm:leading-[1.8] max-w-[460px] mb-5 sm:mb-6">
+                  <p className="text-gray-700 sm:text-gray-600 text-[12.5px] sm:text-sm md:text-base font-medium sm:font-normal leading-[1.62] sm:leading-[1.8] max-w-[460px] mb-5 sm:mb-6">
                     {heroDescription}
                   </p>
                 )}
               </>
             )}
 
-            <div className="flex w-full max-w-[440px] items-center gap-2 sm:gap-4">
+            <div className="flex w-full max-w-[440px] items-center gap-2.5 sm:gap-4">
 
               {/* TOMBOL MEMBUKA DROPDOWN LAYANAN */}
 
@@ -518,7 +547,7 @@ function Home() {
       </section>
 
       {/* ==========================================
-          3. NEWS & ANNOUNCEMENTS
+          3. NEWS & ANNOUNCEMENTS (REVISI MOBILE, DESKTOP TETAP)
       ========================================== */}
 
       <section className="relative py-14 md:py-16 bg-white overflow-hidden">
@@ -558,32 +587,42 @@ function Home() {
                 onTouchEnd={handleNewsTouchEnd}
               >
 
-                <div className="relative min-h-[475px] md:min-h-[500px] overflow-hidden">
+                <div className="relative min-h-[430px] sm:min-h-[475px] md:min-h-[500px] overflow-hidden">
 
                   {visibleNews.map(({ item, offset }) => {
                     const distance = Math.abs(offset);
+                    const isHiddenOnMobile = isMobileView && distance > 1;
+
                     const scale =
                       distance === 0 ? 1 :
-                      distance === 1 ? 0.88 : 0.76;
+                      distance === 1 ? 0.85 : 0.74;
 
                     const rotation =
                       offset === 0 ? 0 :
-                      offset < 0 ? 13 : -13;
+                      offset < 0 ? 10 : -10;
 
                     const depth =
                       distance === 0 ? 60 :
                       distance === 1 ? 0 : -60;
 
-                    const opacity =
-                      distance === 0 ? 1 :
-                      distance === 1 ? 0.88 : 0.62;
+                    const opacity = isHiddenOnMobile
+                      ? 0
+                      : distance === 0
+                        ? 1
+                        : distance === 1
+                          ? 0.88
+                          : 0.62;
+
+                    const horizontalPercent = isMobileView
+                      ? offset * 34
+                      : offset * 19;
 
                     return (
                       <article
                         key={item.id}
                         className="
                           absolute top-0
-                          w-[min(320px,74vw)]
+                          w-[215px] sm:w-[270px] md:w-[320px]
                           flex flex-col
                           bg-white rounded-2xl overflow-hidden
                           border border-[#E4EDE6]
@@ -593,12 +632,12 @@ function Home() {
                           will-change-transform
                         "
                         style={{
-                          left: `calc(50% + ${offset * 19}%)`,
+                          left: `calc(50% + ${horizontalPercent}%)`,
                           transform: `translateX(-50%) scale(${scale}) rotateY(${rotation}deg) translateZ(${depth}px)`,
                           transformOrigin: 'center center',
                           zIndex: 10 - distance,
                           opacity,
-                          pointerEvents: 'auto',
+                          pointerEvents: isHiddenOnMobile ? 'none' : 'auto',
                           backfaceVisibility: 'hidden',
                         }}
                       >
@@ -606,7 +645,7 @@ function Home() {
                         <button
                           type="button"
                           onClick={() => openNewsDetail(item)}
-                          className="relative block w-full h-[210px] overflow-hidden text-left"
+                          className="relative block w-full h-[142px] sm:h-[180px] md:h-[210px] overflow-hidden text-left"
                         >
                           {item.image ? (
                             <img
@@ -621,21 +660,21 @@ function Home() {
                             <div className="w-full h-full bg-[#EAF5EE]" aria-label="Gambar berita tidak tersedia" />
                           )}
 
-                          <span className="absolute bottom-4 left-4 bg-white text-[#0A8F4D] text-[10px] font-bold tracking-wide px-3 py-2 rounded-md shadow-sm">
+                          <span className="absolute bottom-2.5 left-2.5 sm:bottom-4 sm:left-4 bg-white text-[#0A8F4D] text-[9px] sm:text-[10px] font-bold tracking-wide px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-md shadow-sm">
                             {item.category.toUpperCase()}
                           </span>
 
                           {isNewContent({ publishedAt: item.publishedAt }) && (
-                            <span className="absolute top-4 right-4 bg-[#10C35D] text-white text-[10px] font-extrabold tracking-wider px-3 py-1.5 rounded-full shadow-md">
+                            <span className="absolute top-2.5 right-2.5 sm:top-4 sm:right-4 bg-[#10C35D] text-white text-[9px] sm:text-[10px] font-extrabold tracking-wider px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full shadow-md">
                               BARU
                             </span>
                           )}
                         </button>
 
-                        <div className="flex flex-col flex-1 p-5">
+                        <div className="flex flex-col flex-1 p-3.5 sm:p-5">
 
-                          <div className="flex items-center gap-2 text-gray-400 text-xs mb-3">
-                            <CalendarDays className="w-4 h-4" />
+                          <div className="flex items-center gap-1.5 sm:gap-2 text-gray-400 text-[10px] sm:text-xs mb-2 sm:mb-3">
+                            <CalendarDays className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                             <span>{item.date}</span>
                           </div>
 
@@ -644,23 +683,23 @@ function Home() {
                             onClick={() => openNewsDetail(item)}
                             className="text-left"
                           >
-                            <h3 className="font-bold text-[#0A3D2E] leading-snug mb-3 line-clamp-2 min-h-[48px] hover:text-[#10A653] transition-colors text-base">
+                            <h3 className="font-bold text-[#0A3D2E] leading-snug mb-2 sm:mb-3 line-clamp-2 min-h-[36px] sm:min-h-[48px] hover:text-[#10A653] transition-colors text-xs sm:text-base">
                               {item.title}
                             </h3>
                           </button>
 
-                          <p className="text-gray-500 text-sm leading-[1.8] line-clamp-2 mb-5">
+                          <p className="text-gray-500 text-[11px] sm:text-sm leading-[1.65] sm:leading-[1.8] line-clamp-2 mb-3 sm:mb-5">
                             {item.summary}
                           </p>
 
-                          <div className="mt-auto pt-4 border-t border-gray-100">
+                          <div className="mt-auto pt-3 sm:pt-4 border-t border-gray-100">
                             <button
                               type="button"
                               onClick={() => openNewsDetail(item)}
-                              className="inline-flex items-center gap-2 text-[#0A8F4D] font-bold text-xs hover:text-[#10C35D] transition-colors"
+                              className="inline-flex items-center gap-1.5 sm:gap-2 text-[#0A8F4D] font-bold text-[11px] sm:text-xs hover:text-[#10C35D] transition-colors"
                             >
                               Baca Selengkapnya
-                              <ArrowRight className="w-4 h-4" />
+                              <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                             </button>
                           </div>
 
@@ -671,9 +710,9 @@ function Home() {
 
                 </div>
 
-                <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-10 md:w-24 bg-gradient-to-r from-white via-white/80 to-transparent" />
+                <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-7 sm:w-10 md:w-24 bg-gradient-to-r from-white via-white/80 to-transparent" />
 
-                <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-10 md:w-24 bg-gradient-to-l from-white via-white/80 to-transparent" />
+                <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-7 sm:w-10 md:w-24 bg-gradient-to-l from-white via-white/80 to-transparent" />
 
               </div>
 
@@ -749,7 +788,6 @@ function Home() {
 
         <div className="relative max-w-6xl mx-auto px-5 md:px-8">
 
-          {/* PERUBAHAN: sm:grid-cols-2 */}
           <div className="grid grid-cols-1 sm:grid-cols-2 rounded-3xl overflow-hidden shadow-[0_18px_45px_rgba(10,61,46,0.13)]">
 
             <div className="relative min-h-[300px] md:min-h-[420px]">
@@ -858,130 +896,74 @@ function Home() {
                 Galeri Kegiatan UPA Bahasa
               </h2>
 
-              <p className="text-gray-500 text-sm mt-2 leading-relaxed">
-                Dokumentasi kegiatan dan aktivitas UPA Bahasa POLNES.
+              <p className="text-gray-600 text-sm md:text-base mt-2">
+                Momen kegiatan, pelatihan, dan layanan kebahasaan di UPA Bahasa POLNES.
               </p>
 
             </div>
 
             <a
-              href="/galeri"
-              className="group inline-flex items-center justify-center gap-3 min-h-[46px] px-6 py-3 rounded-xl border border-[#0A8F4D]/20 bg-white text-[#0A3D2E] text-sm font-semibold shadow-[0_4px_15px_rgba(10,61,46,0.05)] hover:bg-[#0A8F4D] hover:text-white hover:-translate-y-0.5 transition-all duration-300"
+              href="/informasi/galeri"
+              className={outlineButton}
             >
               <span>Lihat Semua Galeri</span>
-
-              <span className="w-7 h-7 rounded-full bg-[#EAF8EF] flex items-center justify-center group-hover:bg-white/20 transition-colors duration-300">
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-300" />
-              </span>
+              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300" />
             </a>
 
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-[1fr_1.08fr_1fr] items-center gap-5 lg:gap-4 max-w-6xl mx-auto">
+          {homeLoading ? (
+            <p className="py-10 text-center text-sm text-gray-500">
+              Memuat galeri kegiatan...
+            </p>
+          ) : homeError ? (
+            <p role="alert" className="py-10 text-center text-sm text-red-700">
+              Galeri kegiatan gagal dimuat.
+            </p>
+          ) : gallery.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {gallery.map((item) => (
+                <article
+                  key={item.id}
+                  className="group bg-white rounded-2xl overflow-hidden border border-[#E4EDE6] shadow-[0_8px_24px_rgba(10,61,46,0.06)] hover:shadow-[0_14px_32px_rgba(10,61,46,0.12)] transition-all duration-300"
+                >
+                  <div className="relative h-52 overflow-hidden bg-[#EAF5EE]">
+                    {item.image ? (
+                      <img
+                        src={item.image}
+                        alt={item.alt}
+                        onError={(event) => {
+                          event.currentTarget.style.display = 'none';
+                        }}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    ) : null}
+                  </div>
 
-            {homeLoading ? (
-              <p className="col-span-full py-10 text-center text-sm text-gray-500">
-                Memuat galeri...
-              </p>
-            ) : homeError ? (
-              <p role="alert" className="col-span-full py-10 text-center text-sm text-red-700">
-                Galeri gagal dimuat.
-              </p>
-            ) : gallery.length > 0 ? (
-              gallery.slice(0, 3).map((item, index) => {
-
-                const isCenter = index === 1;
-
-                return (
-                  <a
-                    key={index}
-                    href="/galeri"
-                    className={`group relative block bg-white rounded-2xl overflow-hidden border border-[#E8EFEA] transition-all duration-500 ${
-                      isCenter
-                        ? "shadow-[0_12px_35px_rgba(10,61,46,0.13)] z-10"
-                        : "shadow-[0_5px_20px_rgba(10,61,46,0.07)] hover:shadow-[0_12px_28px_rgba(10,61,46,0.13)] hover:-translate-y-1"
-                    }`}
-                  >
-
-                    <div
-                      className={`relative overflow-hidden ${
-                        isCenter
-                          ? "h-[250px] md:h-[280px]"
-                          : "h-[225px] md:h-[250px]"
-                      }`}
-                    >
-
-                      {item.image ? (
-                        <img
-                          src={item.image}
-                          alt={item.alt}
-                          onError={(event) => {
-                            event.currentTarget.style.display = 'none';
-                          }}
-                          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                        />
-                      ) : (
-                        <div className="absolute inset-0 bg-[#EAF5EE]" aria-label="Gambar galeri tidak tersedia" />
-                      )}
-
-                      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white via-white/70 to-transparent" />
-
-                      <div className="absolute top-4 left-4">
-                        <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/80 backdrop-blur-md border border-white/80 text-[#0A3D2E] text-[9px] md:text-[10px] font-bold tracking-wider uppercase shadow-sm">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#10C35D]" />
-                          Dokumentasi UPA
-                        </span>
-                      </div>
-
+                  <div className="p-5">
+                    <div className="flex items-center gap-2 text-xs text-gray-400 mb-2">
+                      <CalendarDays className="w-4 h-4" />
+                      <span>{item.date}</span>
                     </div>
 
-                    <div
-                      className={`relative bg-white ${
-                        isCenter
-                          ? "px-5 pt-1 pb-6 md:px-6"
-                          : "px-4 pt-1 pb-5 md:px-5"
-                      }`}
-                    >
+                    <h3 className="font-bold text-base text-[#0A3D2E] mb-2 line-clamp-1">
+                      {item.title}
+                    </h3>
 
-                      <h3
-                        className={`font-bold text-[#0A3D2E] leading-snug mb-3 line-clamp-2 group-hover:text-[#0A8F4D] transition-colors duration-300 ${
-                          isCenter
-                            ? "text-base md:text-lg"
-                            : "text-sm md:text-base"
-                        }`}
-                      >
-                        {item.title}
-                      </h3>
-
-                      <p className="text-gray-500 text-xs md:text-sm leading-relaxed line-clamp-2">
-                        {item.description || "Dokumentasi kegiatan dan aktivitas UPA Bahasa POLNES."}
+                    {item.description && (
+                      <p className="text-sm text-gray-500 line-clamp-2 leading-relaxed">
+                        {item.description}
                       </p>
-
-                      <div className="flex items-center justify-between mt-4 pt-3 border-t border-[#0A3D2E]/10">
-
-                        <div className="flex items-center gap-2 text-gray-400 text-xs">
-                          <CalendarDays className="w-4 h-4" />
-                          <span>{item.date}</span>
-                        </div>
-
-                        <span className="w-8 h-8 rounded-full bg-[#EAF8EF] flex items-center justify-center text-[#0A8F4D] group-hover:bg-[#0A8F4D] group-hover:text-white group-hover:translate-x-1 transition-all duration-300">
-                          <ArrowUpRight className="w-4 h-4" />
-                        </span>
-
-                      </div>
-
-                    </div>
-
-                  </a>
-                );
-              })
-            ) : (
-              <p className="col-span-full py-10 text-center text-sm text-gray-500">
-                Belum ada dokumentasi galeri.
-              </p>
-            )}
-
-          </div>
+                    )}
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <p className="py-10 text-center text-sm text-gray-500">
+              Belum ada dokumentasi galeri yang ditampilkan.
+            </p>
+          )}
 
         </div>
 
@@ -989,11 +971,10 @@ function Home() {
 
       {selectedNews && (
         <NewsModal
-          item={selectedNews}
-          isNew={isNewContent(selectedNews)}
+          news={selectedNews}
+          loading={loadingNewsDetail}
+          error={newsDetailError}
           onClose={closeNewsDetail}
-          loadingDetail={loadingNewsDetail}
-          detailError={newsDetailError}
         />
       )}
 
