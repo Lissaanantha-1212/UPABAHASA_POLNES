@@ -75,10 +75,10 @@ function formatCmsDate(value) {
 // ==========================================
 
 const primaryButton =
-  "group inline-flex items-center justify-center gap-1 sm:gap-2 min-h-[27px] sm:min-h-[46px] flex-1 sm:flex-none px-2 sm:px-7 py-1.5 sm:py-3 rounded-md sm:rounded-xl bg-gradient-to-r from-[#0A8F4D] to-[#10C35D] text-white text-[8px] sm:text-sm font-semibold tracking-wide shadow-[0_6px_18px_rgba(10,143,77,0.20)] hover:shadow-[0_10px_25px_rgba(10,143,77,0.28)] hover:-translate-y-1 hover:from-[#087A41] hover:to-[#0DAA50] active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20 whitespace-nowrap";
+  "group inline-flex items-center justify-center gap-2 min-h-[46px] flex-1 sm:flex-none px-4 sm:px-7 py-3 rounded-xl bg-gradient-to-r from-[#0A8F4D] to-[#10C35D] text-white text-xs sm:text-sm font-semibold tracking-wide shadow-[0_6px_18px_rgba(10,143,77,0.20)] hover:shadow-[0_10px_25px_rgba(10,143,77,0.28)] hover:-translate-y-1 hover:from-[#087A41] hover:to-[#0DAA50] active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20 whitespace-nowrap";
 
 const secondaryButton =
-  "group inline-flex items-center justify-center gap-1 sm:gap-2 min-h-[27px] sm:min-h-[46px] flex-1 sm:flex-none px-2 sm:px-7 py-1.5 sm:py-3 rounded-md sm:rounded-xl bg-white/95 backdrop-blur-sm border border-[#0A3D2E]/15 text-[#0A3D2E] text-[8px] sm:text-sm font-semibold tracking-wide shadow-sm hover:bg-[#EAF8EF] hover:border-[#10C35D]/50 hover:text-[#087A41] hover:-translate-y-1 hover:shadow-md active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20 whitespace-nowrap";
+  "group inline-flex items-center justify-center gap-2 min-h-[46px] flex-1 sm:flex-none px-4 sm:px-7 py-3 rounded-xl bg-white/90 backdrop-blur-sm border border-[#0A3D2E]/15 text-[#0A3D2E] text-xs sm:text-sm font-semibold tracking-wide shadow-sm hover:bg-[#EAF8EF] hover:border-[#10C35D]/50 hover:text-[#087A41] hover:-translate-y-1 hover:shadow-md active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20 whitespace-nowrap";
 
 const outlineButton =
   "group inline-flex items-center justify-center gap-3 min-h-[46px] px-6 py-3 rounded-xl border border-[#0A8F4D]/30 bg-white text-[#0A8F4D] text-sm font-semibold tracking-wide hover:bg-[#0A8F4D] hover:border-[#0A8F4D] hover:text-white hover:-translate-y-0.5 hover:shadow-[0_7px_18px_rgba(10,143,77,0.16)] active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20";
@@ -88,6 +88,7 @@ const outlineButton =
 // ==========================================
 
 function Home() {
+  // Mengambil fungsi pembuka dropdown dari MainLayout
   const { openLayananDropdown } = useOutletContext();
 
   const [homeData, setHomeData] = useState(() =>
@@ -112,20 +113,6 @@ function Home() {
   const [selectedNews, setSelectedNews] = useState(null);
   const [loadingNewsDetail, setLoadingNewsDetail] = useState(false);
   const [newsDetailError, setNewsDetailError] = useState('');
-
-  const [isMobileView, setIsMobileView] = useState(() =>
-    typeof window !== 'undefined' ? window.innerWidth < 640 : false
-  );
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(max-width: 639px)');
-    const handleChange = (event) => setIsMobileView(event.matches);
-
-    setIsMobileView(mediaQuery.matches);
-    mediaQuery.addEventListener('change', handleChange);
-
-    return () => mediaQuery.removeEventListener('change', handleChange);
-  }, []);
 
   const openNewsDetail = async (item) => {
     setSelectedNews(item);
@@ -309,7 +296,7 @@ function Home() {
   }));
 
   // ==========================================
-  // QUICK ACCESS
+  // QUICK ACCESS - PERMANEN
   // ==========================================
 
   const quickServices = [
@@ -379,7 +366,7 @@ function Home() {
           1. HERO SECTION
       ========================================== */}
 
-      <section className="relative min-h-[210px] sm:min-h-[410px] md:min-h-[445px] lg:min-h-[470px] flex items-center bg-white overflow-hidden">
+      <section className="relative min-h-[430px] sm:min-h-[400px] md:min-h-[440px] lg:min-h-[470px] flex items-center bg-white overflow-hidden">
 
         <div className="absolute inset-0">
 
@@ -390,25 +377,17 @@ function Home() {
               onError={(event) => {
                 event.currentTarget.style.display = 'none';
               }}
-              className="absolute top-0 bottom-0 left-[47%] sm:left-[34%] md:left-[40%] lg:left-[44%] w-[65%] sm:w-[72%] md:w-[68%] lg:w-[64%] h-full max-w-none object-cover object-[76%_center] sm:object-[82%_center] md:object-[88%_center] lg:object-[92%_center]"
+              className="absolute top-0 bottom-0 left-0 sm:left-[3%] w-full sm:w-[110%] h-full max-w-none object-cover object-[62%_center] sm:object-center"
             />
           )}
 
-          <div className="absolute inset-0 bg-[#092F27]/10 sm:bg-[#092F27]/25" />
+          <div className="absolute inset-0 bg-[#092F27]/25 sm:bg-[#092F27]/40" />
 
           <div
-            className="absolute inset-0 sm:hidden"
+            className="absolute inset-0"
             style={{
               background:
-                'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.98) 38%, rgba(255,255,255,0.88) 52%, rgba(255,255,255,0.35) 72%, rgba(255,255,255,0.04) 100%)'
-            }}
-          />
-
-          <div
-            className="hidden sm:block absolute inset-0"
-            style={{
-              background:
-                'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.98) 34%, rgba(255,255,255,0.88) 48%, rgba(255,255,255,0.62) 62%, rgba(255,255,255,0.25) 78%, rgba(255,255,255,0.04) 92%, transparent 100%)'
+                'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.99) 27%, rgba(255,255,255,0.93) 39%, rgba(255,255,255,0.76) 51%, rgba(255,255,255,0.32) 68%, rgba(255,255,255,0.04) 88%, transparent 100%)'
             }}
           />
 
@@ -416,15 +395,15 @@ function Home() {
             className="absolute inset-0"
             style={{
               background:
-                'linear-gradient(0deg, rgba(255,255,255,0.22) 0%, transparent 25%, transparent 80%, rgba(255,255,255,0.08) 100%)'
+                'linear-gradient(0deg, rgba(255,255,255,0.12) 0%, transparent 25%, transparent 80%, rgba(255,255,255,0.08) 100%)'
             }}
           />
 
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto w-full px-2 sm:px-6 md:px-8 py-4 sm:py-12 md:py-14 lg:py-16">
+        <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-5 md:px-8 py-8 sm:py-12 md:py-14 lg:py-16">
 
-          <div className="w-[62%] sm:max-w-[440px] md:max-w-[480px] lg:max-w-[540px]">
+          <div className="max-w-[540px] sm:max-w-[540px]">
 
             {homeLoading ? (
               <p className="py-8 text-sm text-gray-500">
@@ -437,20 +416,22 @@ function Home() {
             ) : (
               <>
                 {heroTitle && (
-                  <h1 className="font-extrabold text-[16px] leading-[1.2] sm:text-3xl md:text-[38px] lg:text-[40px] tracking-tight text-[#0A3D2E] mb-2 sm:mb-4 max-w-[230px] sm:max-w-[370px]">
+                  <h1 className="font-extrabold text-[27px] leading-[1.12] sm:text-4xl md:text-[44px] lg:text-[40px] tracking-tight text-[#0A3D2E] mb-3 sm:mb-4">
                     {heroTitle}
                   </h1>
                 )}
 
                 {heroDescription && (
-                  <p className="text-gray-700 sm:text-gray-600 text-[8px] leading-[1.5] sm:text-sm md:text-[15px] sm:leading-[1.75] max-w-[220px] sm:max-w-[430px] md:max-w-[460px] mb-3 sm:mb-6">
+                  <p className="text-gray-600 text-[13px] sm:text-sm md:text-base leading-[1.65] sm:leading-[1.8] max-w-[460px] mb-5 sm:mb-6">
                     {heroDescription}
                   </p>
                 )}
               </>
             )}
 
-            <div className="flex w-full max-w-[260px] sm:max-w-[440px] items-center gap-1.5 sm:gap-4">
+            <div className="flex w-full max-w-[440px] items-center gap-2 sm:gap-4">
+
+              {/* TOMBOL MEMBUKA DROPDOWN LAYANAN */}
 
               <button
                 type="button"
@@ -458,7 +439,7 @@ function Home() {
                 className={primaryButton}
               >
                 <span>Jelajahi Layanan</span>
-                <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
               </button>
 
               <a
@@ -466,7 +447,7 @@ function Home() {
                 className={secondaryButton}
               >
                 <span>Tentang Kami</span>
-                <ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300" />
               </a>
 
             </div>
@@ -478,18 +459,19 @@ function Home() {
       </section>
 
       {/* ==========================================
-          2. QUICK ACCESS
+          2. QUICK ACCESS - WHITE
       ========================================== */}
 
-      <section className="relative z-20 px-2 sm:px-5 md:px-8 -mt-3 sm:-mt-7 md:-mt-8 pb-4 bg-white">
+      <section className="relative z-20 px-4 sm:px-5 md:px-8 -mt-5 sm:-mt-7 md:-mt-8 pb-4 bg-white">
 
         <div className="max-w-7xl mx-auto">
 
-          <div className="bg-white rounded-xl sm:rounded-2xl border border-[#E7EFE9] shadow-[0_12px_35px_rgba(10,61,46,0.09)] px-1 py-1.5 sm:px-3 sm:py-2 md:px-4 md:py-3">
+          <div className="bg-white rounded-2xl border border-[#E7EFE9] shadow-[0_12px_35px_rgba(10,61,46,0.09)] p-2 sm:px-3 sm:py-2 md:px-4 md:py-3">
 
             {quickServices.length > 0 ? (
-              <div className="grid grid-cols-5 gap-0.5 sm:gap-2">
-
+              <div
+                className="grid grid-cols-5 gap-1 sm:gap-2"
+              >
                 {quickServices.map((service, index) => {
                   const Icon = service.icon;
 
@@ -498,35 +480,30 @@ function Home() {
                       key={service.id || `${service.title}-${index}`}
                       href={service.link}
                       className={`
-                        group relative flex flex-row items-center justify-center text-left
-                        gap-1 sm:gap-2 md:gap-3
-                        px-0.5 py-1.5 sm:px-2 sm:py-3 md:px-3 md:py-4
-                        rounded-lg sm:rounded-xl hover:bg-[#F3F8F4] min-w-0
+                        group relative flex flex-col items-center text-center gap-1 sm:flex-row sm:text-left sm:gap-2 md:gap-3
+                        px-1 py-2 sm:px-2 sm:py-3 md:px-3 md:py-4
+                        rounded-xl hover:bg-[#F3F8F4] min-w-0
                         transition-all duration-300
                         ${index !== 0 ? 'xl:border-l xl:border-[#E9EFEB]' : ''}
                       `}
                     >
-
-                      <div className="w-5 h-5 sm:w-9 sm:h-9 md:w-11 md:h-11 shrink-0 flex items-center justify-center rounded-md sm:rounded-xl bg-[#EAF8EF] text-[#0A8F4D] group-hover:bg-[#0A8F4D] group-hover:text-white group-hover:scale-105 transition-all duration-300">
-                        <Icon className="w-3 h-3 sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]" />
+                      <div className="w-7 h-7 sm:w-9 sm:h-9 md:w-11 md:h-11 shrink-0 flex items-center justify-center rounded-lg sm:rounded-xl bg-[#EAF8EF] text-[#0A8F4D] group-hover:bg-[#0A8F4D] group-hover:text-white group-hover:scale-105 transition-all duration-300">
+                        <Icon className="w-4 h-4 sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]" />
                       </div>
 
                       <div className="min-w-0 flex-1">
-                        <h3 className="text-[6.5px] leading-tight sm:text-xs md:text-[13px] font-bold text-[#183D2E] sm:mb-1 group-hover:text-[#0A8F4D] transition-colors duration-300 line-clamp-2">
+                        <h3 className="text-[9px] leading-tight sm:text-xs md:text-[13px] font-bold text-[#183D2E] sm:mb-1 group-hover:text-[#0A8F4D] transition-colors duration-300 line-clamp-2">
                           {service.title}
                         </h3>
-
                         <p className="hidden md:block text-[9px] sm:text-[10px] md:text-[11px] text-gray-500 leading-relaxed">
                           {service.description}
                         </p>
                       </div>
 
                       <ArrowUpRight className="hidden xl:block w-4 h-4 shrink-0 text-[#0A8F4D] opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300" />
-
                     </a>
                   );
                 })}
-
               </div>
             ) : (
               <p className="px-4 py-8 text-center text-sm text-gray-500">
@@ -544,18 +521,18 @@ function Home() {
           3. NEWS & ANNOUNCEMENTS
       ========================================== */}
 
-      <section className="relative pt-12 pb-12 sm:py-14 md:py-16 bg-white overflow-hidden">
+      <section className="relative py-14 md:py-16 bg-white overflow-hidden">
 
         <div className="absolute -top-32 -right-32 w-96 h-96 bg-[#10C35D]/[0.06] rounded-full blur-[100px]" />
 
-        <div className="relative max-w-7xl mx-auto px-3 sm:px-5 md:px-8">
+        <div className="relative max-w-7xl mx-auto px-5 md:px-8">
 
-          <div className="text-center max-w-2xl mx-auto mb-5 sm:mb-9 px-2">
-            <h2 className="text-[23px] leading-tight md:text-3xl lg:text-4xl font-bold text-[#10C35D] mb-3 sm:mb-3">
+          <div className="text-center max-w-2xl mx-auto mb-9">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#10C35D] mb-3">
               Berita & Pengumuman Terbaru
             </h2>
 
-            <p className="text-gray-600 text-[12px] sm:text-sm md:text-base font-bold leading-[1.7] sm:leading-[1.8]">
+            <p className="text-gray-600 text-sm md:text-base font-bold leading-[1.8]">
               Temukan informasi terbaru mengenai kegiatan, layanan,
               dan pengumuman dari UPA Bahasa POLNES.
             </p>
@@ -581,19 +558,17 @@ function Home() {
                 onTouchEnd={handleNewsTouchEnd}
               >
 
-                <div className="relative min-h-[410px] sm:min-h-[475px] md:min-h-[500px] overflow-hidden">
+                <div className="relative min-h-[475px] md:min-h-[500px] overflow-hidden">
 
                   {visibleNews.map(({ item, offset }) => {
                     const distance = Math.abs(offset);
-
                     const scale =
                       distance === 0 ? 1 :
-                      distance === 1 ? (isMobileView ? 0.88 : 0.86) :
-                      (isMobileView ? 0.76 : 0.74);
+                      distance === 1 ? 0.88 : 0.76;
 
                     const rotation =
                       offset === 0 ? 0 :
-                      offset < 0 ? 12 : -12;
+                      offset < 0 ? 13 : -13;
 
                     const depth =
                       distance === 0 ? 60 :
@@ -601,29 +576,24 @@ function Home() {
 
                     const opacity =
                       distance === 0 ? 1 :
-                      distance === 1 ? (isMobileView ? 0.92 : 0.86) :
-                      (isMobileView ? 0.72 : 0.62);
-
-                    const horizontalPercent = isMobileView
-                      ? offset * 21.5
-                      : offset * 19;
+                      distance === 1 ? 0.88 : 0.62;
 
                     return (
                       <article
                         key={item.id}
                         className="
                           absolute top-0
-                          w-[260px] sm:w-[270px] md:w-[320px]
+                          w-[min(320px,74vw)]
                           flex flex-col
-                          bg-white rounded-xl sm:rounded-2xl overflow-hidden
+                          bg-white rounded-2xl overflow-hidden
                           border border-[#E4EDE6]
-                          shadow-[0_10px_28px_rgba(10,61,46,0.16)] sm:shadow-[0_12px_35px_rgba(10,61,46,0.16)]
+                          shadow-[0_12px_35px_rgba(10,61,46,0.16)]
                           transition-all duration-700
                           ease-[cubic-bezier(0.22,1,0.36,1)]
                           will-change-transform
                         "
                         style={{
-                          left: `calc(50% + ${horizontalPercent}%)`,
+                          left: `calc(50% + ${offset * 19}%)`,
                           transform: `translateX(-50%) scale(${scale}) rotateY(${rotation}deg) translateZ(${depth}px)`,
                           transformOrigin: 'center center',
                           zIndex: 10 - distance,
@@ -636,7 +606,7 @@ function Home() {
                         <button
                           type="button"
                           onClick={() => openNewsDetail(item)}
-                          className="relative block w-full h-[145px] sm:h-[180px] md:h-[210px] overflow-hidden text-left"
+                          className="relative block w-full h-[210px] overflow-hidden text-left"
                         >
                           {item.image ? (
                             <img
@@ -651,22 +621,22 @@ function Home() {
                             <div className="w-full h-full bg-[#EAF5EE]" aria-label="Gambar berita tidak tersedia" />
                           )}
 
-                          <span className="absolute bottom-1.5 left-1.5 sm:bottom-4 sm:left-4 bg-white text-[#0A8F4D] text-[9px] sm:text-[10px] font-bold tracking-wide px-1.5 py-0.5 sm:px-3 sm:py-2 rounded sm:rounded-md shadow-sm">
+                          <span className="absolute bottom-4 left-4 bg-white text-[#0A8F4D] text-[10px] font-bold tracking-wide px-3 py-2 rounded-md shadow-sm">
                             {item.category.toUpperCase()}
                           </span>
 
                           {isNewContent({ publishedAt: item.publishedAt }) && (
-                            <span className="absolute top-1.5 right-1.5 sm:top-4 sm:right-4 bg-[#10C35D] text-white text-[6.5px] sm:text-[10px] font-extrabold tracking-wider px-1.5 py-0.5 sm:px-3 sm:py-1.5 rounded-full shadow-md">
+                            <span className="absolute top-4 right-4 bg-[#10C35D] text-white text-[10px] font-extrabold tracking-wider px-3 py-1.5 rounded-full shadow-md">
                               BARU
                             </span>
                           )}
                         </button>
 
-                        <div className="flex flex-col flex-1 p-4 sm:p-5">
+                        <div className="flex flex-col flex-1 p-5">
 
-                          <div className="flex items-center gap-1.5 sm:gap-2 text-gray-400 text-[10px] sm:text-xs mb-2 sm:mb-3">
-                            <CalendarDays className="w-2.5 h-2.5 sm:w-4 sm:h-4 shrink-0" />
-                            <span className="truncate">{item.date}</span>
+                          <div className="flex items-center gap-2 text-gray-400 text-xs mb-3">
+                            <CalendarDays className="w-4 h-4" />
+                            <span>{item.date}</span>
                           </div>
 
                           <button
@@ -674,23 +644,23 @@ function Home() {
                             onClick={() => openNewsDetail(item)}
                             className="text-left"
                           >
-                            <h3 className="font-bold text-[#0A3D2E] leading-snug mb-2 sm:mb-3 line-clamp-2 min-h-[40px] sm:min-h-[48px] hover:text-[#10A653] transition-colors text-[14px] sm:text-base">
+                            <h3 className="font-bold text-[#0A3D2E] leading-snug mb-3 line-clamp-2 min-h-[48px] hover:text-[#10A653] transition-colors text-base">
                               {item.title}
                             </h3>
                           </button>
 
-                          <p className="text-gray-500 text-[11px] sm:text-sm leading-[1.65] sm:leading-[1.8] line-clamp-3 mb-3 sm:mb-5">
+                          <p className="text-gray-500 text-sm leading-[1.8] line-clamp-2 mb-5">
                             {item.summary}
                           </p>
 
-                          <div className="mt-auto pt-1.5 sm:pt-4 border-t border-gray-100">
+                          <div className="mt-auto pt-4 border-t border-gray-100">
                             <button
                               type="button"
                               onClick={() => openNewsDetail(item)}
-                              className="inline-flex items-center gap-1.5 sm:gap-2 text-[#0A8F4D] font-bold text-[10px] sm:text-xs hover:text-[#10C35D] transition-colors"
+                              className="inline-flex items-center gap-2 text-[#0A8F4D] font-bold text-xs hover:text-[#10C35D] transition-colors"
                             >
-                              <span className="truncate">Baca Selengkapnya</span>
-                              <ArrowRight className="w-2.5 h-2.5 sm:w-4 sm:h-4 shrink-0" />
+                              Baca Selengkapnya
+                              <ArrowRight className="w-4 h-4" />
                             </button>
                           </div>
 
@@ -701,14 +671,16 @@ function Home() {
 
                 </div>
 
-                <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-4 sm:w-10 md:w-24 bg-gradient-to-r from-white via-white/70 to-transparent" />
+                <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-10 md:w-24 bg-gradient-to-r from-white via-white/80 to-transparent" />
 
-                <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-4 sm:w-10 md:w-24 bg-gradient-to-l from-white via-white/70 to-transparent" />
+                <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-10 md:w-24 bg-gradient-to-l from-white via-white/80 to-transparent" />
 
               </div>
 
+              {/* NEWS PAGINATION */}
+
               {news.length > 1 && (
-                <div className="mt-3 sm:mt-6 flex items-center justify-center gap-4 sm:gap-5">
+                <div className="mt-6 flex items-center justify-center gap-4 sm:gap-5">
 
                   <button
                     type="button"
@@ -754,7 +726,7 @@ function Home() {
             </p>
           )}
 
-          <div className="flex justify-center mt-5 sm:mt-9">
+          <div className="flex justify-center mt-9">
             <a href="/informasi/berita" className={outlineButton}>
               <span>Lihat Semua Berita</span>
               <span className="w-7 h-7 rounded-full bg-[#EAF8EF] flex items-center justify-center group-hover:bg-white/20 transition-colors duration-300">
@@ -777,6 +749,7 @@ function Home() {
 
         <div className="relative max-w-6xl mx-auto px-5 md:px-8">
 
+          {/* PERUBAHAN: sm:grid-cols-2 */}
           <div className="grid grid-cols-1 sm:grid-cols-2 rounded-3xl overflow-hidden shadow-[0_18px_45px_rgba(10,61,46,0.13)]">
 
             <div className="relative min-h-[300px] md:min-h-[420px]">
@@ -885,74 +858,130 @@ function Home() {
                 Galeri Kegiatan UPA Bahasa
               </h2>
 
-              <p className="text-gray-600 text-sm md:text-base mt-2">
-                Momen kegiatan, pelatihan, dan layanan kebahasaan di UPA Bahasa POLNES.
+              <p className="text-gray-500 text-sm mt-2 leading-relaxed">
+                Dokumentasi kegiatan dan aktivitas UPA Bahasa POLNES.
               </p>
 
             </div>
 
             <a
-              href="/informasi/galeri"
-              className={outlineButton}
+              href="/galeri"
+              className="group inline-flex items-center justify-center gap-3 min-h-[46px] px-6 py-3 rounded-xl border border-[#0A8F4D]/20 bg-white text-[#0A3D2E] text-sm font-semibold shadow-[0_4px_15px_rgba(10,61,46,0.05)] hover:bg-[#0A8F4D] hover:text-white hover:-translate-y-0.5 transition-all duration-300"
             >
               <span>Lihat Semua Galeri</span>
-              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300" />
+
+              <span className="w-7 h-7 rounded-full bg-[#EAF8EF] flex items-center justify-center group-hover:bg-white/20 transition-colors duration-300">
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-300" />
+              </span>
             </a>
 
           </div>
 
-          {homeLoading ? (
-            <p className="py-10 text-center text-sm text-gray-500">
-              Memuat galeri kegiatan...
-            </p>
-          ) : homeError ? (
-            <p role="alert" className="py-10 text-center text-sm text-red-700">
-              Galeri kegiatan gagal dimuat.
-            </p>
-          ) : gallery.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {gallery.map((item) => (
-                <article
-                  key={item.id}
-                  className="group bg-white rounded-2xl overflow-hidden border border-[#E4EDE6] shadow-[0_8px_24px_rgba(10,61,46,0.06)] hover:shadow-[0_14px_32px_rgba(10,61,46,0.12)] transition-all duration-300"
-                >
-                  <div className="relative h-52 overflow-hidden bg-[#EAF5EE]">
-                    {item.image ? (
-                      <img
-                        src={item.image}
-                        alt={item.alt}
-                        onError={(event) => {
-                          event.currentTarget.style.display = 'none';
-                        }}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                    ) : null}
-                  </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-[1fr_1.08fr_1fr] items-center gap-5 lg:gap-4 max-w-6xl mx-auto">
 
-                  <div className="p-5">
-                    <div className="flex items-center gap-2 text-xs text-gray-400 mb-2">
-                      <CalendarDays className="w-4 h-4" />
-                      <span>{item.date}</span>
+            {homeLoading ? (
+              <p className="col-span-full py-10 text-center text-sm text-gray-500">
+                Memuat galeri...
+              </p>
+            ) : homeError ? (
+              <p role="alert" className="col-span-full py-10 text-center text-sm text-red-700">
+                Galeri gagal dimuat.
+              </p>
+            ) : gallery.length > 0 ? (
+              gallery.slice(0, 3).map((item, index) => {
+
+                const isCenter = index === 1;
+
+                return (
+                  <a
+                    key={index}
+                    href="/galeri"
+                    className={`group relative block bg-white rounded-2xl overflow-hidden border border-[#E8EFEA] transition-all duration-500 ${
+                      isCenter
+                        ? "shadow-[0_12px_35px_rgba(10,61,46,0.13)] z-10"
+                        : "shadow-[0_5px_20px_rgba(10,61,46,0.07)] hover:shadow-[0_12px_28px_rgba(10,61,46,0.13)] hover:-translate-y-1"
+                    }`}
+                  >
+
+                    <div
+                      className={`relative overflow-hidden ${
+                        isCenter
+                          ? "h-[250px] md:h-[280px]"
+                          : "h-[225px] md:h-[250px]"
+                      }`}
+                    >
+
+                      {item.image ? (
+                        <img
+                          src={item.image}
+                          alt={item.alt}
+                          onError={(event) => {
+                            event.currentTarget.style.display = 'none';
+                          }}
+                          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                        />
+                      ) : (
+                        <div className="absolute inset-0 bg-[#EAF5EE]" aria-label="Gambar galeri tidak tersedia" />
+                      )}
+
+                      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white via-white/70 to-transparent" />
+
+                      <div className="absolute top-4 left-4">
+                        <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/80 backdrop-blur-md border border-white/80 text-[#0A3D2E] text-[9px] md:text-[10px] font-bold tracking-wider uppercase shadow-sm">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#10C35D]" />
+                          Dokumentasi UPA
+                        </span>
+                      </div>
+
                     </div>
 
-                    <h3 className="font-bold text-base text-[#0A3D2E] mb-2 line-clamp-1">
-                      {item.title}
-                    </h3>
+                    <div
+                      className={`relative bg-white ${
+                        isCenter
+                          ? "px-5 pt-1 pb-6 md:px-6"
+                          : "px-4 pt-1 pb-5 md:px-5"
+                      }`}
+                    >
 
-                    {item.description && (
-                      <p className="text-sm text-gray-500 line-clamp-2 leading-relaxed">
-                        {item.description}
+                      <h3
+                        className={`font-bold text-[#0A3D2E] leading-snug mb-3 line-clamp-2 group-hover:text-[#0A8F4D] transition-colors duration-300 ${
+                          isCenter
+                            ? "text-base md:text-lg"
+                            : "text-sm md:text-base"
+                        }`}
+                      >
+                        {item.title}
+                      </h3>
+
+                      <p className="text-gray-500 text-xs md:text-sm leading-relaxed line-clamp-2">
+                        {item.description || "Dokumentasi kegiatan dan aktivitas UPA Bahasa POLNES."}
                       </p>
-                    )}
-                  </div>
-                </article>
-              ))}
-            </div>
-          ) : (
-            <p className="py-10 text-center text-sm text-gray-500">
-              Belum ada dokumentasi galeri yang ditampilkan.
-            </p>
-          )}
+
+                      <div className="flex items-center justify-between mt-4 pt-3 border-t border-[#0A3D2E]/10">
+
+                        <div className="flex items-center gap-2 text-gray-400 text-xs">
+                          <CalendarDays className="w-4 h-4" />
+                          <span>{item.date}</span>
+                        </div>
+
+                        <span className="w-8 h-8 rounded-full bg-[#EAF8EF] flex items-center justify-center text-[#0A8F4D] group-hover:bg-[#0A8F4D] group-hover:text-white group-hover:translate-x-1 transition-all duration-300">
+                          <ArrowUpRight className="w-4 h-4" />
+                        </span>
+
+                      </div>
+
+                    </div>
+
+                  </a>
+                );
+              })
+            ) : (
+              <p className="col-span-full py-10 text-center text-sm text-gray-500">
+                Belum ada dokumentasi galeri.
+              </p>
+            )}
+
+          </div>
 
         </div>
 
@@ -960,10 +989,11 @@ function Home() {
 
       {selectedNews && (
         <NewsModal
-          news={selectedNews}
-          loading={loadingNewsDetail}
-          error={newsDetailError}
+          item={selectedNews}
+          isNew={isNewContent(selectedNews)}
           onClose={closeNewsDetail}
+          loadingDetail={loadingNewsDetail}
+          detailError={newsDetailError}
         />
       )}
 
