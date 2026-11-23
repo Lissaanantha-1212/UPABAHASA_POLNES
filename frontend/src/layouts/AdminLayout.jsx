@@ -56,14 +56,16 @@ export default function AdminLayout({ children }) {
     'Hasil Test': false,
   });
 
-  let adminUser = {};
+  const getStoredAdminUser = () => {
+    try {
+      return JSON.parse(localStorage.getItem('adminUser') || '{}') || {};
+    } catch (error) {
+      console.error('Data profil admin tidak valid:', error);
+      return {};
+    }
+  };
 
-  try {
-    adminUser = JSON.parse(localStorage.getItem('adminUser') || '{}') || {};
-  } catch (error) {
-    console.error('Data profil admin tidak valid:', error);
-  }
-
+  const adminUser = getStoredAdminUser();
   const adminName = adminUser.fullName || 'Admin UPA';
   const adminEmail = adminUser.email || '-';
   const adminInitial = adminName.trim().charAt(0).toUpperCase() || 'A';
@@ -79,19 +81,36 @@ export default function AdminLayout({ children }) {
     ? adminUser.role.charAt(0).toUpperCase() + adminUser.role.slice(1)
     : 'Administrator';
 
-  // Kirim data profil yang sedang login di Piya ke halaman operasional (upabahasa.vercel.app)
+  // Susun URL dengan parameter ?piya_user=... secara real-time
   const buildUpaBahasaUrl = (baseHref) => {
-    if (!adminUser || !adminUser.email) return baseHref;
+    const latestUser = getStoredAdminUser();
+    const name = latestUser.fullName || adminName;
+    const email = latestUser.email || adminEmail;
+    const role = latestUser.role
+      ? latestUser.role.charAt(0).toUpperCase() + latestUser.role.slice(1)
+      : roleLabel;
+    const num = latestUser.staffNumber ?? staffNumber ?? '';
+
+    if (!email || email === '-') return baseHref;
+
     const payload = {
-      fullName: adminName,
-      email: adminEmail,
-      role: roleLabel,
-      staffNumber: staffNumber ?? '',
+      fullName: name,
+      email: email,
+      role: role,
+      staffNumber: num,
     };
     const encoded = encodeURIComponent(
       btoa(unescape(encodeURIComponent(JSON.stringify(payload))))
     );
     return `${baseHref}?piya_user=${encoded}`;
+  };
+
+  // Handler klik untuk semua menu yang menuju ke upabahasa.vercel.app (Jadwal Test, Remedial, TOEFL, SSPECT, Rekapan)
+  const handleNavigateToUpaBahasa = (e, baseHref) => {
+    e.preventDefault();
+    setIsSidebarOpen(false);
+    const targetUrl = buildUpaBahasaUrl(baseHref);
+    window.location.href = targetUrl;
   };
 
   const menuItems = [
@@ -177,7 +196,7 @@ export default function AdminLayout({ children }) {
                 <a
                   key={item.name}
                   href={buildUpaBahasaUrl(item.href)}
-                  onClick={() => setIsSidebarOpen(false)}
+                  onClick={(e) => handleNavigateToUpaBahasa(e, item.href)}
                   className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-300 hover:bg-white/10 hover:text-white transition-all duration-200"
                 >
                   <Icon size={18} />
@@ -212,7 +231,7 @@ export default function AdminLayout({ children }) {
                       <a
                         key={subItem.name}
                         href={buildUpaBahasaUrl(subItem.href)}
-                        onClick={() => setIsSidebarOpen(false)}
+                        onClick={(e) => handleNavigateToUpaBahasa(e, subItem.href)}
                         className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium text-gray-300 hover:bg-white/10 hover:text-white transition-colors"
                       >
                         <span className="w-1.5 h-1.5 rounded-full bg-[#10C35D]" />
