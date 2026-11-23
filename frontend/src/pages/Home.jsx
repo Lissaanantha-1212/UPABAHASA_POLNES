@@ -436,7 +436,7 @@ function Home() {
             ) : (
               <>
                 {heroTitle && (
-                  <h1 className="font-extrabold text-[25px] leading-[1.22] sm:text-3xl md:text-[38px] lg:text-[40px] tracking-tight text-[#0A3D2E] mb-3 sm:mb-4 max-w-[370px]">
+                  <h1 className="font-extrabold text-[25px] leading-[1.24] sm:text-3xl md:text-[38px] lg:text-[40px] tracking-tight text-[#0A3D2E] mb-3 sm:mb-4 max-w-[370px]">
                     {heroTitle}
                   </h1>
                 )}
@@ -512,7 +512,7 @@ function Home() {
                       </div>
 
                       <div className="min-w-0 flex-1">
-                        <h3 className="text-[8.5px] leading-tight sm:text-xs md:text-[13px] font-bold text-[#183D2E] sm:mb-1 group-hover:text-[#0A8F4D] transition-colors duration-300 line-clamp-2">
+                        <h3 className="text-[9px] leading-[1.15] sm:text-xs md:text-[13px] font-bold text-[#183D2E] sm:mb-1 group-hover:text-[#0A8F4D] transition-colors duration-300 line-clamp-2">
                           {service.title}
                         </h3>
                         <p className="hidden md:block text-[9px] sm:text-[10px] md:text-[11px] text-gray-500 leading-relaxed">
@@ -610,7 +610,7 @@ function Home() {
                         key={item.id}
                         className="
                           absolute top-0
-                          w-[260px] sm:w-[270px] md:w-[320px]
+                          w-[min(260px,calc(100vw-48px))] sm:w-[270px] md:w-[320px]
                           flex flex-col
                           bg-white rounded-xl sm:rounded-2xl overflow-hidden
                           border border-[#E4EDE6]
