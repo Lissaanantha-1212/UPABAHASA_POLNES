@@ -141,7 +141,7 @@ export default function ProfileSection() {
             ))}
           </div>
 
-          <div className="relative md:-mr-2 lg:-mr-8">
+          <div className="relative md:-mr-8">
             <div className="absolute -right-5 -top-5 h-40 w-40 rounded-full bg-[#10C35D]/10 blur-3xl" />
 
             <div className="relative h-[280px] overflow-hidden rounded-2xl shadow-[0_15px_40px_rgba(10,61,46,0.12)] md:h-[370px] lg:h-[430px] lg:rounded-l-3xl lg:rounded-r-none">

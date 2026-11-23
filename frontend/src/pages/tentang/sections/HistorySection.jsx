@@ -123,7 +123,7 @@ export default function HistorySection() {
     >
       <div className={container}>
         <div className="grid items-center gap-8 md:grid-cols-[1.05fr_0.95fr] md:gap-8 lg:gap-12">
-          <div className="relative md:-ml-2 lg:-ml-8">
+          <div className="relative md:-ml-8">
             <div className="relative h-[280px] overflow-hidden rounded-2xl shadow-[0_15px_40px_rgba(0,0,0,0.18)] md:h-[370px] lg:h-[430px] lg:rounded-r-3xl lg:rounded-l-none">
               <img
                 src={history.image}
