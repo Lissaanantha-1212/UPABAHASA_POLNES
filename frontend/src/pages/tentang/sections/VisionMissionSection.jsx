@@ -158,11 +158,14 @@ export default function VisionMissionSection() {
         className={`relative scroll-mt-16 overflow-hidden bg-gradient-to-b from-[#F4FBF7] via-[#EAEFF5] to-[#F4FBF7] ${sectionSpacing}`}
       >
         {/* Ornamen Latar Belakang */}
-        <div className="absolute inset-0 opacity-30 bg-[radial-gradient(#10C35D_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
-        <div className="absolute top-1/4 -left-32 h-96 w-96 rounded-full bg-[#10C35D]/10 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-1/4 -right-32 h-96 w-96 rounded-full bg-[#0A3D2E]/10 blur-3xl pointer-events-none" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(#10C35D_1px,transparent_1px)] opacity-30 [background-size:24px_24px]" />
+
+        <div className="pointer-events-none absolute -left-32 top-1/4 h-96 w-96 rounded-full bg-[#10C35D]/10 blur-3xl" />
+
+        <div className="pointer-events-none absolute -right-32 bottom-1/4 h-96 w-96 rounded-full bg-[#0A3D2E]/10 blur-3xl" />
 
         <div className={`${container} relative z-10`}>
+          {/* Heading */}
           <div className="mx-auto max-w-3xl text-center">
             <span className="inline-block rounded-full bg-[#10C35D]/15 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#0A3D2E] shadow-xs">
               Landasan dan Pelaksanaan
@@ -177,65 +180,69 @@ export default function VisionMissionSection() {
             </p>
           </div>
 
-          {/* Kartu sejajar dan dapat digeser pada layar HP */}
-          <div className="mt-16 -mx-5 overflow-x-auto overscroll-x-contain snap-x snap-mandatory px-5 pb-2 md:mx-0 md:overflow-visible md:px-0">
-            <div className="flex w-max items-stretch gap-3 md:w-full">
-              {cards.map((card, idx) => {
-                const Icon = card.icon;
-                const text = card.content || "";
+          {/* Kartu Sejajar di Mobile dan Desktop */}
+          <div className="mt-10 grid grid-cols-4 items-stretch gap-2 sm:mt-12 sm:gap-3 md:mt-16">
+            {cards.map((card, idx) => {
+              const Icon = card.icon;
+              const text = card.content || "";
 
-                return (
-                  <article
-                    key={card.title}
-                    onClick={() => setSelectedCard(card)}
-                    style={{ animationDelay: `${idx * 150}ms` }}
-                    className="group relative flex w-[78vw] max-w-[280px] shrink-0 snap-start cursor-pointer flex-col justify-between rounded-3xl bg-white/90 backdrop-blur-md p-7 border border-gray-200/80 shadow-[0_10px_30px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(16,195,93,0.12)] hover:border-[#10C35D]/60 md:w-0 md:min-w-0 md:max-w-none md:flex-1"
-                  >
-                    <div>
-                      {/* Ikon */}
-                      <div className="flex justify-center">
-                        <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#10C35D]/10 text-[#10C35D] transition-transform duration-300 group-hover:scale-110 shadow-xs">
-                          <Icon size={32} strokeWidth={1.8} />
-                        </div>
-                      </div>
-
-                      {/* Judul */}
-                      <h3 className="mt-6 text-center text-xl font-extrabold tracking-tight text-gray-900 group-hover:text-[#10C35D] transition-colors">
-                        {card.title}
-                      </h3>
-
-                      {/* Cuplikan Konten */}
-                      <div className="mt-3 max-h-[90px] overflow-hidden text-center">
-                        <p className="line-clamp-3 text-xs md:text-sm font-normal leading-relaxed text-gray-600">
-                          {loading ? (
-                            <span className="animate-pulse text-gray-400">
-                              Memuat konten...
-                            </span>
-                          ) : loadError ? (
-                            <span className="text-gray-400">
-                              Gagal memuat konten.
-                            </span>
-                          ) : (
-                            text
-                          )}
-                        </p>
+              return (
+                <article
+                  key={card.title}
+                  onClick={() => setSelectedCard(card)}
+                  style={{ animationDelay: `${idx * 150}ms` }}
+                  className="group relative flex min-w-0 cursor-pointer flex-col justify-between rounded-xl border border-gray-200/80 bg-white/90 p-2 shadow-[0_10px_30px_rgba(0,0,0,0.04)] backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-[#10C35D]/60 hover:shadow-[0_20px_40px_rgba(16,195,93,0.12)] sm:rounded-2xl sm:p-4 md:rounded-3xl md:p-7"
+                >
+                  <div>
+                    {/* Ikon */}
+                    <div className="flex justify-center">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#10C35D]/10 text-[#10C35D] shadow-xs transition-transform duration-300 group-hover:scale-110 sm:h-12 sm:w-12 sm:rounded-xl md:h-16 md:w-16 md:rounded-2xl">
+                        <Icon
+                          className="h-4 w-4 sm:h-6 sm:w-6 md:h-8 md:w-8"
+                          strokeWidth={1.8}
+                        />
                       </div>
                     </div>
 
-                    {/* Tombol Baca Selengkapnya */}
-                    <div className="mt-8 pt-4 border-t border-gray-100 flex justify-center">
-                      <button
-                        type="button"
-                        className="w-full flex items-center justify-center gap-2 rounded-2xl bg-gray-50 py-2.5 text-xs font-bold text-gray-700 transition-all duration-300 group-hover:bg-[#10C35D] group-hover:text-white shadow-2xs"
-                      >
-                        <span>Baca Selengkapnya</span>
-                        <ArrowRight size={14} />
-                      </button>
+                    {/* Judul */}
+                    <h3 className="mt-3 text-center text-[10px] font-extrabold tracking-tight text-gray-900 transition-colors group-hover:text-[#10C35D] sm:mt-4 sm:text-sm md:mt-6 md:text-xl">
+                      {card.title}
+                    </h3>
+
+                    {/* Cuplikan Konten */}
+                    <div className="mt-2 max-h-[90px] overflow-hidden text-center sm:mt-3">
+                      <p className="line-clamp-3 text-[9px] font-normal leading-relaxed text-gray-600 sm:text-xs md:text-sm">
+                        {loading ? (
+                          <span className="animate-pulse text-gray-400">
+                            Memuat konten...
+                          </span>
+                        ) : loadError ? (
+                          <span className="text-gray-400">
+                            Gagal memuat konten.
+                          </span>
+                        ) : (
+                          text
+                        )}
+                      </p>
                     </div>
-                  </article>
-                );
-              })}
-            </div>
+                  </div>
+
+                  {/* Tombol Baca Selengkapnya */}
+                  <div className="mt-3 flex justify-center border-t border-gray-100 pt-2 sm:mt-5 sm:pt-3 md:mt-8 md:pt-4">
+                    <button
+                      type="button"
+                      className="flex w-full items-center justify-center gap-1 rounded-lg bg-gray-50 py-2 text-[8px] font-bold text-gray-700 shadow-2xs transition-all duration-300 group-hover:bg-[#10C35D] group-hover:text-white sm:gap-2 sm:rounded-xl sm:text-[10px] md:rounded-2xl md:py-2.5 md:text-xs"
+                    >
+                      <span className="sm:hidden">Detail</span>
+                      <span className="hidden sm:inline">
+                        Baca Selengkapnya
+                      </span>
+                      <ArrowRight size={12} />
+                    </button>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -254,7 +261,7 @@ export default function VisionMissionSection() {
             role="dialog"
             aria-modal="true"
             aria-labelledby="vision-mission-modal-title"
-            className="relative flex max-h-[85vh] w-full max-w-xl flex-col overflow-hidden rounded-3xl bg-white shadow-2xl border border-gray-100 animate-scaleUp"
+            className="relative flex max-h-[85vh] w-full max-w-xl flex-col overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-2xl animate-scaleUp"
           >
             {/* Header Modal */}
             <div className="flex shrink-0 items-center justify-between border-b border-gray-100 bg-gray-50 px-6 py-4">
@@ -289,7 +296,7 @@ export default function VisionMissionSection() {
 
             {/* Konten Detail Lengkap */}
             <div className="overflow-y-auto px-6 py-6">
-              <p className="whitespace-pre-wrap break-words text-sm md:text-base leading-7 text-gray-700">
+              <p className="whitespace-pre-wrap break-words text-sm leading-7 text-gray-700 md:text-base">
                 {selectedCard.content}
               </p>
             </div>
