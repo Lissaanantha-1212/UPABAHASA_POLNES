@@ -1,13 +1,13 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { clearAdminSession } from '../../adminSession';
+import { clearAdminSession, saveAdminSession } from '../../adminSession';
 import logoPolnes from '../../assets/logo-polnes.png';
 
 const API_BASE_URL = 'https://upabahasa-polnes-4p4a.vercel.app';
 
 export default function LoginAdmin() {
   const navigate = useNavigate();
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -26,25 +26,25 @@ export default function LoginAdmin() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          username: username.trim(),
-          email: username.trim(),
+          email: email.trim(),
+          username: email.trim(),
           password,
         }),
       });
 
-      const data = await response.json().catch(() => ({}));
+      const result = await response.json().catch(() => ({}));
 
-      if (!response.ok) {
-        throw new Error(data.message || data.error || 'Username atau password salah.');
+      if (!response.ok || result.success === false) {
+        throw new Error(result.message || result.error || 'Email atau password salah.');
       }
 
-      const token = data.token || data.accessToken || data.data?.token || 'admin_authenticated';
-      const userData = data.user || data.admin || data.data?.user || { username: username.trim(), role: 'admin' };
-
-      localStorage.setItem('adminToken', token);
-      localStorage.setItem('token', token);
-      localStorage.setItem('adminUser', JSON.stringify(userData));
-      sessionStorage.setItem('adminToken', token);
+      const sessionData = result.data || result;
+      saveAdminSession({
+        token: sessionData.token || sessionData.accessToken,
+        refreshToken: sessionData.refreshToken || '',
+        expiresAt: sessionData.expiresAt || '',
+        user: sessionData.user || { email: email.trim(), role: 'admin' },
+      });
 
       navigate('/admin', { replace: true });
     } catch (err) {
@@ -72,14 +72,14 @@ export default function LoginAdmin() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-xs font-semibold text-gray-700 mb-1">
-              Username / Email
+              Email Admin
             </label>
             <input
               type="text"
               required
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Masukkan username atau email admin"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Masukkan email admin"
               className="w-full px-3.5 py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-[#10C35D]"
             />
           </div>
