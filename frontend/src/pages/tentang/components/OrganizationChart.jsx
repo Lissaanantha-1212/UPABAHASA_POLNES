@@ -1,8 +1,8 @@
 ﻿import { useEffect, useMemo, useState } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
-const API_URL = "http://localhost:5000/api/cms/about";
-const API_ORIGIN = "http://localhost:5000";
+const API_URL = "https://upabahasa-polnes-4p4a.vercel.app/api/cms/about";
+const API_ORIGIN = "https://upabahasa-polnes-4p4a.vercel.app";
 
 function getImageUrl(path) {
   if (!path) return "";

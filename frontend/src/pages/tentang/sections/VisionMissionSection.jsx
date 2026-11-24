@@ -14,7 +14,11 @@ import {
   missions,
 } from "../data/aboutContent";
 
-const API_URL = "http://localhost:5000/api/cms/about";
+const API_ORIGIN = (
+  import.meta.env.VITE_API_URL || "https://upabahasa-polnes-4p4a.vercel.app"
+).replace(/\/+$/, "");
+
+const API_URL = `${API_ORIGIN}/api/cms/about`;
 
 const container = "mx-auto w-full max-w-7xl px-5 md:px-8 lg:px-10";
 const sectionSpacing = "py-16 md:py-24 lg:py-28";
@@ -91,7 +95,8 @@ export default function VisionMissionSection() {
         console.error("Gagal memuat konten visi dan misi:", error);
 
         if (isMounted) {
-          setLoadError(true);
+          setContent(defaultContent);
+          setLoadError(false);
         }
       } finally {
         if (isMounted) {

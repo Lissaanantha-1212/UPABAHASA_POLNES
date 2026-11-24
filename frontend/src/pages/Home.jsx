@@ -1,5 +1,4 @@
-﻿
-import React, { useEffect, useRef, useState } from 'react';
+﻿import React, { useEffect, useRef, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import {
   BookOpen,
@@ -25,7 +24,11 @@ import {
 // IMPORT ASSETS
 // ==========================================
 
-const CMS_API = 'http://localhost:5000/api/cms';
+const API_ORIGIN = (
+  import.meta.env.VITE_API_URL || 'https://upabahasa-polnes-4p4a.vercel.app'
+).replace(/\/+$/, '');
+
+const CMS_API = `${API_ORIGIN}/api/cms`;
 const HOME_CACHE_KEY = 'upa_cms_home_cache';
 
 function readHomeCache() {
@@ -53,7 +56,7 @@ function readHomeCache() {
 function getCmsImage(path) {
   if (!path) return null;
   if (path.startsWith('http://') || path.startsWith('https://')) return path;
-  return `http://localhost:5000${path}`;
+  return `${API_ORIGIN}${path.startsWith('/') ? '' : '/'}${path}`;
 }
 
 function formatCmsDate(value) {
@@ -178,6 +181,7 @@ function Home() {
 
   useEffect(() => {
     let active = true;
+    const hadCacheAtStart = Boolean(readHomeCache());
 
     fetch(`${CMS_API}/home`)
       .then(async (response) => {
@@ -200,6 +204,7 @@ function Home() {
 
           setHomeData(nextHomeData);
           setHasHomeCache(true);
+          setHomeError('');
 
           try {
             localStorage.setItem(
@@ -213,7 +218,7 @@ function Home() {
       })
       .catch((error) => {
         console.error('Gagal memuat konten Beranda:', error);
-        if (active && !hasHomeCache) {
+        if (active && !hadCacheAtStart && !hasHomeCache) {
           setHomeError(error.message || 'Konten Beranda gagal dimuat.');
         }
       })
@@ -224,7 +229,7 @@ function Home() {
     return () => {
       active = false;
     };
-  }, []);
+  }, [hasHomeCache]);
 
   const settingsMap = Object.fromEntries(
     homeData.settings.map((item) => [
@@ -363,7 +368,7 @@ function Home() {
     <main className="w-full overflow-hidden bg-white">
 
       {/* ==========================================
-          1. HERO SECTION
+1. HERO SECTION
       ========================================== */}
 
       <section className="relative min-h-[400px] md:min-h-[440px] lg:min-h-[470px] flex items-center bg-white overflow-hidden">
@@ -459,7 +464,7 @@ function Home() {
       </section>
 
       {/* ==========================================
-          2. QUICK ACCESS - WHITE
+2. QUICK ACCESS - WHITE
       ========================================== */}
 
       <section className="relative z-20 px-5 md:px-8 -mt-7 md:-mt-8 pb-4 bg-white">
@@ -521,7 +526,7 @@ function Home() {
       </section>
 
       {/* ==========================================
-          3. NEWS & ANNOUNCEMENTS
+3. NEWS & ANNOUNCEMENTS
       ========================================== */}
 
       <section className="relative py-14 md:py-16 bg-white overflow-hidden">
@@ -742,7 +747,7 @@ function Home() {
       </section>
 
       {/* ==========================================
-          4. ABOUT UPA BAHASA
+4. ABOUT UPA BAHASA
       ========================================== */}
 
       <section className="relative py-14 md:py-20 bg-[#EAF5EE] overflow-hidden">
@@ -837,7 +842,7 @@ function Home() {
       </section>
 
       {/* ==========================================
-          5. GALLERY
+5. GALLERY
       ========================================== */}
 
       <section className="relative py-14 md:py-16 bg-white overflow-hidden">
@@ -868,134 +873,77 @@ function Home() {
 
             <a
               href="/galeri"
-              className="group inline-flex items-center justify-center gap-3 min-h-[46px] px-6 py-3 rounded-xl border border-[#0A8F4D]/20 bg-white text-[#0A3D2E] text-sm font-semibold shadow-[0_4px_15px_rgba(10,61,46,0.05)] hover:bg-[#0A8F4D] hover:text-white hover:-translate-y-0.5 transition-all duration-300"
+              className="group inline-flex items-center justify-center gap-3 min-h-[46px] px-6 py-3 rounded-xl border border-[#0A8F4D]/20 bg-white text-[#0A3D2E] text-sm font-semibold shadow-[0_4px_15px_rgba(10,61,46,0.05)] hover:bg-[#0A8F4D] hover:text-white hover:border-[#0A8F4D] hover:-translate-y-0.5 transition-all duration-300"
             >
-              <span>Lihat Semua Galeri</span>
-
-              <span className="w-7 h-7 rounded-full bg-[#EAF8EF] flex items-center justify-center group-hover:bg-white/20 transition-colors duration-300">
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-300" />
-              </span>
+              <span>Lihat Galeri</span>
+              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300" />
             </a>
 
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1fr_1.08fr_1fr] items-center gap-5 lg:gap-4 max-w-6xl mx-auto">
-
-            {homeLoading ? (
-              <p className="col-span-full py-10 text-center text-sm text-gray-500">
-                Memuat galeri...
-              </p>
-            ) : homeError ? (
-              <p role="alert" className="col-span-full py-10 text-center text-sm text-red-700">
-                Galeri gagal dimuat.
-              </p>
-            ) : gallery.length > 0 ? (
-              gallery.slice(0, 3).map((item, index) => {
-
-                const isCenter = index === 1;
-
-                return (
-                  <a
-                    key={index}
-                    href="/galeri"
-                    className={`group relative block bg-white rounded-2xl overflow-hidden border border-[#E8EFEA] transition-all duration-500 ${
-                      isCenter
-                        ? "shadow-[0_12px_35px_rgba(10,61,46,0.13)] z-10"
-                        : "shadow-[0_5px_20px_rgba(10,61,46,0.07)] hover:shadow-[0_12px_28px_rgba(10,61,46,0.13)] hover:-translate-y-1"
-                    }`}
-                  >
-
-                    <div
-                      className={`relative overflow-hidden ${
-                        isCenter
-                          ? "h-[250px] md:h-[280px]"
-                          : "h-[225px] md:h-[250px]"
-                      }`}
-                    >
-
-                      {item.image ? (
-                        <img
-                          src={item.image}
-                          alt={item.alt}
-                          onError={(event) => {
-                            event.currentTarget.style.display = 'none';
-                          }}
-                          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                        />
-                      ) : (
-                        <div className="absolute inset-0 bg-[#EAF5EE]" aria-label="Gambar galeri tidak tersedia" />
-                      )}
-
-                      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white via-white/70 to-transparent" />
-
-                      <div className="absolute top-4 left-4">
-                        <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/80 backdrop-blur-md border border-white/80 text-[#0A3D2E] text-[9px] md:text-[10px] font-bold tracking-wider uppercase shadow-sm">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#10C35D]" />
-                          Dokumentasi UPA
-                        </span>
+          {homeLoading ? (
+            <p className="py-10 text-center text-sm text-gray-500">
+              Memuat galeri kegiatan...
+            </p>
+          ) : homeError ? (
+            <p role="alert" className="py-10 text-center text-sm text-red-700">
+              Galeri kegiatan gagal dimuat.
+            </p>
+          ) : gallery.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {gallery.slice(0, 6).map((item) => (
+                <article
+                  key={item.id}
+                  className="group rounded-2xl overflow-hidden bg-white border border-[#E4EDE6] shadow-[0_8px_24px_rgba(10,61,46,0.06)] hover:-translate-y-1 hover:shadow-[0_14px_30px_rgba(10,61,46,0.12)] transition-all duration-300"
+                >
+                  <div className="relative h-52 w-full overflow-hidden bg-[#EAF5EE]">
+                    {item.image ? (
+                      <img
+                        src={item.image}
+                        alt={item.alt}
+                        onError={(event) => {
+                          event.currentTarget.style.display = 'none';
+                        }}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-xs text-gray-400">
+                        Gambar tidak tersedia
                       </div>
+                    )}
+                  </div>
 
-                    </div>
-
-                    <div
-                      className={`relative bg-white ${
-                        isCenter
-                          ? "px-5 pt-1 pb-6 md:px-6"
-                          : "px-4 pt-1 pb-5 md:px-5"
-                      }`}
-                    >
-
-                      <h3
-                        className={`font-bold text-[#0A3D2E] leading-snug mb-3 line-clamp-2 group-hover:text-[#0A8F4D] transition-colors duration-300 ${
-                          isCenter
-                            ? "text-base md:text-lg"
-                            : "text-sm md:text-base"
-                        }`}
-                      >
-                        {item.title}
-                      </h3>
-
-                      <p className="text-gray-500 text-xs md:text-sm leading-relaxed line-clamp-2">
-                        {item.description || "Dokumentasi kegiatan dan aktivitas UPA Bahasa POLNES."}
+                  <div className="p-5">
+                    {item.date && item.date !== '-' && (
+                      <p className="text-xs text-gray-400 mb-2">{item.date}</p>
+                    )}
+                    <h3 className="font-bold text-base text-[#0A3D2E] line-clamp-2 mb-1.5">
+                      {item.title}
+                    </h3>
+                    {item.description && (
+                      <p className="text-xs text-gray-500 line-clamp-2 leading-relaxed">
+                        {item.description}
                       </p>
-
-                      <div className="flex items-center justify-between mt-4 pt-3 border-t border-[#0A3D2E]/10">
-
-                        <div className="flex items-center gap-2 text-gray-400 text-xs">
-                          <CalendarDays className="w-4 h-4" />
-                          <span>{item.date}</span>
-                        </div>
-
-                        <span className="w-8 h-8 rounded-full bg-[#EAF8EF] flex items-center justify-center text-[#0A8F4D] group-hover:bg-[#0A8F4D] group-hover:text-white group-hover:translate-x-1 transition-all duration-300">
-                          <ArrowUpRight className="w-4 h-4" />
-                        </span>
-
-                      </div>
-
-                    </div>
-
-                  </a>
-                );
-              })
-            ) : (
-              <p className="col-span-full py-10 text-center text-sm text-gray-500">
-                Belum ada dokumentasi galeri.
-              </p>
-            )}
-
-          </div>
+                    )}
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <p className="py-10 text-center text-sm text-gray-500">
+              Belum ada dokumentasi galeri yang ditampilkan.
+            </p>
+          )}
 
         </div>
-
       </section>
 
       {selectedNews && (
         <NewsModal
-          item={selectedNews}
-          isNew={isNewContent(selectedNews)}
+          news={selectedNews}
+          loading={loadingNewsDetail}
+          error={newsDetailError}
           onClose={closeNewsDetail}
-          loadingDetail={loadingNewsDetail}
-          detailError={newsDetailError}
         />
       )}
 
