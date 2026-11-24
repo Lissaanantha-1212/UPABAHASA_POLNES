@@ -643,3 +643,6 @@ function Navbar({
 }
 
 export default Navbar;
+```[cite: 23]
+
+Tinggal timpa file `frontend/src/layouts/Navbar.jsx` di proyek web utama dengan kode di atas, lalu commit & push untuk memastikan build-nya berjalan tanpa error[cite: 25].
