@@ -928,7 +928,7 @@ function Home() {
               <div className="relative">
 
                 <p className="text-[#7DE6A5] font-bold text-xs md:text-sm uppercase tracking-[0.16em] mb-4">
-                  Tentang UPA 
+                  Tentang UPA Bahasa
                 </p>
 
                 {homeLoading ? (
