@@ -1,4 +1,5 @@
-﻿import React, { useEffect, useRef, useState } from 'react';
+﻿
+import React, { useEffect, useRef, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import {
   BookOpen,
@@ -24,9 +25,8 @@ import {
 // IMPORT ASSETS
 // ==========================================
 
-const CMS_API = 'https://upabahasa-polnes-4p4a.vercel.app/api/cms';
+const CMS_API = 'http://localhost:5000/api/cms';
 const HOME_CACHE_KEY = 'upa_cms_home_cache';
-const TEST_SERVICE_BASE_URL = 'https://upabahasa.vercel.app/layanan-tes.html';
 
 function readHomeCache() {
   try {
@@ -53,7 +53,7 @@ function readHomeCache() {
 function getCmsImage(path) {
   if (!path) return null;
   if (path.startsWith('http://') || path.startsWith('https://')) return path;
-  return `https://upabahasa-polnes-4p4a.vercel.app${path}`;
+  return `http://localhost:5000${path}`;
 }
 
 function formatCmsDate(value) {
@@ -75,10 +75,10 @@ function formatCmsDate(value) {
 // ==========================================
 
 const primaryButton =
-  "group inline-flex items-center justify-center gap-2 min-h-[46px] flex-1 sm:flex-none px-4 sm:px-7 py-3 rounded-xl bg-gradient-to-r from-[#0A8F4D] to-[#10C35D] text-white text-xs sm:text-sm font-semibold tracking-wide shadow-[0_6px_18px_rgba(10,143,77,0.20)] hover:shadow-[0_10px_25px_rgba(10,143,77,0.28)] hover:-translate-y-1 hover:from-[#087A41] hover:to-[#0DAA50] active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20 whitespace-nowrap";
+  "group inline-flex items-center justify-center gap-3 min-h-[50px] px-7 py-3.5 rounded-xl bg-gradient-to-r from-[#0A8F4D] to-[#10C35D] text-white text-sm font-semibold tracking-wide shadow-[0_6px_18px_rgba(10,143,77,0.20)] hover:shadow-[0_10px_25px_rgba(10,143,77,0.28)] hover:-translate-y-1 hover:from-[#087A41] hover:to-[#0DAA50] active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20";
 
 const secondaryButton =
-  "group inline-flex items-center justify-center gap-2 min-h-[46px] flex-1 sm:flex-none px-4 sm:px-7 py-3 rounded-xl bg-white/90 backdrop-blur-sm border border-[#0A3D2E]/15 text-[#0A3D2E] text-xs sm:text-sm font-semibold tracking-wide shadow-sm hover:bg-[#EAF8EF] hover:border-[#10C35D]/50 hover:text-[#087A41] hover:-translate-y-1 hover:shadow-md active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20 whitespace-nowrap";
+  "group inline-flex items-center justify-center gap-3 min-h-[50px] px-7 py-3.5 rounded-xl bg-white/90 backdrop-blur-sm border border-[#0A3D2E]/15 text-[#0A3D2E] text-sm font-semibold tracking-wide shadow-sm hover:bg-[#EAF8EF] hover:border-[#10C35D]/50 hover:text-[#087A41] hover:-translate-y-1 hover:shadow-md active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20";
 
 const outlineButton =
   "group inline-flex items-center justify-center gap-3 min-h-[46px] px-6 py-3 rounded-xl border border-[#0A8F4D]/30 bg-white text-[#0A8F4D] text-sm font-semibold tracking-wide hover:bg-[#0A8F4D] hover:border-[#0A8F4D] hover:text-white hover:-translate-y-0.5 hover:shadow-[0_7px_18px_rgba(10,143,77,0.16)] active:translate-y-0 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20";
@@ -304,8 +304,8 @@ function Home() {
       id: 'layanan-tes',
       icon: BookOpen,
       title: 'Layanan Tes',
-      description: 'TOEFL, SSPECT, TOEIC',
-      link: `${TEST_SERVICE_BASE_URL}?tab=toefl`,
+      description: 'TOEFL, TOEIC, SSPECT',
+      link: '/layanan/kursus-inggris',
     },
     {
       id: 'kursus-bahasa',
@@ -366,7 +366,7 @@ function Home() {
           1. HERO SECTION
       ========================================== */}
 
-      <section className="relative min-h-[430px] sm:min-h-[400px] md:min-h-[440px] lg:min-h-[470px] flex items-center bg-white overflow-hidden">
+      <section className="relative min-h-[400px] md:min-h-[440px] lg:min-h-[470px] flex items-center bg-white overflow-hidden">
 
         <div className="absolute inset-0">
 
@@ -377,11 +377,11 @@ function Home() {
               onError={(event) => {
                 event.currentTarget.style.display = 'none';
               }}
-              className="absolute top-0 bottom-0 left-0 sm:left-[3%] w-full sm:w-[110%] h-full max-w-none object-cover object-[62%_center] sm:object-center"
+              className="absolute top-0 bottom-0 left-[6%] w-[110%] h-full max-w-none object-cover object-center"
             />
           )}
 
-          <div className="absolute inset-0 bg-[#092F27]/25 sm:bg-[#092F27]/40" />
+          <div className="absolute inset-0 bg-[#092F27]/45" />
 
           <div
             className="absolute inset-0"
@@ -401,9 +401,9 @@ function Home() {
 
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-5 md:px-8 py-8 sm:py-12 md:py-14 lg:py-16">
+        <div className="relative z-10 max-w-7xl mx-auto w-full px-5 md:px-8 py-12 md:py-14 lg:py-16">
 
-          <div className="max-w-[540px] sm:max-w-[540px]">
+          <div className="max-w-[540px]">
 
             {homeLoading ? (
               <p className="py-8 text-sm text-gray-500">
@@ -416,20 +416,20 @@ function Home() {
             ) : (
               <>
                 {heroTitle && (
-                  <h1 className="font-extrabold text-[27px] leading-[1.12] sm:text-4xl md:text-[44px] lg:text-[40px] tracking-tight text-[#0A3D2E] mb-3 sm:mb-4">
+                  <h1 className="font-extrabold text-3xl sm:text-4xl md:text-[44px] lg:text-[40px] leading-[1.15] tracking-tight text-[#0A3D2E] mb-4">
                     {heroTitle}
                   </h1>
                 )}
 
                 {heroDescription && (
-                  <p className="text-gray-600 text-[13px] sm:text-sm md:text-base leading-[1.65] sm:leading-[1.8] max-w-[460px] mb-5 sm:mb-6">
+                  <p className="text-gray-600 text-sm md:text-base leading-[1.8] max-w-[460px] mb-6">
                     {heroDescription}
                   </p>
                 )}
               </>
             )}
 
-            <div className="flex w-full max-w-[440px] items-center gap-2 sm:gap-4">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4">
 
               {/* TOMBOL MEMBUKA DROPDOWN LAYANAN */}
 
@@ -462,43 +462,43 @@ function Home() {
           2. QUICK ACCESS - WHITE
       ========================================== */}
 
-      <section className="relative z-20 px-4 sm:px-5 md:px-8 -mt-5 sm:-mt-7 md:-mt-8 pb-4 bg-white">
+      <section className="relative z-20 px-5 md:px-8 -mt-7 md:-mt-8 pb-4 bg-white">
 
         <div className="max-w-7xl mx-auto">
 
-          <div className="bg-white rounded-2xl border border-[#E7EFE9] shadow-[0_12px_35px_rgba(10,61,46,0.09)] p-2 sm:px-3 sm:py-2 md:px-4 md:py-3">
+          <div className="bg-white rounded-2xl border border-[#E7EFE9] shadow-[0_12px_35px_rgba(10,61,46,0.09)] px-3 py-2 md:px-4 md:py-3">
 
             {quickServices.length > 0 ? (
               <div
-                className="grid grid-cols-5 gap-1 sm:gap-2"
+                className="grid"
+                style={{
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 210px), 1fr))',
+                }}
               >
                 {quickServices.map((service, index) => {
                   const Icon = service.icon;
-                  const isExternal = service.link.startsWith('http');
 
                   return (
                     <a
                       key={service.id || `${service.title}-${index}`}
                       href={service.link}
-                      target={isExternal ? '_blank' : undefined}
-                      rel={isExternal ? 'noopener noreferrer' : undefined}
                       className={`
-                        group relative flex flex-col items-center text-center gap-1 sm:flex-row sm:text-left sm:gap-2 md:gap-3
-                        px-1 py-2 sm:px-2 sm:py-3 md:px-3 md:py-4
-                        rounded-xl hover:bg-[#F3F8F4] min-w-0
+                        group relative flex items-center gap-3
+                        px-3 py-3 md:px-4 md:py-4
+                        rounded-xl hover:bg-[#F3F8F4]
                         transition-all duration-300
-                        ${index !== 0 ? 'xl:border-l xl:border-[#E9EFEB]' : ''}
+                        ${index !== 0 ? 'lg:border-l lg:border-[#E9EFEB]' : ''}
                       `}
                     >
-                      <div className="w-7 h-7 sm:w-9 sm:h-9 md:w-11 md:h-11 shrink-0 flex items-center justify-center rounded-lg sm:rounded-xl bg-[#EAF8EF] text-[#0A8F4D] group-hover:bg-[#0A8F4D] group-hover:text-white group-hover:scale-105 transition-all duration-300">
-                        <Icon className="w-4 h-4 sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]" />
+                      <div className="w-10 h-10 md:w-11 md:h-11 shrink-0 flex items-center justify-center rounded-xl bg-[#EAF8EF] text-[#0A8F4D] group-hover:bg-[#0A8F4D] group-hover:text-white group-hover:scale-105 transition-all duration-300">
+                        <Icon className="w-5 h-5 md:w-[22px] md:h-[22px]" />
                       </div>
 
                       <div className="min-w-0 flex-1">
-                        <h3 className="text-[9px] leading-tight sm:text-xs md:text-[13px] font-bold text-[#183D2E] sm:mb-1 group-hover:text-[#0A8F4D] transition-colors duration-300 line-clamp-2">
+                        <h3 className="text-xs md:text-[13px] font-bold text-[#183D2E] leading-snug mb-1 group-hover:text-[#0A8F4D] transition-colors duration-300">
                           {service.title}
                         </h3>
-                        <p className="hidden md:block text-[9px] sm:text-[10px] md:text-[11px] text-gray-500 leading-relaxed">
+                        <p className="text-[10px] md:text-[11px] text-gray-500 leading-relaxed">
                           {service.description}
                         </p>
                       </div>
@@ -520,379 +520,226 @@ function Home() {
 
       </section>
 
-     
-{/* ==========================================
-    3. NEWS & ANNOUNCEMENTS
-========================================== */}
+      {/* ==========================================
+          3. NEWS & ANNOUNCEMENTS
+      ========================================== */}
 
-<section className="relative py-10 sm:py-14 md:py-16 bg-white overflow-hidden">
+      <section className="relative py-14 md:py-16 bg-white overflow-hidden">
 
-  <div className="absolute -top-32 -right-32 w-96 h-96 bg-[#10C35D]/[0.06] rounded-full blur-[100px]" />
+        <div className="absolute -top-32 -right-32 w-96 h-96 bg-[#10C35D]/[0.06] rounded-full blur-[100px]" />
 
-  <div className="relative max-w-7xl mx-auto px-3 sm:px-5 md:px-8">
+        <div className="relative max-w-7xl mx-auto px-5 md:px-8">
 
-    <div className="text-center max-w-2xl mx-auto mb-7 sm:mb-9">
-      <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#10C35D] mb-2 sm:mb-3">
-        Berita & Pengumuman Terbaru
-      </h2>
+          <div className="text-center max-w-2xl mx-auto mb-9">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#10C35D] mb-3">
+              Berita & Pengumuman Terbaru
+            </h2>
 
-      <p className="text-gray-600 text-xs sm:text-sm md:text-base font-bold leading-[1.7]">
-        Temukan informasi terbaru mengenai kegiatan, layanan,
-        dan pengumuman dari UPA Bahasa POLNES.
-      </p>
-    </div>
+            <p className="text-gray-600 text-sm md:text-base font-bold leading-[1.8]">
+              Temukan informasi terbaru mengenai kegiatan, layanan,
+              dan pengumuman dari UPA Bahasa POLNES.
+            </p>
+          </div>
 
-    {homeLoading ? (
-      <p className="py-10 text-center text-sm text-gray-500">
-        Memuat berita dan pengumuman...
-      </p>
-    ) : homeError ? (
-      <p role="alert" className="py-10 text-center text-sm text-red-700">
-        Berita dan pengumuman gagal dimuat.
-      </p>
-    ) : news.length > 0 ? (
-      <>
+          {homeLoading ? (
+            <p className="py-10 text-center text-sm text-gray-500">
+              Memuat berita dan pengumuman...
+            </p>
+          ) : homeError ? (
+            <p role="alert" className="py-10 text-center text-sm text-red-700">
+              Berita dan pengumuman gagal dimuat.
+            </p>
+          ) : news.length > 0 ? (
+            <>
+              <div
+                className="relative max-w-6xl mx-auto"
+                style={{
+                  perspective: '1200px',
+                  transformStyle: 'preserve-3d',
+                }}
+                onTouchStart={handleNewsTouchStart}
+                onTouchEnd={handleNewsTouchEnd}
+              >
 
-        {/* CAROUSEL BERITA */}
+                <div className="relative min-h-[475px] md:min-h-[500px] overflow-hidden">
 
-        <div
-          className="relative w-full max-w-6xl mx-auto"
-          style={{
-            perspective: '1200px',
-            transformStyle: 'preserve-3d',
-          }}
-          onTouchStart={handleNewsTouchStart}
-          onTouchEnd={handleNewsTouchEnd}
-        >
+                  {visibleNews.map(({ item, offset }) => {
+                    const distance = Math.abs(offset);
+                    const scale =
+                      distance === 0 ? 1 :
+                      distance === 1 ? 0.88 : 0.76;
 
-          {/* AREA CAROUSEL */}
+                    const rotation =
+                      offset === 0 ? 0 :
+                      offset < 0 ? 13 : -13;
 
-          <div className="relative min-h-[230px] sm:min-h-[350px] md:min-h-[500px] overflow-hidden">
+                    const depth =
+                      distance === 0 ? 60 :
+                      distance === 1 ? 0 : -60;
 
-            {visibleNews.map(({ item, offset }) => {
+                    const opacity =
+                      distance === 0 ? 1 :
+                      distance === 1 ? 0.88 : 0.62;
 
-              const distance = Math.abs(offset);
+                    return (
+                      <article
+                        key={item.id}
+                        className="
+                          absolute top-0
+                          w-[min(320px,74vw)]
+                          flex flex-col
+                          bg-white rounded-2xl overflow-hidden
+                          border border-[#E4EDE6]
+                          shadow-[0_12px_35px_rgba(10,61,46,0.16)]
+                          transition-all duration-700
+                          ease-[cubic-bezier(0.22,1,0.36,1)]
+                          will-change-transform
+                        "
+                        style={{
+                          left: `calc(50% + ${offset * 19}%)`,
+                          transform: `translateX(-50%) scale(${scale}) rotateY(${rotation}deg) translateZ(${depth}px)`,
+                          transformOrigin: 'center center',
+                          zIndex: 10 - distance,
+                          opacity,
+                          pointerEvents: 'auto',
+                          backfaceVisibility: 'hidden',
+                        }}
+                      >
 
-              const scale =
-                distance === 0 ? 1 :
-                distance === 1 ? 0.88 : 0.76;
+                        <button
+                          type="button"
+                          onClick={() => openNewsDetail(item)}
+                          className="relative block w-full h-[210px] overflow-hidden text-left"
+                        >
+                          {item.image ? (
+                            <img
+                              src={item.image}
+                              alt={item.title}
+                              onError={(event) => {
+                                event.currentTarget.style.display = 'none';
+                              }}
+                              className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                            />
+                          ) : (
+                            <div className="w-full h-full bg-[#EAF5EE]" aria-label="Gambar berita tidak tersedia" />
+                          )}
 
-              const rotation =
-                offset === 0 ? 0 :
-                offset < 0 ? 13 : -13;
+                          <span className="absolute bottom-4 left-4 bg-white text-[#0A8F4D] text-[10px] font-bold tracking-wide px-3 py-2 rounded-md shadow-sm">
+                            {item.category.toUpperCase()}
+                          </span>
 
-              const depth =
-                distance === 0 ? 60 :
-                distance === 1 ? 0 : -60;
+                          {isNewContent({ publishedAt: item.publishedAt }) && (
+                            <span className="absolute top-4 right-4 bg-[#10C35D] text-white text-[10px] font-extrabold tracking-wider px-3 py-1.5 rounded-full shadow-md">
+                              BARU
+                            </span>
+                          )}
+                        </button>
 
-              const opacity =
-                distance === 0 ? 1 :
-                distance === 1 ? 0.88 : 0.62;
+                        <div className="flex flex-col flex-1 p-5">
 
-              return (
-                <article
-                  key={item.id}
-                  className="
-                    absolute top-0
-                    left-1/2
-                    w-[27%]
-                    min-w-0
-                    flex flex-col
-                    bg-white
-                    rounded-lg sm:rounded-xl md:rounded-2xl
-                    overflow-hidden
-                    border border-[#E4EDE6]
-                    shadow-[0_5px_18px_rgba(10,61,46,0.13)]
-                    sm:shadow-[0_12px_35px_rgba(10,61,46,0.16)]
-                    transition-all duration-700
-                    ease-[cubic-bezier(0.22,1,0.36,1)]
-                    will-change-transform
-                  "
-                  style={{
-                    width: 'min(320px, 27%)',
-                    left: `calc(50% + ${offset * 19}%)`,
-                    transform: `
-                      translateX(-50%)
-                      scale(${scale})
-                      rotateY(${rotation}deg)
-                      translateZ(${depth}px)
-                    `,
-                    transformOrigin: 'center center',
-                    zIndex: 10 - distance,
-                    opacity,
-                    pointerEvents: distance > 1 ? 'none' : 'auto',
-                    backfaceVisibility: 'hidden',
-                  }}
-                >
+                          <div className="flex items-center gap-2 text-gray-400 text-xs mb-3">
+                            <CalendarDays className="w-4 h-4" />
+                            <span>{item.date}</span>
+                          </div>
 
-                  {/* GAMBAR BERITA */}
+                          <button
+                            type="button"
+                            onClick={() => openNewsDetail(item)}
+                            className="text-left"
+                          >
+                            <h3 className="font-bold text-[#0A3D2E] leading-snug mb-3 line-clamp-2 min-h-[48px] hover:text-[#10A653] transition-colors text-base">
+                              {item.title}
+                            </h3>
+                          </button>
+
+                          <p className="text-gray-500 text-sm leading-[1.8] line-clamp-2 mb-5">
+                            {item.summary}
+                          </p>
+
+                          <div className="mt-auto pt-4 border-t border-gray-100">
+                            <button
+                              type="button"
+                              onClick={() => openNewsDetail(item)}
+                              className="inline-flex items-center gap-2 text-[#0A8F4D] font-bold text-xs hover:text-[#10C35D] transition-colors"
+                            >
+                              Baca Selengkapnya
+                              <ArrowRight className="w-4 h-4" />
+                            </button>
+                          </div>
+
+                        </div>
+                      </article>
+                    );
+                  })}
+
+                </div>
+
+                <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-10 md:w-24 bg-gradient-to-r from-white via-white/80 to-transparent" />
+
+                <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-10 md:w-24 bg-gradient-to-l from-white via-white/80 to-transparent" />
+
+              </div>
+
+              {/* NEWS PAGINATION */}
+
+              {news.length > 1 && (
+                <div className="mt-6 flex items-center justify-center gap-4 sm:gap-5">
 
                   <button
                     type="button"
-                    onClick={() => openNewsDetail(item)}
-                    className="
-                      relative block w-full
-                      h-[clamp(65px,12.6vw,210px)]
-                      overflow-hidden text-left
-                    "
+                    onClick={() => changeNews(-1)}
+                    aria-label="Berita sebelumnya"
+                    className="!w-11 !h-11 !min-w-11 !min-h-11 !p-0 shrink-0 rounded-full flex items-center justify-center bg-white border border-[#D7E9DD] text-[#0A8F4D] shadow-[0_3px_12px_rgba(10,61,46,0.05)] hover:bg-[#0A8F4D] hover:border-[#0A8F4D] hover:text-white hover:shadow-[0_5px_15px_rgba(10,143,77,0.20)] hover:-translate-x-0.5 active:scale-95 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20"
                   >
-
-                    {item.image ? (
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        onError={(event) => {
-                          event.currentTarget.style.display = 'none';
-                        }}
-                        className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                      />
-                    ) : (
-                      <div
-                        className="w-full h-full bg-[#EAF5EE] flex items-center justify-center"
-                        aria-label="Gambar berita tidak tersedia"
-                      >
-                        <Languages className="w-[20%] h-[20%] text-[#0A8F4D]/40" />
-                      </div>
-                    )}
-
-                    {/* KATEGORI */}
-
-                    <span className="
-                      absolute bottom-[5%] left-[5%]
-                      bg-white text-[#0A8F4D]
-                      text-[clamp(5px,0.65vw,10px)]
-                      font-bold tracking-wide
-                      px-[5%] py-[2%]
-                      rounded-md shadow-sm
-                      max-w-[90%] truncate
-                    ">
-                      {item.category.toUpperCase()}
-                    </span>
-
-                    {/* BADGE BARU */}
-
-                    {isNewContent({ publishedAt: item.publishedAt }) && (
-                      <span className="
-                        absolute top-[5%] right-[5%]
-                        bg-[#10C35D] text-white
-                        text-[clamp(5px,0.65vw,10px)]
-                        font-extrabold tracking-wider
-                        px-[5%] py-[2%]
-                        rounded-full shadow-md
-                      ">
-                        BARU
-                      </span>
-                    )}
-
+                    <ArrowLeft className="w-[18px] h-[18px]" />
                   </button>
 
-                  {/* KONTEN BERITA */}
+                  <div
+                    className="flex items-center justify-center gap-1.5 min-w-[52px]"
+                    aria-live="polite"
+                    aria-label={`Halaman ${activeNewsIndex + 1} dari ${news.length}`}
+                  >
+                    <span className="text-sm font-extrabold text-[#0A8F4D] tabular-nums">
+                      {String(activeNewsIndex + 1).padStart(2, '0')}
+                    </span>
 
-                  <div className="
-                    flex flex-col flex-1
-                    p-[5%]
-                    sm:p-4
-                    md:p-5
-                  ">
+                    <span className="text-xs text-gray-300 font-medium">/</span>
 
-                    {/* TANGGAL */}
-
-                    <div className="
-                      flex items-center gap-[4px] sm:gap-2
-                      text-gray-400
-                      text-[clamp(6px,0.8vw,12px)]
-                      mb-[5%]
-                    ">
-                      <CalendarDays className="w-[clamp(8px,1vw,16px)] h-[clamp(8px,1vw,16px)] shrink-0" />
-                      <span className="truncate">
-                        {item.date}
-                      </span>
-                    </div>
-
-                    {/* JUDUL */}
-
-                    <button
-                      type="button"
-                      onClick={() => openNewsDetail(item)}
-                      className="text-left"
-                    >
-                      <h3 className="
-                        font-bold text-[#0A3D2E]
-                        leading-snug
-                        mb-[5%]
-                        line-clamp-2
-                        min-h-[2.4em]
-                        hover:text-[#10A653]
-                        transition-colors
-                        text-[clamp(7px,1vw,16px)]
-                      ">
-                        {item.title}
-                      </h3>
-                    </button>
-
-                    {/* RINGKASAN */}
-
-                    <p className="
-                      text-gray-500
-                      text-[clamp(6px,0.85vw,14px)]
-                      leading-[1.7]
-                      line-clamp-2
-                      mb-[5%]
-                    ">
-                      {item.summary}
-                    </p>
-
-                    {/* TOMBOL BACA */}
-
-                    <div className="
-                      mt-auto
-                      pt-[5%]
-                      border-t border-gray-100
-                    ">
-
-                      <button
-                        type="button"
-                        onClick={() => openNewsDetail(item)}
-                        className="
-                          inline-flex items-center
-                          gap-1 sm:gap-2
-                          text-[#0A8F4D]
-                          font-bold
-                          text-[clamp(6px,0.8vw,12px)]
-                          hover:text-[#10C35D]
-                          transition-colors
-                          whitespace-nowrap
-                        "
-                      >
-                        Baca Selengkapnya
-
-                        <ArrowRight className="w-[clamp(8px,1vw,16px)] h-[clamp(8px,1vw,16px)] shrink-0" />
-                      </button>
-
-                    </div>
-
+                    <span className="text-sm font-semibold text-gray-400 tabular-nums">
+                      {String(news.length).padStart(2, '0')}
+                    </span>
                   </div>
 
-                </article>
-              );
-            })}
+                  <button
+                    type="button"
+                    onClick={() => changeNews(1)}
+                    aria-label="Berita berikutnya"
+                    className="!w-11 !h-11 !min-w-11 !min-h-11 !p-0 shrink-0 rounded-full flex items-center justify-center bg-white border border-[#D7E9DD] text-[#0A8F4D] shadow-[0_3px_12px_rgba(10,61,46,0.05)] hover:bg-[#0A8F4D] hover:border-[#0A8F4D] hover:text-white hover:shadow-[0_5px_15px_rgba(10,143,77,0.20)] hover:translate-x-0.5 active:scale-95 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#10C35D]/20"
+                  >
+                    <ArrowRight className="w-[18px] h-[18px]" />
+                  </button>
 
+                </div>
+              )}
+
+            </>
+          ) : (
+            <p className="py-10 text-center text-sm text-gray-500">
+              Belum ada berita atau pengumuman yang diterbitkan.
+            </p>
+          )}
+
+          <div className="flex justify-center mt-9">
+            <a href="/informasi/berita" className={outlineButton}>
+              <span>Lihat Semua Berita</span>
+              <span className="w-7 h-7 rounded-full bg-[#EAF8EF] flex items-center justify-center group-hover:bg-white/20 transition-colors duration-300">
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-300" />
+              </span>
+            </a>
           </div>
-
-          {/* GRADIENT SISI */}
-
-          <div className="
-            pointer-events-none
-            absolute inset-y-0 left-0 z-20
-            w-[3%] sm:w-10 md:w-24
-            bg-gradient-to-r
-            from-white via-white/80 to-transparent
-          " />
-
-          <div className="
-            pointer-events-none
-            absolute inset-y-0 right-0 z-20
-            w-[3%] sm:w-10 md:w-24
-            bg-gradient-to-l
-            from-white via-white/80 to-transparent
-          " />
 
         </div>
-
-        {/* NEWS PAGINATION */}
-
-        {news.length > 1 && (
-          <div className="mt-4 sm:mt-6 flex items-center justify-center gap-3 sm:gap-5">
-
-            <button
-              type="button"
-              onClick={() => changeNews(-1)}
-              aria-label="Berita sebelumnya"
-              className="
-                !w-8 !h-8 sm:!w-11 sm:!h-11
-                !min-w-8 !min-h-8 sm:!min-w-11 sm:!min-h-11
-                !p-0 shrink-0 rounded-full
-                flex items-center justify-center
-                bg-white border border-[#D7E9DD]
-                text-[#0A8F4D]
-                shadow-[0_3px_12px_rgba(10,61,46,0.05)]
-                hover:bg-[#0A8F4D]
-                hover:border-[#0A8F4D]
-                hover:text-white
-                transition-all duration-300
-                focus-visible:outline-none
-                focus-visible:ring-4
-                focus-visible:ring-[#10C35D]/20
-              "
-            >
-              <ArrowLeft className="w-3.5 h-3.5 sm:w-[18px] sm:h-[18px]" />
-            </button>
-
-            <div
-              className="flex items-center justify-center gap-1.5 min-w-[45px]"
-              aria-live="polite"
-              aria-label={`Halaman ${activeNewsIndex + 1} dari ${news.length}`}
-            >
-              <span className="text-xs sm:text-sm font-extrabold text-[#0A8F4D] tabular-nums">
-                {String(activeNewsIndex + 1).padStart(2, '0')}
-              </span>
-
-              <span className="text-xs text-gray-300 font-medium">/</span>
-
-              <span className="text-xs sm:text-sm font-semibold text-gray-400 tabular-nums">
-                {String(news.length).padStart(2, '0')}
-              </span>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => changeNews(1)}
-              aria-label="Berita berikutnya"
-              className="
-                !w-8 !h-8 sm:!w-11 sm:!h-11
-                !min-w-8 !min-h-8 sm:!min-w-11 sm:!min-h-11
-                !p-0 shrink-0 rounded-full
-                flex items-center justify-center
-                bg-white border border-[#D7E9DD]
-                text-[#0A8F4D]
-                shadow-[0_3px_12px_rgba(10,61,46,0.05)]
-                hover:bg-[#0A8F4D]
-                hover:border-[#0A8F4D]
-                hover:text-white
-                transition-all duration-300
-                focus-visible:outline-none
-                focus-visible:ring-4
-                focus-visible:ring-[#10C35D]/20
-              "
-            >
-              <ArrowRight className="w-3.5 h-3.5 sm:w-[18px] sm:h-[18px]" />
-            </button>
-
-          </div>
-        )}
-
-      </>
-    ) : (
-      <p className="py-10 text-center text-sm text-gray-500">
-        Belum ada berita atau pengumuman yang diterbitkan.
-      </p>
-    )}
-
-    {/* LIHAT SEMUA BERITA */}
-
-    <div className="flex justify-center mt-6 sm:mt-9">
-      <a href="/informasi/berita" className={outlineButton}>
-        <span>Lihat Semua Berita</span>
-
-        <span className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#EAF8EF] flex items-center justify-center group-hover:bg-white/20 transition-colors duration-300">
-          <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-0.5 transition-transform duration-300" />
-        </span>
-      </a>
-    </div>
-
-  </div>
-</section>
-
+      </section>
 
       {/* ==========================================
           4. ABOUT UPA BAHASA
@@ -905,7 +752,7 @@ function Home() {
 
         <div className="relative max-w-6xl mx-auto px-5 md:px-8">
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 rounded-3xl overflow-hidden shadow-[0_18px_45px_rgba(10,61,46,0.13)]">
+          <div className="grid grid-cols-1 lg:grid-cols-2 rounded-3xl overflow-hidden shadow-[0_18px_45px_rgba(10,61,46,0.13)]">
 
             <div className="relative min-h-[300px] md:min-h-[420px]">
               {profileImage ? (
@@ -1032,7 +879,7 @@ function Home() {
 
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-[1fr_1.08fr_1fr] items-center gap-5 lg:gap-4 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1fr_1.08fr_1fr] items-center gap-5 lg:gap-4 max-w-6xl mx-auto">
 
             {homeLoading ? (
               <p className="col-span-full py-10 text-center text-sm text-gray-500">
