@@ -8,17 +8,21 @@ import {
   X,
   ArrowRight,
 } from "lucide-react";
-import SectionHeading from "../components/SectionHeading";
+
 import {
   duties,
   functions,
   missions,
 } from "../data/aboutContent";
 
-const API_URL = "https://upabahasa-polnes-4p4a.vercel.app/api/cms/about";
+const API_URL =
+  "https://upabahasa-polnes-4p4a.vercel.app/api/cms/about";
 
-const container = "mx-auto w-full max-w-7xl px-5 md:px-8 lg:px-10";
-const sectionSpacing = "py-16 md:py-24 lg:py-28";
+const container =
+  "mx-auto w-full max-w-7xl px-3 sm:px-5 md:px-8 lg:px-10";
+
+const sectionSpacing =
+  "py-10 sm:py-14 md:py-24 lg:py-28";
 
 const defaultContent = {
   visi: "Menjadi Lembaga Bahasa yang Berkualitas dan Terkemuka di Tingkat Nasional.",
@@ -49,7 +53,9 @@ function getContentByType(items, type) {
     return filtered[0].content.trim();
   }
 
-  return filtered.map((item) => item.content.trim()).join("\n");
+  return filtered
+    .map((item) => item.content.trim())
+    .join("\n");
 }
 
 export default function VisionMissionSection() {
@@ -58,6 +64,7 @@ export default function VisionMissionSection() {
   const [loadError, setLoadError] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
 
+  // Mengambil konten CMS
   useEffect(() => {
     let isMounted = true;
 
@@ -86,10 +93,14 @@ export default function VisionMissionSection() {
             tugas: getContentByType(items, "tugas"),
             fungsi: getContentByType(items, "fungsi"),
           });
+
           setLoadError(false);
         }
       } catch (error) {
-        console.error("Gagal memuat konten visi dan misi:", error);
+        console.error(
+          "Gagal memuat konten visi dan misi:",
+          error
+        );
 
         if (isMounted) {
           setLoadError(true);
@@ -108,6 +119,7 @@ export default function VisionMissionSection() {
     };
   }, []);
 
+  // Mengunci scroll ketika modal terbuka
   useEffect(() => {
     if (!selectedCard) return;
 
@@ -120,11 +132,16 @@ export default function VisionMissionSection() {
     };
 
     document.body.style.overflow = "hidden";
+
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
       document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", handleKeyDown);
+
+      window.removeEventListener(
+        "keydown",
+        handleKeyDown
+      );
     };
   }, [selectedCard]);
 
@@ -157,28 +174,34 @@ export default function VisionMissionSection() {
         id="visi-misi"
         className={`relative scroll-mt-16 overflow-hidden bg-gradient-to-b from-[#F4FBF7] via-[#EAEFF5] to-[#F4FBF7] ${sectionSpacing}`}
       >
-        {/* Ornamen Latar Belakang Profesional (Tidak Polosan) */}
-        <div className="absolute inset-0 opacity-30 bg-[radial-gradient(#10C35D_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
-        <div className="absolute top-1/4 -left-32 h-96 w-96 rounded-full bg-[#10C35D]/10 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-1/4 -right-32 h-96 w-96 rounded-full bg-[#0A3D2E]/10 blur-3xl pointer-events-none" />
+        {/* Ornamen Latar Belakang */}
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(#10C35D_1px,transparent_1px)] opacity-30 [background-size:24px_24px]" />
+
+        <div className="pointer-events-none absolute -left-32 top-1/4 h-96 w-96 rounded-full bg-[#10C35D]/10 blur-3xl" />
+
+        <div className="pointer-events-none absolute -right-32 bottom-1/4 h-96 w-96 rounded-full bg-[#0A3D2E]/10 blur-3xl" />
 
         <div className={`${container} relative z-10`}>
+
+          {/* Heading Section */}
           <div className="mx-auto max-w-3xl text-center">
-            <span className="inline-block rounded-full bg-[#10C35D]/15 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#0A3D2E] shadow-xs">
+
+            <span className="inline-block rounded-full bg-[#10C35D]/15 px-3 py-1 text-[9px] font-bold uppercase tracking-wider text-[#0A3D2E] shadow-xs sm:px-4 sm:py-1.5 sm:text-xs">
               Landasan dan Pelaksanaan
             </span>
 
-            <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-gray-900 md:text-4xl">
+            <h2 className="mt-3 text-[clamp(19px,5vw,36px)] font-extrabold leading-tight tracking-tight text-gray-900 md:mt-4 md:text-4xl">
               Visi, Misi, Tugas, dan Fungsi
             </h2>
 
-            <p className="mt-4 text-base text-gray-600">
+            <p className="mx-auto mt-3 max-w-3xl text-[clamp(10px,2.5vw,16px)] leading-relaxed text-gray-600 md:mt-4">
               Mengenal arah pengembangan serta tanggung jawab UPA Bahasa dalam mendukung pelayanan kebahasaan di POLNES.
             </p>
           </div>
 
-          {/* Grid 4 Kolom Card Minimalis Bersih & Profesional */}
-          <div className="mt-16 grid grid-cols-1 gap-3 min-[480px]:grid-cols-2 min-[700px]:grid-cols-4 items-stretch">
+          {/* Grid Empat Kartu */}
+          <div className="mt-8 grid grid-cols-4 items-stretch gap-1.5 sm:mt-12 sm:gap-3 md:mt-16">
+
             {cards.map((card, idx) => {
               const Icon = card.icon;
               const text = card.content || "";
@@ -187,25 +210,35 @@ export default function VisionMissionSection() {
                 <article
                   key={card.title}
                   onClick={() => setSelectedCard(card)}
-                  style={{ animationDelay: `${idx * 150}ms` }}
-                  className="group relative flex cursor-pointer flex-col justify-between rounded-3xl bg-white/90 backdrop-blur-md p-7 border border-gray-200/80 shadow-[0_10px_30px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(16,195,93,0.12)] hover:border-[#10C35D]/60"
+                  style={{
+                    animationDelay: `${idx * 150}ms`,
+                  }}
+                  className="group relative flex min-w-0 aspect-[0.86/1] cursor-pointer flex-col justify-between rounded-xl border border-gray-200/80 bg-white/90 p-1.5 shadow-[0_10px_30px_rgba(0,0,0,0.04)] backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-[#10C35D]/60 hover:shadow-[0_20px_40px_rgba(16,195,93,0.12)] sm:rounded-2xl sm:p-4 md:aspect-auto md:min-h-[400px] md:rounded-3xl md:p-7"
                 >
                   <div>
-                    {/* Ikon Ilustrasi di Atas */}
+
+                    {/* Ikon */}
                     <div className="flex justify-center">
-                      <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#10C35D]/10 text-[#10C35D] transition-transform duration-300 group-hover:scale-110 shadow-xs">
-                        <Icon size={32} strokeWidth={1.8} />
+                      <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#10C35D]/10 text-[#10C35D] shadow-xs transition-transform duration-300 group-hover:scale-110 sm:h-12 sm:w-12 sm:rounded-xl md:h-16 md:w-16 md:rounded-2xl">
+
+                        <Icon
+                          className="h-3.5 w-3.5 sm:h-6 sm:w-6 md:h-8 md:w-8"
+                          strokeWidth={1.8}
+                        />
+
                       </div>
                     </div>
 
                     {/* Judul */}
-                    <h3 className="mt-6 text-center text-xl font-extrabold tracking-tight text-gray-900 group-hover:text-[#10C35D] transition-colors">
+                    <h3 className="mt-2 text-center text-[9px] font-extrabold leading-tight tracking-tight text-gray-900 transition-colors group-hover:text-[#10C35D] sm:mt-4 sm:text-sm md:mt-6 md:text-xl">
                       {card.title}
                     </h3>
 
                     {/* Cuplikan Konten */}
-                    <div className="mt-3 max-h-[90px] overflow-hidden text-center">
-                      <p className="line-clamp-3 text-xs md:text-sm font-normal leading-relaxed text-gray-600">
+                    <div className="mt-2 max-h-[55px] overflow-hidden text-center sm:mt-3 sm:max-h-[100px] md:max-h-none">
+
+                      <p className="line-clamp-3 break-words text-[8px] font-normal leading-relaxed text-gray-600 sm:line-clamp-3 sm:text-xs md:text-sm">
+
                         {loading ? (
                           <span className="animate-pulse text-gray-400">
                             Memuat konten...
@@ -217,23 +250,36 @@ export default function VisionMissionSection() {
                         ) : (
                           text
                         )}
+
                       </p>
                     </div>
                   </div>
 
-                  {/* Tombol Baca Selengkapnya di Bawah */}
-                  <div className="mt-8 pt-4 border-t border-gray-100 flex justify-center">
+                  {/* Tombol Detail */}
+                  <div className="mt-2 flex justify-center border-t border-gray-100 pt-1.5 sm:mt-5 sm:pt-3 md:mt-8 md:pt-4">
+
                     <button
                       type="button"
-                      className="w-full flex items-center justify-center gap-2 rounded-2xl bg-gray-50 py-2.5 text-xs font-bold text-gray-700 transition-all duration-300 group-hover:bg-[#10C35D] group-hover:text-white shadow-2xs"
+                      className="flex w-full items-center justify-center gap-0.5 rounded-md bg-gray-50 py-1.5 text-[8px] font-bold text-gray-700 shadow-2xs transition-all duration-300 group-hover:bg-[#10C35D] group-hover:text-white sm:gap-2 sm:rounded-xl sm:py-2 sm:text-[10px] md:rounded-2xl md:py-2.5 md:text-xs"
                     >
-                      <span>Baca Selengkapnya</span>
-                      <ArrowRight size={14} />
+                      <span className="sm:hidden">
+                        Detail
+                      </span>
+
+                      <span className="hidden sm:inline">
+                        Baca Selengkapnya
+                      </span>
+
+                      <ArrowRight
+                        className="h-2.5 w-2.5 sm:h-3 sm:w-3"
+                      />
                     </button>
                   </div>
+
                 </article>
               );
             })}
+
           </div>
         </div>
       </section>
@@ -252,13 +298,19 @@ export default function VisionMissionSection() {
             role="dialog"
             aria-modal="true"
             aria-labelledby="vision-mission-modal-title"
-            className="relative flex max-h-[85vh] w-full max-w-xl flex-col overflow-hidden rounded-3xl bg-white shadow-2xl border border-gray-100 animate-scaleUp"
+            className="relative flex max-h-[85vh] w-full max-w-xl flex-col overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-2xl animate-scaleUp"
           >
+
             {/* Header Modal */}
             <div className="flex shrink-0 items-center justify-between border-b border-gray-100 bg-gray-50 px-6 py-4">
+
               <div className="flex items-center gap-3">
+
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#10C35D] text-white shadow-sm">
-                  <selectedCard.icon size={20} strokeWidth={1.8} />
+                  <selectedCard.icon
+                    size={20}
+                    strokeWidth={1.8}
+                  />
                 </div>
 
                 <div>
@@ -283,17 +335,19 @@ export default function VisionMissionSection() {
               >
                 <X size={18} />
               </button>
+
             </div>
 
             {/* Konten Detail Lengkap */}
             <div className="overflow-y-auto px-6 py-6">
-              <p className="whitespace-pre-wrap break-words text-sm md:text-base leading-7 text-gray-700">
+              <p className="whitespace-pre-wrap break-words text-sm leading-7 text-gray-700 md:text-base">
                 {selectedCard.content}
               </p>
             </div>
 
             {/* Footer Modal */}
             <div className="flex shrink-0 justify-end border-t border-gray-100 bg-gray-50 px-6 py-3.5">
+
               <button
                 type="button"
                 onClick={() => setSelectedCard(null)}
@@ -301,6 +355,7 @@ export default function VisionMissionSection() {
               >
                 Tutup
               </button>
+
             </div>
           </div>
         </div>
