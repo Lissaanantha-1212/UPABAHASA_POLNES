@@ -121,32 +121,30 @@ export default function ProfileSection() {
       className="relative scroll-mt-16 overflow-hidden bg-white"
     >
       <div className={`${container} relative`}>
-        <div className="grid min-h-[300px] grid-cols-[0.95fr_1.05fr] items-center gap-3 py-8 sm:min-h-[360px] sm:gap-5 sm:py-10 md:min-h-[430px] md:gap-5 md:py-0">
-          {/* Konten Profil */}
-          <div className="relative z-10 min-w-0 max-w-xl py-2 md:py-12">
-            <p className="mb-2 text-[8px] font-bold uppercase tracking-[0.12em] text-[#10a653] sm:mb-3 sm:text-[10px] sm:tracking-[0.18em] md:text-xs md:tracking-[0.22em]">
+        <div className="grid min-h-[430px] items-center gap-8 py-12 md:grid-cols-[0.95fr_1.05fr] md:gap-5 md:py-0">
+          <div className="relative z-10 max-w-xl py-2 md:py-12">
+            <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.22em] text-[#10a653] md:text-xs">
               Profil UPA Bahasa
             </p>
 
-            <h2 className="max-w-lg text-base font-extrabold leading-tight tracking-tight text-[#0a3d2e] sm:text-2xl md:text-4xl lg:text-[42px]">
+            <h2 className="max-w-lg text-3xl font-extrabold leading-[1.15] tracking-tight text-[#0a3d2e] md:text-4xl lg:text-[42px]">
               {profile.title}
             </h2>
 
             {paragraphs.map((paragraph, index) => (
               <p
                 key={index}
-                className={`${index === 0 ? "mt-2 sm:mt-4 md:mt-5" : "mt-2 sm:mt-3"} text-[9px] leading-relaxed text-gray-600 sm:text-xs sm:leading-6 md:text-[15px] md:leading-7`}
+                className={`${index === 0 ? "mt-5" : "mt-3"} text-sm leading-7 text-gray-600 md:text-[15px]`}
               >
                 {paragraph}
               </p>
             ))}
           </div>
 
-          {/* Gambar Profil */}
-          <div className="relative min-w-0 md:-mr-8">
-            <div className="absolute -right-3 -top-3 h-20 w-20 rounded-full bg-[#10C35D]/10 blur-2xl sm:-right-5 sm:-top-5 sm:h-40 sm:w-40 sm:blur-3xl" />
+          <div className="relative md:-mr-2 lg:-mr-8">
+            <div className="absolute -right-5 -top-5 h-40 w-40 rounded-full bg-[#10C35D]/10 blur-3xl" />
 
-            <div className="relative h-[160px] overflow-hidden rounded-xl shadow-[0_15px_40px_rgba(10,61,46,0.12)] sm:h-[230px] sm:rounded-2xl md:h-[370px] lg:h-[430px] lg:rounded-l-3xl lg:rounded-r-none">
+            <div className="relative h-[280px] overflow-hidden rounded-2xl shadow-[0_15px_40px_rgba(10,61,46,0.12)] md:h-[370px] lg:h-[430px] lg:rounded-l-3xl lg:rounded-r-none">
               <img
                 src={profile.image}
                 alt="Dokumentasi UPA Bahasa POLNES"
