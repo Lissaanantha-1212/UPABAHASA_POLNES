@@ -270,22 +270,43 @@ export default function OrganizationChart() {
     );
   }
 
+  const hasMoreThanFour = sortedMembers.length > 4;
+
   return (
     <div className="mx-auto w-full max-w-7xl px-3 sm:px-5 md:px-8 lg:px-10">
 
-      {/* Grid 4 Kolom - Mobile dan Desktop */}
-      <div className="grid grid-cols-4 items-stretch gap-1.5 sm:gap-3 md:gap-5">
+      {/* ORGANISATION CHART */}
 
-        {sortedMembers.map((person) => (
-          <div
-            key={person.id}
-            className="min-w-0"
-          >
-            <MemberCard person={person} />
+      {hasMoreThanFour ? (
+        <div className="w-full overflow-x-auto overscroll-x-contain pb-3">
+          <div className="grid min-w-[680px] grid-cols-4 items-stretch gap-3 md:gap-5">
+
+            {sortedMembers.map((person) => (
+              <div
+                key={person.id}
+                className="min-w-0"
+              >
+                <MemberCard person={person} />
+              </div>
+            ))}
+
           </div>
-        ))}
+        </div>
+      ) : (
+        <div className="mx-auto grid w-full max-w-5xl grid-cols-4 items-stretch justify-center gap-1.5 sm:gap-3 md:gap-5">
 
-      </div>
+          {sortedMembers.map((person) => (
+            <div
+              key={person.id}
+              className="min-w-0"
+            >
+              <MemberCard person={person} />
+            </div>
+          ))}
+
+        </div>
+      )}
+
     </div>
   );
 }
