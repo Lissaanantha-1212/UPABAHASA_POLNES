@@ -1,12 +1,11 @@
-﻿
-import React, { useEffect } from 'react';
+﻿import React, { useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import logoPolnes from '../assets/logo-polnes.png';
 
 const EPD2_URLS = {
-  toefl: null,
-  sspect: null,
-  toeic: null,
+  toefl: 'https://upabahasa.vercel.app/layanan-tes.html?tab=toefl',
+  sspect: 'https://upabahasa.vercel.app/layanan-tes.html?tab=sspect',
+  toeic: 'https://upabahasa.vercel.app/layanan-tes.html?tab=toeic',
 };
 
 const menus = [
