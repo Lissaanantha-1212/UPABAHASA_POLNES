@@ -8,14 +8,15 @@ import {
   X,
   ArrowRight,
 } from "lucide-react";
-import SectionHeading from "../components/SectionHeading";
+
 import {
   duties,
   functions,
   missions,
 } from "../data/aboutContent";
 
-const API_URL = "https://upabahasa-polnes-4p4a.vercel.app/api/cms/about";
+const API_URL =
+  "https://upabahasa-polnes-4p4a.vercel.app/api/cms/about";
 
 const container =
   "mx-auto w-full max-w-7xl px-3 sm:px-5 md:px-8 lg:px-10";
@@ -198,7 +199,7 @@ export default function VisionMissionSection() {
             </p>
           </div>
 
-          {/* Empat Kartu Sejajar di Mobile dan Desktop */}
+          {/* Grid Empat Kartu */}
           <div className="mt-8 grid grid-cols-4 items-stretch gap-1.5 sm:mt-12 sm:gap-3 md:mt-16">
 
             {cards.map((card, idx) => {
@@ -212,7 +213,7 @@ export default function VisionMissionSection() {
                   style={{
                     animationDelay: `${idx * 150}ms`,
                   }}
-                  className="group relative flex min-w-0 min-h-[190px] cursor-pointer flex-col justify-between rounded-xl border border-gray-200/80 bg-white/90 p-1.5 shadow-[0_10px_30px_rgba(0,0,0,0.04)] backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-[#10C35D]/60 hover:shadow-[0_20px_40px_rgba(16,195,93,0.12)] sm:min-h-[260px] sm:rounded-2xl sm:p-4 md:min-h-[400px] md:rounded-3xl md:p-7"
+                  className="group relative flex min-w-0 aspect-[0.86/1] cursor-pointer flex-col justify-between rounded-xl border border-gray-200/80 bg-white/90 p-1.5 shadow-[0_10px_30px_rgba(0,0,0,0.04)] backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-[#10C35D]/60 hover:shadow-[0_20px_40px_rgba(16,195,93,0.12)] sm:rounded-2xl sm:p-4 md:aspect-auto md:min-h-[400px] md:rounded-3xl md:p-7"
                 >
                   <div>
 
@@ -234,9 +235,9 @@ export default function VisionMissionSection() {
                     </h3>
 
                     {/* Cuplikan Konten */}
-                    <div className="mt-2 max-h-[85px] overflow-hidden text-center sm:mt-3 sm:max-h-[100px] md:max-h-none">
+                    <div className="mt-2 max-h-[55px] overflow-hidden text-center sm:mt-3 sm:max-h-[100px] md:max-h-none">
 
-                      <p className="line-clamp-4 break-words text-[8px] font-normal leading-relaxed text-gray-600 sm:line-clamp-3 sm:text-xs md:text-sm">
+                      <p className="line-clamp-3 break-words text-[8px] font-normal leading-relaxed text-gray-600 sm:line-clamp-3 sm:text-xs md:text-sm">
 
                         {loading ? (
                           <span className="animate-pulse text-gray-400">
@@ -254,8 +255,8 @@ export default function VisionMissionSection() {
                     </div>
                   </div>
 
-                  {/* Tombol Baca Selengkapnya */}
-                  <div className="mt-2 flex justify-center border-t border-gray-100 pt-2 sm:mt-5 sm:pt-3 md:mt-8 md:pt-4">
+                  {/* Tombol Detail */}
+                  <div className="mt-2 flex justify-center border-t border-gray-100 pt-1.5 sm:mt-5 sm:pt-3 md:mt-8 md:pt-4">
 
                     <button
                       type="button"
