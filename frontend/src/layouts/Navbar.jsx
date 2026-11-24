@@ -601,7 +601,6 @@ function Navbar({
 
                     {isOpen && (
                       <div className="pb-2">
-
                         {menu.sections ? (
                           menu.sections.map((section) => (
                             <div key={section.title}>
@@ -627,7 +626,6 @@ function Navbar({
                             />
                           ))
                         )}
-
                       </div>
                     )}
                   </div>
