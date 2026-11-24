@@ -2,6 +2,7 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard,
+  BarChart3,
   FileText,
   Briefcase,
   GraduationCap,
@@ -105,7 +106,7 @@ export default function AdminLayout({ children }) {
     return `${baseHref}?piya_user=${encoded}`;
   };
 
-  // Handler klik untuk semua menu yang menuju ke upabahasa.vercel.app (Jadwal Test, Remedial, TOEFL, SSPECT, Rekapan)
+  // Handler klik untuk semua menu yang menuju ke upabahasa.vercel.app
   const handleNavigateToUpaBahasa = (e, baseHref) => {
     e.preventDefault();
     setIsSidebarOpen(false);
@@ -115,6 +116,12 @@ export default function AdminLayout({ children }) {
 
   const menuItems = [
     { name: 'Dashboard', path: '/admin/dashboard', icon: LayoutDashboard },
+    {
+      name: 'Statistik & Grafik',
+      href: `${UPABAHASA_BASE_URL}/dashboard.html`,
+      icon: BarChart3,
+      isExternal: true,
+    },
     { name: 'Manajemen Konten', path: '/admin/konten', icon: FileText },
     { name: 'Manajemen Layanan', path: '/admin/layanan', icon: Briefcase },
     { name: 'Manajemen Pembelajaran', path: '/admin/pembelajaran', icon: GraduationCap },
@@ -167,6 +174,21 @@ export default function AdminLayout({ children }) {
         <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
           {menuItems.map((item) => {
             const Icon = item.icon;
+
+            if (item.isExternal) {
+              return (
+                <a
+                  key={item.name}
+                  href={buildUpaBahasaUrl(item.href)}
+                  onClick={(e) => handleNavigateToUpaBahasa(e, item.href)}
+                  className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-300 hover:bg-white/10 hover:text-white transition-all duration-200"
+                >
+                  <Icon size={18} />
+                  {item.name}
+                </a>
+              );
+            }
+
             const isActive = location.pathname === item.path;
 
             return (
