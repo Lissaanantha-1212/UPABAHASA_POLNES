@@ -1,5 +1,4 @@
-﻿
-import React, { useEffect, useRef, useState } from 'react';
+﻿import React, { useEffect, useRef, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import {
   BookOpen,
@@ -27,6 +26,7 @@ import {
 
 const CMS_API = 'https://upabahasa-polnes-4p4a.vercel.app/api/cms';
 const HOME_CACHE_KEY = 'upa_cms_home_cache';
+const TEST_SERVICE_BASE_URL = 'https://upabahasa.vercel.app/layanan-tes.html';
 
 function readHomeCache() {
   try {
@@ -304,8 +304,8 @@ function Home() {
       id: 'layanan-tes',
       icon: BookOpen,
       title: 'Layanan Tes',
-      description: 'TOEFL, TOEIC, SSPECT',
-      link: '/layanan/kursus-inggris',
+      description: 'TOEFL, SSPECT, TOEIC',
+      link: `${TEST_SERVICE_BASE_URL}?tab=toefl`,
     },
     {
       id: 'kursus-bahasa',
@@ -474,11 +474,14 @@ function Home() {
               >
                 {quickServices.map((service, index) => {
                   const Icon = service.icon;
+                  const isExternal = service.link.startsWith('http');
 
                   return (
                     <a
                       key={service.id || `${service.title}-${index}`}
                       href={service.link}
+                      target={isExternal ? '_blank' : undefined}
+                      rel={isExternal ? 'noopener noreferrer' : undefined}
                       className={`
                         group relative flex flex-col items-center text-center gap-1 sm:flex-row sm:text-left sm:gap-2 md:gap-3
                         px-1 py-2 sm:px-2 sm:py-3 md:px-3 md:py-4
@@ -902,7 +905,6 @@ function Home() {
 
         <div className="relative max-w-6xl mx-auto px-5 md:px-8">
 
-          {/* PERUBAHAN: sm:grid-cols-2 */}
           <div className="grid grid-cols-1 sm:grid-cols-2 rounded-3xl overflow-hidden shadow-[0_18px_45px_rgba(10,61,46,0.13)]">
 
             <div className="relative min-h-[300px] md:min-h-[420px]">
