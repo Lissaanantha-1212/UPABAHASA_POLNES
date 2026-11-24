@@ -1,5 +1,5 @@
 ﻿const API_URL = 'https://upabahasa-polnes-4p4a.vercel.app/api/admin';
-const LOGIN_REDIRECT_URL = 'https://upabahasa.vercel.app/login.html';
+const LOGIN_REDIRECT_URL = '/admin/login';
 
 const REFRESH_BUFFER_MS = 60 * 1000;
 const REFRESH_RETRY_MS = 30 * 1000;
@@ -41,9 +41,9 @@ export const logoutAdminToCustomLogin = () => {
   clearAdminSession(true);
 };
 
-const saveSession = (session) => {
+export const saveAdminSession = (session) => {
   localStorage.setItem('adminToken', session.token);
-  localStorage.setItem('adminRefreshToken', session.refreshToken);
+  localStorage.setItem('adminRefreshToken', session.refreshToken || '');
   localStorage.setItem(
     'adminTokenExpiresAt',
     session.expiresAt ? String(session.expiresAt) : ''
@@ -156,7 +156,6 @@ const refreshAdminSession = async () => {
 
     const result = await response.json().catch(() => null);
 
-    // Abaikan respons jika sesi sudah berubah saat request berlangsung.
     if (currentVersion !== sessionVersion) {
       return {
         ok: false,
@@ -170,7 +169,7 @@ const refreshAdminSession = async () => {
       result.data?.token &&
       result.data?.refreshToken
     ) {
-      saveSession(result.data);
+      saveAdminSession(result.data);
 
       return {
         ok: true
@@ -204,7 +203,6 @@ const refreshAdminSession = async () => {
   try {
     return await promise;
   } finally {
-    // Jangan sampai proses lama menghapus referensi proses refresh yang baru.
     if (refreshPromise === promise) {
       refreshPromise = null;
       refreshPromiseVersion = null;
@@ -245,7 +243,6 @@ const verifyAdminSession = async () => {
 };
 
 export const ensureAdminSession = async () => {
-  // Jika masuk melalui login.html (membawa ?uid= dari tabel user_app), izinkan sesi aktif
   if (typeof window !== 'undefined') {
     const params = new URLSearchParams(window.location.search);
     const uidFromUrl = params.get('uid');
@@ -310,7 +307,6 @@ export const ensureAdminSession = async () => {
   return true;
 };
 
-// Pemanggilan API terpusat untuk halaman Admin.
 export const adminFetch = async (input, init = {}) => {
   const expiresAt = Number(
     localStorage.getItem('adminTokenExpiresAt')
@@ -322,8 +318,6 @@ export const adminFetch = async (input, init = {}) => {
   ) {
     const refreshed = await refreshAdminSession();
 
-    // Jika gangguan sementara, coba gunakan access token lama.
-    // Backend akan menentukan apakah token tersebut masih berlaku.
     if (!refreshed.ok && refreshed.reason === 'temporary') {
       console.warn('Refresh tertunda karena gangguan sementara.');
     }
@@ -357,6 +351,5 @@ export const adminFetch = async (input, init = {}) => {
     return response;
   }
 
-  // Ulangi permintaan maksimal satu kali setelah refresh berhasil.
   return sendRequest();
 };
