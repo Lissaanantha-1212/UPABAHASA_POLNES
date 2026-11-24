@@ -28,10 +28,10 @@ function MemberCard({ person }) {
 
   return (
     <>
-      <article className="group flex h-full min-w-0 flex-col overflow-hidden rounded-tl-xl rounded-tr-xl rounded-bl-xl rounded-br-[28px] border border-gray-100 bg-white shadow-[0_8px_25px_rgba(10,61,46,0.09)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(10,61,46,0.15)] sm:rounded-tl-2xl sm:rounded-tr-2xl sm:rounded-bl-2xl sm:rounded-br-[48px] md:rounded-br-[64px]">
+      <article className="group flex h-full min-w-0 flex-col overflow-hidden rounded-tl-xl rounded-tr-xl rounded-bl-xl rounded-br-[24px] border border-gray-100 bg-white shadow-[0_8px_25px_rgba(10,61,46,0.09)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(10,61,46,0.15)] sm:rounded-tl-2xl sm:rounded-tr-2xl sm:rounded-bl-2xl sm:rounded-br-[48px] md:rounded-br-[64px]">
 
         {/* Foto Personel */}
-        <div className="relative aspect-square w-full shrink-0 overflow-hidden rounded-tl-xl rounded-tr-xl rounded-bl-none rounded-br-[28px] bg-[#e8f8ee] sm:rounded-tl-2xl sm:rounded-tr-2xl sm:rounded-br-[48px] md:rounded-br-[68px]">
+        <div className="relative aspect-[4/4.3] w-full shrink-0 overflow-hidden rounded-tl-xl rounded-tr-xl rounded-bl-none rounded-br-[24px] bg-[#e8f8ee] sm:rounded-tl-2xl sm:rounded-tr-2xl sm:rounded-br-[48px] md:rounded-br-[68px]">
 
           {photo ? (
             <img
@@ -42,15 +42,16 @@ function MemberCard({ person }) {
             />
           ) : (
             <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-[#e8f8ee] to-[#c8eed6]">
-              <span className="text-2xl font-bold text-[#0a3d2e] sm:text-5xl md:text-6xl">
+              <span className="text-xl font-bold text-[#0a3d2e] sm:text-4xl md:text-6xl">
                 {person.name?.charAt(0)?.toUpperCase() || "?"}
               </span>
             </div>
           )}
+
         </div>
 
         {/* Informasi Personel */}
-        <div className="flex min-h-0 flex-1 flex-col px-1.5 pb-2.5 pt-2 sm:px-3 sm:pb-4 sm:pt-3 md:px-5 md:pb-7 md:pt-4">
+        <div className="flex flex-1 flex-col px-1.5 pb-2.5 pt-2 sm:px-3 sm:pb-4 sm:pt-3 md:px-5 md:pb-7 md:pt-4">
 
           <h4 className="line-clamp-3 break-words text-[8px] font-bold leading-snug text-gray-800 sm:line-clamp-2 sm:text-sm md:text-lg">
             {person.name}
@@ -68,7 +69,7 @@ function MemberCard({ person }) {
               onClick={() => setShowDetail(true)}
               className="inline-flex items-center gap-0.5 text-[7px] font-semibold text-[#10C35D] transition-colors hover:text-[#0a3d2e] sm:gap-1 sm:text-[10px] md:text-xs"
             >
-              Klik Detail
+              <span>Klik Detail</span>
               <span aria-hidden="true">→</span>
             </button>
 
@@ -86,7 +87,7 @@ function MemberCard({ person }) {
             role="dialog"
             aria-modal="true"
             aria-labelledby={`member-title-${person.id}`}
-            className="relative min-w-0 max-h-[85vh] w-full max-w-lg overflow-x-hidden overflow-y-auto rounded-2xl border border-green-100 bg-white p-5 shadow-2xl sm:p-6 md:p-8"
+            className="relative max-h-[85vh] w-full max-w-lg min-w-0 overflow-x-hidden overflow-y-auto rounded-2xl border border-green-100 bg-white p-5 shadow-2xl sm:p-6 md:p-8"
             onClick={(event) => event.stopPropagation()}
           >
 
@@ -127,7 +128,7 @@ function MemberCard({ person }) {
                 Rincian Tugas
               </h4>
 
-              <p className="min-w-0 whitespace-pre-wrap [overflow-wrap:anywhere] text-sm leading-7 text-gray-600">
+              <p className="min-w-0 whitespace-pre-wrap break-words text-sm leading-7 text-gray-600">
                 {person.description?.trim() ||
                   "Rincian tugas belum tersedia."}
               </p>
@@ -212,7 +213,7 @@ export default function OrganizationChart() {
     };
   }, [retry]);
 
-  // Mengurutkan data personel
+  // Mengurutkan personel berdasarkan sort_order
   const sortedMembers = useMemo(() => {
     return [...members]
       .filter((person) =>
@@ -250,9 +251,7 @@ export default function OrganizationChart() {
 
         <button
           type="button"
-          onClick={() =>
-            setRetry((value) => value + 1)
-          }
+          onClick={() => setRetry((value) => value + 1)}
           className="mt-4 rounded-lg bg-[#0a3d2e] px-5 py-2 text-sm font-semibold text-white transition hover:bg-[#10C35D]"
         >
           Coba Lagi
@@ -274,7 +273,7 @@ export default function OrganizationChart() {
   return (
     <div className="mx-auto w-full max-w-7xl px-3 sm:px-5 md:px-8 lg:px-10">
 
-      {/* Grid Organisasi - Selalu 4 Kolom */}
+      {/* Grid 4 Kolom - Mobile dan Desktop */}
       <div className="grid grid-cols-4 items-stretch gap-1.5 sm:gap-3 md:gap-5">
 
         {sortedMembers.map((person) => (
