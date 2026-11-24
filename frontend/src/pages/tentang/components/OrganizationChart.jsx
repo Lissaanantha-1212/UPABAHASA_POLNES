@@ -1,9 +1,8 @@
-﻿
-import { useEffect, useMemo, useState } from "react";
+﻿import { useEffect, useMemo, useState } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
-const API_URL = "https://upabahasa-polnes-4p4a.vercel.app/api/cms/about";
-const API_ORIGIN = "https://upabahasa-polnes-4p4a.vercel.app";
+const API_URL = "http://localhost:5000/api/cms/about";
+const API_ORIGIN = "http://localhost:5000";
 
 function getImageUrl(path) {
   if (!path) return "";
@@ -21,7 +20,9 @@ function MemberCard({ person }) {
 
   return (
     <>
-      <article className="group flex h-full min-w-0 flex-col overflow-hidden rounded-tl-xl rounded-tr-xl rounded-bl-xl rounded-br-[64px] border border-gray-100 bg-white shadow-[0_8px_25px_rgba(10,61,46,0.09)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(10,61,46,0.15)]">
+      {/* Tambahkan flex flex-col h-full agar tinggi card seragam dan rata */}
+      <article className="group flex flex-col h-full min-w-0 overflow-hidden rounded-tl-xl rounded-tr-xl rounded-bl-xl rounded-br-[64px] border border-gray-100 bg-white shadow-[0_8px_25px_rgba(10,61,46,0.09)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(10,61,46,0.15)]">
+        {/* Foto dengan lengkungan khusus di kanan bawah */}
         <div className="relative aspect-[4/4.3] w-full shrink-0 overflow-hidden rounded-tl-xl rounded-tr-xl rounded-bl-none rounded-br-[68px] bg-[#e8f8ee]">
           {photo ? (
             <img
@@ -39,12 +40,13 @@ function MemberCard({ person }) {
           )}
         </div>
 
+        {/* Informasi personel: flex-1 membuat area teks melar fleksibel, mt-auto memaksa tombol ke bawah */}
         <div className="flex flex-1 flex-col px-4 pb-6 pt-4 md:px-5 md:pb-7">
-          <h4 className="line-clamp-2 break-words text-base font-bold leading-snug text-gray-800 md:text-lg">
+          <h4 className="line-clamp-2 text-base font-bold leading-snug text-gray-800 md:text-lg">
             {person.name}
           </h4>
 
-          <p className="mt-1 line-clamp-2 break-words text-sm text-gray-500">
+          <p className="mt-1 line-clamp-2 text-sm text-gray-500">
             {person.section_name}
           </p>
 
@@ -61,6 +63,7 @@ function MemberCard({ person }) {
         </div>
       </article>
 
+      {/* Card rincian tugas */}
       {showDetail && (
         <div
           className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 px-4 py-6 backdrop-blur-sm"
@@ -70,7 +73,7 @@ function MemberCard({ person }) {
             role="dialog"
             aria-modal="true"
             aria-labelledby={`member-title-${person.id}`}
-            className="relative max-h-[85vh] w-full max-w-lg min-w-0 overflow-x-hidden overflow-y-auto rounded-2xl border border-green-100 bg-white p-6 shadow-2xl md:p-8"
+            className="relative min-w-0 max-h-[85vh] w-full max-w-lg overflow-x-hidden overflow-y-auto rounded-2xl border border-green-100 bg-white p-6 shadow-2xl md:p-8"
             onClick={(event) => event.stopPropagation()}
           >
             <button
@@ -89,7 +92,7 @@ function MemberCard({ person }) {
 
               <h3
                 id={`member-title-${person.id}`}
-                className="mt-2 break-words text-xl font-bold text-[#0a3d2e]"
+                className="mt-2 text-xl font-bold text-[#0a3d2e]"
               >
                 {person.name}
               </h3>
@@ -105,8 +108,7 @@ function MemberCard({ person }) {
               </h4>
 
               <p className="min-w-0 whitespace-pre-wrap [overflow-wrap:anywhere] text-sm leading-7 text-gray-600">
-                {person.description?.trim() ||
-                  "Rincian tugas belum tersedia."}
+                {person.description?.trim() || "Rincian tugas belum tersedia."}
               </p>
             </div>
 
@@ -132,7 +134,6 @@ function MemberCarousel({ members }) {
   const [touchStartX, setTouchStartX] = useState(null);
 
   const hasCarousel = members.length > 4;
-
   const visibleMembers = hasCarousel
     ? members.slice(startIndex, startIndex + 4)
     : members;
@@ -143,9 +144,7 @@ function MemberCarousel({ members }) {
     if (!hasCarousel || paused) return undefined;
 
     const interval = setInterval(() => {
-      setStartIndex((current) =>
-        current >= maxStart ? 0 : current + 1
-      );
+      setStartIndex((current) => (current >= maxStart ? 0 : current + 1));
     }, 5000);
 
     return () => clearInterval(interval);
@@ -169,8 +168,7 @@ function MemberCarousel({ members }) {
   const handleTouchEnd = (event) => {
     if (touchStartX === null) return;
 
-    const distance =
-      event.changedTouches[0].clientX - touchStartX;
+    const distance = event.changedTouches[0].clientX - touchStartX;
 
     if (distance < -45) moveCarousel("next");
     if (distance > 45) moveCarousel("previous");
@@ -181,7 +179,7 @@ function MemberCarousel({ members }) {
 
   return (
     <div
-      className="relative w-full min-w-0 overflow-hidden"
+      className="relative"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
@@ -199,7 +197,7 @@ function MemberCarousel({ members }) {
             type="button"
             aria-label="Geser personel ke kiri"
             onClick={() => moveCarousel("previous")}
-            className="absolute left-1 top-1/2 z-30 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-green-100 bg-white/95 text-[#0a3d2e] shadow-lg transition hover:bg-[#0a3d2e] hover:text-white md:left-2"
+            className="absolute -left-2 top-1/2 z-30 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-green-100 bg-white/95 text-[#0a3d2e] shadow-lg transition hover:bg-[#0a3d2e] hover:text-white md:-left-4"
           >
             <ChevronLeft size={21} />
           </button>
@@ -208,37 +206,28 @@ function MemberCarousel({ members }) {
             type="button"
             aria-label="Geser personel ke kanan"
             onClick={() => moveCarousel("next")}
-            className="absolute right-1 top-1/2 z-30 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-green-100 bg-white/95 text-[#0a3d2e] shadow-lg transition hover:bg-[#0a3d2e] hover:text-white md:right-2"
+            className="absolute -right-2 top-1/2 z-30 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-green-100 bg-white/95 text-[#0a3d2e] shadow-lg transition hover:bg-[#0a3d2e] hover:text-white md:-right-4"
           >
             <ChevronRight size={21} />
           </button>
 
           <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-12 bg-gradient-to-r from-white via-white/80 to-transparent backdrop-blur-[3px] md:w-16" />
-
           <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-12 bg-gradient-to-l from-white via-white/80 to-transparent backdrop-blur-[3px] md:w-16" />
         </>
       )}
 
+      {/* Gunakan items-stretch agar tinggi kontainer anak-anaknya di dalam flex mengikuti tinggi maksimum */}
       <div
         className={
           hasCarousel
-            ? "flex w-full min-w-0 items-stretch justify-center gap-5"
-            : "grid grid-cols-1 items-stretch justify-items-center gap-5 min-[480px]:grid-cols-2 min-[768px]:grid-cols-4"
+            ? "flex items-stretch justify-center gap-5"
+            : "flex flex-wrap items-stretch justify-center gap-5"
         }
       >
         {visibleMembers.map((person) => (
           <div
             key={person.id}
-            className={
-              hasCarousel
-                ? "flex max-w-[220px] min-w-0 shrink-0"
-                : "flex w-full max-w-[220px] min-w-0"
-            }
-            style={
-              hasCarousel
-                ? { flexBasis: "calc((100% - 60px) / 4)" }
-                : undefined
-            }
+            className="w-full max-w-[220px] shrink-0 flex"
           >
             <MemberCard person={person} />
           </div>
@@ -253,7 +242,7 @@ function MemberCarousel({ members }) {
               type="button"
               aria-label={`Tampilkan posisi ${index + 1}`}
               onClick={() => setStartIndex(index)}
-              className={`h-2 rounded-full transition-all duration-300 ${
+            className={`h-2 rounded-full transition-all duration-300 ${
                 startIndex === index
                   ? "w-7 bg-[#0a3d2e]"
                   : "w-2 bg-[#b9dfc7] hover:bg-[#10C35D]"
@@ -285,8 +274,7 @@ export default function OrganizationChart() {
 
         if (!response.ok || !result.success || !result.data) {
           throw new Error(
-            result.message ||
-              "Gagal mengambil data struktur organisasi."
+            result.message || "Gagal mengambil data struktur organisasi."
           );
         }
 
@@ -300,8 +288,7 @@ export default function OrganizationChart() {
       } catch (err) {
         if (!cancelled) {
           setError(
-            err.message ||
-              "Terjadi kesalahan saat memuat struktur organisasi."
+            err.message || "Terjadi kesalahan saat memuat struktur organisasi."
           );
         }
       } finally {
@@ -341,7 +328,6 @@ export default function OrganizationChart() {
     return (
       <div className="mx-auto max-w-3xl px-5 py-12 text-center">
         <p className="text-sm text-red-600">{error}</p>
-
         <button
           type="button"
           onClick={() => setRetry((value) => value + 1)}
@@ -362,7 +348,7 @@ export default function OrganizationChart() {
   }
 
   return (
-    <div className="mx-auto w-full min-w-0 max-w-6xl overflow-hidden px-3 md:px-5">
+    <div className="mx-auto max-w-6xl px-3 md:px-5">
       <MemberCarousel members={sortedMembers} />
     </div>
   );
